@@ -1,9 +1,9 @@
 import React from "react";
-import CashSales from "./CashSales";
-import Vouchers from "./Vouchers";
-import Ref from "./Ref";
+import CashSales from "../Protocol/CashSales";
+import Vouchers from "../Protocol/Vouchers";
+import Ref from "../Protocol/Ref";
 import { useContext } from "react";
-import { TotalContext } from "../Context/TotalContext";
+import { TotalContext } from "../../Context/TotalContext";
 
 function TotalProtocol({ obekt }) {
   const { total, setTotal } = useContext(TotalContext);

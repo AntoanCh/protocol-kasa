@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function CashCalc({
+function CashItem({
   value,
   handleValues,
   position,
@@ -33,4 +33,4 @@ function CashCalc({
   );
 }
 
-export default CashCalc;
+export default CashItem;

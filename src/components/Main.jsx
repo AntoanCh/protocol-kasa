@@ -9,7 +9,7 @@ function Main({ kasi, obekt }) {
   return (
     <div>
       <TotalContext.Provider value={{ total, setTotal }}>
-        <Header obekt={obekt} />
+        <Header kasi={kasi} obekt={obekt} />
         <Outlet />
       </TotalContext.Provider>
     </div>

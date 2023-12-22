@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Voucher from "./Voucher";
 import { useContext } from "react";
-import { TotalContext } from "../Context/TotalContext";
+import { TotalContext } from "../../Context/TotalContext";
 
 function Vouchers({ disabled }) {
   const { total, setTotal } = useContext(TotalContext);

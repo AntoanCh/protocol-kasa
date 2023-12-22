@@ -1,5 +1,5 @@
 import React from "react";
-import CashCalc from "./CashCalc";
+import CashItem from "./CashItem";
 import { useState } from "react";
 
 function CashSales({ disabled }) {
@@ -22,7 +22,7 @@ function CashSales({ disabled }) {
   return (
     <div>
       <h3>Продажби в брой</h3>
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={100}
         position={values[0][1]}
@@ -30,7 +30,7 @@ function CashSales({ disabled }) {
         result={values[0][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={50}
         position={values[1][1]}
@@ -38,7 +38,7 @@ function CashSales({ disabled }) {
         result={values[1][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={20}
         position={values[2][1]}
@@ -46,7 +46,7 @@ function CashSales({ disabled }) {
         result={values[2][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={10}
         position={values[3][1]}
@@ -54,7 +54,7 @@ function CashSales({ disabled }) {
         result={values[3][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={5}
         position={values[4][1]}
@@ -62,7 +62,7 @@ function CashSales({ disabled }) {
         result={values[4][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={2}
         position={values[5][1]}
@@ -70,7 +70,7 @@ function CashSales({ disabled }) {
         result={values[5][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={1}
         position={values[6][1]}
@@ -78,7 +78,7 @@ function CashSales({ disabled }) {
         result={values[6][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={0.5}
         position={values[7][1]}
@@ -86,7 +86,7 @@ function CashSales({ disabled }) {
         result={values[7][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={0.2}
         position={values[8][1]}
@@ -94,7 +94,7 @@ function CashSales({ disabled }) {
         result={values[8][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={0.1}
         position={values[9][1]}
@@ -102,7 +102,7 @@ function CashSales({ disabled }) {
         result={values[9][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={0.05}
         position={values[10][1]}
@@ -110,7 +110,7 @@ function CashSales({ disabled }) {
         result={values[10][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={0.02}
         position={values[11][1]}
@@ -118,7 +118,7 @@ function CashSales({ disabled }) {
         result={values[11][2]}
         handleValues={handleValues}
       />
-      <CashCalc
+      <CashItem
         disabled={disabled}
         placeholder={0.01}
         position={values[12][1]}

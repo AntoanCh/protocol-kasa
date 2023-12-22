@@ -2,7 +2,7 @@ import CashSales from "./CashSales";
 import Vouchers from "./Vouchers";
 import Ref from "./Ref";
 import Shift from "./Shift";
-import "../App.css";
+import "../../App.css";
 
 function Protocol({ kasa, obekt }) {
   const curr = new Date();
