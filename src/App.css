@@ -1,0 +1,228 @@
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  background-color: #c4c4c4;
+  border-radius: 5px;
+}
+
+.header {
+  background-color: #c4c4c4;
+}
+
+.print-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(200 0 0);
+  border-radius: 8px;
+}
+
+.cash-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  text-align: center;
+  font-weight: 500;
+  font-size: large;
+}
+
+.shift-container {
+  display: flex;
+}
+
+input,
+label {
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 4px 20px;
+  margin: 2px 2px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: small;
+  font-weight: 400;
+  border-radius: 7px;
+}
+
+select {
+  width: 70%;
+  text-align: center;
+  padding: 8px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: 800;
+  font-size: large;
+  border-radius: 7px;
+}
+
+.input1 {
+  width: 100%;
+}
+
+.input2 {
+  width: 30%;
+}
+.input3 {
+  width: 30%;
+}
+
+#name-start {
+  flex-grow: 5;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+h3 input {
+  width: 10px;
+}
+
+#totalCash {
+  display: grid;
+  grid-template-columns: 66% 33%;
+}
+
+.printer {
+  display: flex;
+  align-items: center;
+}
+.printer input {
+  width: 30%;
+  height: auto;
+}
+
+.report {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 800;
+}
+.report input {
+  width: auto;
+}
+
+.inline-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  font-weight: 600;
+  font-size: large;
+}
+.inline-input input {
+  width: auto;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media print {
+  .container {
+    width: 100%;
+    max-width: auto;
+    margin: 0 0;
+    padding: 0 0;
+    background-color: #ccc;
+    font-size: smaller;
+  }
+
+  .header {
+    display: none;
+  }
+
+  .print-btn {
+    display: none;
+  }
+
+  h1 {
+    font-size: medium;
+  }
+  h3 {
+    font-size: smaller;
+  }
+
+  .cash-table {
+    font-weight: 600;
+    font-size: smaller;
+  }
+
+  input,
+  label {
+    display: block;
+    font-size: smaller;
+  }
+
+  input {
+    padding: 0px 0px;
+    margin: 0px 0px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: smaller;
+    font-weight: 500;
+  }
+  input[type="date"] {
+    width: 100%;
+    padding: 0px 0px;
+    margin: 0px 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: smaller;
+    font-weight: 500;
+    border-radius: 7px;
+  }
+  select {
+    width: 100%;
+    text-align: center;
+    padding: 0px 0px;
+    margin: 0px 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-weight: 500;
+    font-size: smaller;
+    border-radius: 7px;
+  }
+
+  .printer input {
+    width: 30%;
+    height: auto;
+  }
+
+  .report {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 800;
+  }
+
+  .inline-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    font-weight: 400;
+    font-size: smaller;
+  }
+  .inline-input input {
+    width: auto;
+  }
+}
