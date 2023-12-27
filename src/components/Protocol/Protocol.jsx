@@ -30,7 +30,7 @@ function Protocol({ kasa, obekt }) {
       <Shift />
 
       <div className="bottom">
-        <CashSales />
+        <CashSales kasa={kasa} />
         <Vouchers />
         <Ref />
 

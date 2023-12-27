@@ -57,7 +57,7 @@ function Header({ obekt, kasi }) {
   const currentTab = routeMatch?.pattern?.path;
 
   //constructor function to generate number of tabs equal to
-  //number of cash registers in current store based on prop
+  //number of cash desks in current store based on prop
   //passed from Main.jsx which is passed from App.jsx with Route definition
   const generateTabs = (kasi) => {
     const arr = [];

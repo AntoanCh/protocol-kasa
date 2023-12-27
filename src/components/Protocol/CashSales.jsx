@@ -2,7 +2,7 @@ import React from "react";
 import CashItem from "./CashItem";
 import { useState } from "react";
 
-function CashSales({ disabled }) {
+function CashSales({ kasa }) {
   const createState = function () {
     const arr = [];
     for (let i = 0; i <= 13; i++) arr.push([0, i, 0]);
@@ -18,114 +18,28 @@ function CashSales({ disabled }) {
     newArr[position][2] = newResult;
     setValues([...newArr]);
   };
+  //constructor function for generating all CashItem components needed
 
+  const cash = [100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
+  const generateCashItem = (arr) => {
+    const cashItems = arr.map((item, index) => (
+      <CashItem
+        kasa={kasa}
+        placeholder={item}
+        position={values[index][1]}
+        value={values[index][0]}
+        result={values[index][2]}
+        handleValues={handleValues}
+      />
+    ));
+    console.log(cashItems);
+    return cashItems;
+  };
   return (
     <div>
       <h3>Продажби в брой</h3>
-      <CashItem
-        disabled={disabled}
-        placeholder={100}
-        position={values[0][1]}
-        value={values[0][0]}
-        result={values[0][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={50}
-        position={values[1][1]}
-        value={values[1][0]}
-        result={values[1][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={20}
-        position={values[2][1]}
-        value={values[2][0]}
-        result={values[2][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={10}
-        position={values[3][1]}
-        value={values[3][0]}
-        result={values[3][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={5}
-        position={values[4][1]}
-        value={values[4][0]}
-        result={values[4][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={2}
-        position={values[5][1]}
-        value={values[5][0]}
-        result={values[5][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={1}
-        position={values[6][1]}
-        value={values[6][0]}
-        result={values[6][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={0.5}
-        position={values[7][1]}
-        value={values[7][0]}
-        result={values[7][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={0.2}
-        position={values[8][1]}
-        value={values[8][0]}
-        result={values[8][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={0.1}
-        position={values[9][1]}
-        value={values[9][0]}
-        result={values[9][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={0.05}
-        position={values[10][1]}
-        value={values[10][0]}
-        result={values[10][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={0.02}
-        position={values[11][1]}
-        value={values[11][0]}
-        result={values[11][2]}
-        handleValues={handleValues}
-      />
-      <CashItem
-        disabled={disabled}
-        placeholder={0.01}
-        position={values[12][1]}
-        value={values[12][0]}
-        result={values[12][2]}
-        handleValues={handleValues}
-      />
+      {generateCashItem(cash)}
+
       <div id="totalCash">
         <input type="text" value={"Всичко в брой :"} disabled></input>
         <input
