@@ -1,4 +1,3 @@
-import { create } from "@mui/material/styles/createTransitions";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -52,12 +51,15 @@ const initialState = {
   },
 };
 
-// const cash1Slice = createSlice({
-//   name: "cash1",
-//   initialState,
-//   reducers: {
-//     update: (state, action) => {
-//       state.cash;
-//     },
-//   },
-// });
+export const cash1Slice = createSlice({
+  name: "cash1",
+  initialState,
+  reducers: {
+    updateName: (state, action) => {
+      state.start.name = action.payload;
+    },
+  },
+});
+
+export const { updateName } = cash1Slice.actions;
+export default cash1Slice.reducer;

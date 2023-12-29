@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateName } from "../../features/cash1/cash1Slice";
 
 function Shift() {
+  const name = useSelector((state) => state.cash1.start.name);
+  const dispatch = useDispatch();
   return (
     <div className="shift-container">
       <div className="shift">
@@ -8,7 +12,12 @@ function Shift() {
         <div className="cash-table">
           <div className="input1">
             <label htmlFor="name-start">Три имена на касиера</label>
-            <input id="name-start" type="text"></input>
+            <input
+              onChange={() => dispatch(updateName())}
+              id="name-start"
+              type="text"
+              value={name}
+            ></input>
           </div>
           <div className="input2">
             <label htmlFor="sum-start">Сума касов депозит</label>
