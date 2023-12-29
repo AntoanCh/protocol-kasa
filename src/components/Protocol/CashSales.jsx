@@ -5,7 +5,7 @@ import { useState } from "react";
 function CashSales({ kasa }) {
   const createState = function () {
     const arr = [];
-    for (let i = 0; i <= 13; i++) arr.push([0, i, 0]);
+    for (let i = 0; i <= 13; i++) arr.push([0, 0]);
 
     return arr;
   };
@@ -26,7 +26,8 @@ function CashSales({ kasa }) {
       <CashItem
         kasa={kasa}
         placeholder={item}
-        position={values[index][1]}
+        // position={values[index][1]}
+        position={item}
         value={values[index][0]}
         result={values[index][2]}
         handleValues={handleValues}

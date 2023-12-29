@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import CashSales from "../Protocol/CashSales";
 import Vouchers from "../Protocol/Vouchers";
 import Ref from "../Protocol/Ref";
-import { useContext } from "react";
-import { TotalContext } from "../../Context/TotalContext";
 
 function TotalProtocol({ obekt }) {
-  const { total, setTotal } = useContext(TotalContext);
+  const { total, setTotal } = useState();
   console.log(total[2][2]);
   const curr = new Date();
   curr.setDate(curr.getDate());

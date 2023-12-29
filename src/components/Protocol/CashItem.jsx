@@ -1,11 +1,4 @@
 import React from "react";
-import { useContext } from "react";
-import { Cash1Context } from "../../Context/Cash1Context";
-import { Cash2Context } from "../../Context/Cash2Context";
-import { Cash3Context } from "../../Context/Cash3Context";
-import { Cash4Context } from "../../Context/Cash4Context";
-import { Cash5Context } from "../../Context/Cash5Context";
-import { Cash6Context } from "../../Context/Cash6Context";
 
 function CashItem({
   value,
@@ -15,9 +8,6 @@ function CashItem({
   result,
   kasa,
 }) {
-  switch (kasa) {
-    case 1:
-  }
   const handleChange = (event) => {
     if (event.target.value) {
       const newValue = parseInt(event.target.value);
