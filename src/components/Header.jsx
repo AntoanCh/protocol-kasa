@@ -64,6 +64,7 @@ function Header({ obekt, kasi }) {
     for (let i = 1; i <= kasi; i++) {
       arr.push(
         <CustomTab
+          key={i}
           label={`КАСА ${i}`}
           value={`/${obekt}/kasa${i}`}
           to={`/${obekt}/kasa${i}`}

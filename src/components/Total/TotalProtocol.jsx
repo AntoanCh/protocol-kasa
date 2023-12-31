@@ -1,161 +1,112 @@
-import React, { useState } from "react";
-import CashSales from "../Protocol/CashSales";
-import Vouchers from "../Protocol/Vouchers";
-import Ref from "../Protocol/Ref";
-
+import { useOutletContext } from "react-router-dom";
 function TotalProtocol({ obekt }) {
-  const { total, setTotal } = useState();
-  console.log(total[2][2]);
+  const [state, handleState] = useOutletContext();
   const curr = new Date();
   curr.setDate(curr.getDate());
   const date = curr.toISOString().substring(0, 10);
+  const cash = [100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
+  const vouchers = [
+    ["Суми по видове ваучери", "sum"],
+    ["Содексо", "sodekso"],
+    ["Етап Адресс", "etap"],
+    ["Идънред", "idunred"],
+    ["Бълг. пощи", "poshti"],
+    ["Томбоу", "tombou"],
+    ["Дежене", "dejene"],
+    ["Призма лукс", "prizma"],
+    ["Фидуция", "fiducia"],
+    ["Терминал общо", "terminal"],
+    ["Кеш бек", "cashBack"],
+    ["РКО", "rko"],
+  ];
+  const refs = [
+    ["По лента:", "lenta"],
+    ["Чек:", "check"],
+    ["С карта:", "karta"],
+    ["Кредит(Glovo):", "glovo"],
+    ["Бр. Клиенти", "klienti"],
+  ];
+
+  const generateCashSales = () => {
+    return cash.map((item, index) => (
+      <div key={index} className="cash-table">
+        <input
+          disabled
+          name={item}
+          type="text"
+          defaultValue={state.reduce((sum, obj) => sum + obj.cash[item], 0)}
+        ></input>
+        <input type="text" defaultValue={`${item} лв`} disabled></input>
+        <input
+          type="text"
+          defaultValue={state.reduce((sum, obj) => sum + obj.cash[item], 0)}
+          disabled
+        ></input>
+      </div>
+    ));
+  };
+  const generateVouchers = () => {
+    return vouchers.map((item, index) => (
+      <div key={index} className="inline-input">
+        <label>{item[0]}</label>
+        <input
+          disabled
+          name={item[1]}
+          defaultValue={state.reduce(
+            (sum, obj) => sum + parseFloat(obj.vouchers[item[1]]),
+            0
+          )}
+          type="text"
+        ></input>
+      </div>
+    ));
+  };
+  const generateRefs = () => {
+    return refs.map((item, index) => (
+      <div key={index} className="inline-input">
+        <label>{item[0]}</label>
+        <input
+          disabled
+          defaultValue={state.reduce(
+            (sum, obj) => sum + parseFloat(obj.ref[item[1]]),
+            0
+          )}
+          type="text"
+        ></input>
+      </div>
+    ));
+  };
   return (
     <div className="container">
       <h1>ПРОТОКОЛ ЗА РАБОТА НА ОБЕКТ {obekt}</h1>
       <div className="top">
         <div className="inline-input">
           <label>Обект</label>
-          <input disabled type="text" value={obekt} />
+          <input disabled type="text" defaultValue={obekt} />
         </div>
         <div className="inline-input">
           <label htmlFor="data">Дата:</label>
-          <input value={date} type="date" id="date"></input>
+          <input defaultValue={date} type="date" id="date"></input>
         </div>
       </div>
 
       <div className="bottom">
-        <CashSales disabled={true} />
+        <div>
+          <h3>Продажби в брой</h3>
+          {generateCashSales()}
+        </div>
         <div>
           <h3>Ваучери</h3>
-          <div className="inline-input">
-            <label>ВАучери</label>
-
-            <input
-              value={total[2][0][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Содексо</label>
-
-            <input
-              value={total[2][1][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Етап Адрес</label>
-
-            <input
-              value={total[2][2][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Идънред</label>
-
-            <input
-              value={total[2][3][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Бълг. пощи</label>
-
-            <input
-              value={total[2][4][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Томбоу</label>
-
-            <input
-              value={total[2][5][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Дежене</label>
-
-            <input
-              value={total[2][6][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Призма лукс</label>
-
-            <input
-              value={total[2][7][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Фидужия</label>
-
-            <input
-              value={total[2][8][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Терминал общо</label>
-
-            <input
-              value={total[2][9][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>Кеш бек</label>
-
-            <input
-              value={total[2][10][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>РКО</label>
-
-            <input
-              value={total[2][11][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-          <div className="inline-input">
-            <label>ВАучери</label>
-
-            <input
-              value={total[2][12][0]}
-              onWheel={(e) => e.target.blur()}
-              type="number"
-            ></input>
-          </div>
-
+          {generateVouchers()}
           <div className="inline-input">
             <label>Тотал</label>
-            <input
-              disabled
-              //   value={values.reduce((sum, item) => sum + item[0], 0).toFixed(2)}
-              step="0.01"
-              type="number"
-            ></input>
+            <input disabled step="0.01" type="number"></input>
           </div>
         </div>
-        <Ref />
+        <div>
+          <h3>Справка</h3>
+          {generateRefs()}
+        </div>
 
         <div>
           <label>Инкасо</label>
@@ -165,7 +116,9 @@ function TotalProtocol({ obekt }) {
         </div>
       </div>
       <div>
-        <button className="print-btn">PRINT</button>
+        <button onClick={() => window.print()} className="print-btn">
+          PRINT
+        </button>
       </div>
     </div>
   );

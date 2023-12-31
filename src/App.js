@@ -3,6 +3,7 @@ import Main from "./components/Main";
 import Protocol from "./components/Protocol/Protocol";
 import Home from "./components/Home";
 import TotalProtocol from "./components/Total/TotalProtocol";
+import { useState } from "react";
 
 function App() {
   //constructor function for generating sub-routes for each store
@@ -12,6 +13,7 @@ function App() {
     for (let i = 1; i <= kasi; i++) {
       arr.push(
         <Route
+          key={i}
           path={`kasa${i}`}
           element={<Protocol kasa={`${i}`} obekt={obekt} />}
         />
