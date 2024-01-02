@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+
 function TotalProtocol({ obekt }) {
   const [state, handleState] = useOutletContext();
   const curr = new Date();
@@ -26,6 +28,23 @@ function TotalProtocol({ obekt }) {
     ["Кредит(Glovo):", "glovo"],
     ["Бр. Клиенти", "klienti"],
   ];
+  let totalRef = 0;
+  refs.map((item) => {
+    totalRef =
+      totalRef +
+      state.reduce((sum, obj) => sum + parseFloat(obj.ref[item[1]]), 0);
+  });
+  let totalCash = 0;
+  cash.map((item) => {
+    totalCash =
+      totalCash + state.reduce((sum, obj) => sum + obj.cash[item], 0) * item;
+  });
+  let totalVouchers = 0;
+  vouchers.map((item) => {
+    totalVouchers =
+      totalVouchers +
+      state.reduce((sum, obj) => sum + parseFloat(obj.vouchers[item[1]]), 0);
+  });
 
   const generateCashSales = () => {
     return cash.map((item, index) => (
@@ -39,7 +58,10 @@ function TotalProtocol({ obekt }) {
         <input type="text" defaultValue={`${item} лв`} disabled></input>
         <input
           type="text"
-          defaultValue={state.reduce((sum, obj) => sum + obj.cash[item], 0)}
+          defaultValue={state.reduce(
+            (sum, obj) => sum + obj.cash[item] * item,
+            0
+          )}
           disabled
         ></input>
       </div>
@@ -94,18 +116,31 @@ function TotalProtocol({ obekt }) {
         <div>
           <h3>Продажби в брой</h3>
           {generateCashSales()}
+          <div id="totalCash">
+            <input type="text" value={"Всичко в брой :"} disabled></input>
+            <input type="text" disabled value={totalCash}></input>
+          </div>
         </div>
         <div>
           <h3>Ваучери</h3>
           {generateVouchers()}
           <div className="inline-input">
             <label>Тотал</label>
-            <input disabled step="0.01" type="number"></input>
+            <input
+              disabled
+              step="0.01"
+              type="number"
+              value={totalVouchers}
+            ></input>
           </div>
         </div>
         <div>
           <h3>Справка</h3>
           {generateRefs()}
+          <div className="inline-input">
+            <label>Общо:</label>
+            <input disabled value={totalRef} type="text"></input>
+          </div>
         </div>
 
         <div>
