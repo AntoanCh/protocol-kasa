@@ -64,16 +64,20 @@ function Main({ kasi, obekt }) {
   };
 
   const [state, setState] = useState(generateState());
+  // const [badge, setBadge] = useState(0);
   // useEffect(() => {
-  //   const state = JSON.parse(localStorage.getItem("state"));
-  //   if (state) {
-  //     setState(state);
+  //   let change;
+  //   for (let obj of state) {
+  //     Object.keys(obj).forEach((key) => {
+  //       if (Object.keys(key).every((i) => i === 0 || i === "")) {
+  //         change = false;
+  //       } else change = true;
+  //     });
+  //     if (change) setBadge(badge + 1);
   //   }
-  // }, []);
-  // useEffect(() => {
-  //   localStorage.setItem("state", JSON.stringify(state));
+  //   console.log(state);
   // }, [state]);
-  // console.log(localStorage);
+
   //function handling state changing based on cash register
   //so every cash register has its own object in the state
   //group is the second object

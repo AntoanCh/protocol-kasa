@@ -3,7 +3,6 @@ import Voucher from "./Voucher";
 
 function Vouchers({ state, handleState, kasa }) {
   const vouchers = [
-    ["Суми по видове ваучери", "sum"],
     ["Содексо", "sodekso"],
     ["Етап Адресс", "etap"],
     ["Идънред", "idunred"],
@@ -32,6 +31,21 @@ function Vouchers({ state, handleState, kasa }) {
     <div>
       <h3>Ваучери</h3>
       {generateVoucherItems()}
+      <div className="inline-input">
+        <label>Тотал</label>
+        <input
+          disabled
+          value={vouchers
+            .reduce(
+              (sum, item) =>
+                sum + parseFloat(state[kasa - 1].vouchers[item[1]]),
+              0
+            )
+            .toFixed(2)}
+          step="0.01"
+          type="number"
+        ></input>
+      </div>
       <div className="inline-input">
         <label>Тотал</label>
         <input

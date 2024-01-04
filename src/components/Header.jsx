@@ -1,8 +1,9 @@
 import React from "react";
-import { Tab, Tabs } from "@mui/material";
+import { Tab, Tabs, Avatar, Badge } from "@mui/material";
 import { useLocation, matchPath } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { deepOrange } from "@mui/material/colors";
 
 function Header({ obekt, kasi }) {
   //Custom tabs from material ui
@@ -78,6 +79,18 @@ function Header({ obekt, kasi }) {
   return (
     <div className="header">
       <CustomTabs centered value={currentTab}>
+        {/* <Badge badgeContent={""} color="success" sx={{ margin: "10px" }}>
+          <Avatar
+            variant="rounded"
+            sx={{
+              padding: "2px",
+              bgcolor: deepOrange[500],
+            }}
+          >
+            {obekt.replace(/n/, "Н")}
+          </Avatar>
+        </Badge> */}
+
         {generateTabs(kasi)}
         <CustomTab
           label={`ТОТАЛ`}
