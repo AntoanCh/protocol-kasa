@@ -1,7 +1,7 @@
 import React from "react";
 import CashItem from "./CashItem";
 
-function CashSales({ kasa, handleState, state }) {
+function CashSales({ kasa, handleCash, state }) {
   //constructor function for generating all CashItem components needed
 
   const cash = [100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
@@ -12,7 +12,7 @@ function CashSales({ kasa, handleState, state }) {
         kasa={kasa}
         placeholder={item}
         state={state}
-        handleState={handleState}
+        handleCash={handleCash}
       />
     ));
   };
@@ -26,9 +26,10 @@ function CashSales({ kasa, handleState, state }) {
         <input
           type="text"
           disabled
-          value={cash
-            .reduce((sum, item) => sum + item * state[kasa - 1].cash[item], 0)
-            .toFixed(2)}
+          // value={cash
+          //   .reduce((sum, item) => sum + item * state[kasa - 1].cash[item], 0)
+          //   .toFixed(2)}
+          value={state[kasa - 1].totals.cash}
         ></input>
       </div>
     </div>

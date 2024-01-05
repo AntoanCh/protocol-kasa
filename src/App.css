@@ -12,6 +12,10 @@
   background-color: #c4c4c4;
 }
 
+input:disabled {
+  background-color: #b7b7b7;
+  color: black;
+}
 .print-btn {
   width: 100%;
   padding: 10px;

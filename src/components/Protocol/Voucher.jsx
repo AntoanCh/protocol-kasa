@@ -3,12 +3,8 @@ import React from "react";
 function Voucher({ label, state, handleState, kasa, name }) {
   const handleChange = (event) => {
     if (event.target.value) {
-      let newValue;
-      if (event.target.value.endsWith(".")) {
-        newValue = parseFloat(event.target.value).toString() + ".";
-      } else {
-        newValue = parseFloat(event.target.value).toString();
-      }
+      const newValue = parseInt(event.target.value);
+
       handleState("vouchers", name, newValue, kasa);
     } else {
       handleState("vouchers", name, 0, kasa);

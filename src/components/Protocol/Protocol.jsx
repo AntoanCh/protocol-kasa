@@ -2,11 +2,12 @@ import CashSales from "./CashSales";
 import Vouchers from "./Vouchers";
 import Ref from "./Ref";
 import Shift from "./Shift";
+import Others from "./Others";
 import "../../App.css";
 import { useOutletContext } from "react-router-dom";
 
 function Protocol({ kasa, obekt }) {
-  const [state, handleState] = useOutletContext();
+  const [state, handleState, handleCash] = useOutletContext();
   const curr = new Date();
   curr.setDate(curr.getDate());
   const date = curr.toISOString().substring(0, 10);
@@ -32,8 +33,12 @@ function Protocol({ kasa, obekt }) {
       <Shift kasa={kasa} handleState={handleState} state={state} />
 
       <div className="bottom">
-        <CashSales kasa={kasa} handleState={handleState} state={state} />
-        <Vouchers kasa={kasa} handleState={handleState} state={state} />
+        <CashSales kasa={kasa} handleCash={handleCash} state={state} />
+        <div>
+          <Vouchers kasa={kasa} handleState={handleState} state={state} />
+          <Others kasa={kasa} handleState={handleState} state={state} />
+        </div>
+
         <Ref kasa={kasa} handleState={handleState} state={state} />
 
         <div>

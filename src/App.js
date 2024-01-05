@@ -30,12 +30,20 @@ function App() {
           {generateRoutes(2, "Н1")}
           <Route path="total" element={<TotalProtocol obekt="Н5" />} />
         </Route>
+        <Route path="/n4" element={<Main kasi="2" obekt="n4" />}>
+          {generateRoutes(2, "Н4")}
+          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+        </Route>
         <Route path="/n5" element={<Main kasi="6" obekt="n5" />}>
           {generateRoutes(6, "Н5")}
           <Route path="total" element={<TotalProtocol obekt="Н5" />} />
         </Route>
-        <Route path="/n6" element={<Main kasi="4" obekt="n6" />}>
+        <Route path="/n6" element={<Main kasi="5" obekt="n6" />}>
           {generateRoutes(4, "Н6")}
+          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+        </Route>
+        <Route path="/n7" element={<Main kasi="2" obekt="n7" />}>
+          {generateRoutes(2, "Н7")}
           <Route path="total" element={<TotalProtocol obekt="Н5" />} />
         </Route>
         <Route path="/n8" element={<Main kasi="3" obekt="n8" />}>

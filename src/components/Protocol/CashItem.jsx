@@ -1,13 +1,13 @@
 import React from "react";
 
-function CashItem({ kasa, placeholder, state, handleState }) {
+function CashItem({ kasa, placeholder, state, handleCash }) {
   const handleChange = (event) => {
     if (event.target.value) {
       const newValue = parseInt(event.target.value);
 
-      handleState("cash", placeholder, newValue, kasa);
+      handleCash(placeholder, newValue, kasa);
     } else {
-      handleState("cash", placeholder, 0, kasa);
+      handleCash(placeholder, 0, kasa);
     }
   };
   return (
@@ -15,13 +15,14 @@ function CashItem({ kasa, placeholder, state, handleState }) {
       <input
         name={placeholder}
         type="text"
-        value={state[kasa - 1].cash[placeholder]}
+        value={state[kasa - 1].cash[placeholder][0]}
         onChange={handleChange}
       ></input>
       <input type="text" defaultValue={`${placeholder} лв`} disabled></input>
       <input
         type="text"
-        value={(state[kasa - 1].cash[placeholder] * placeholder).toFixed(2)}
+        value={state[kasa - 1].cash[placeholder][1]}
+        // value={(state[kasa - 1].cash[placeholder] * placeholder).toFixed(2)}
         disabled
       ></input>
     </div>

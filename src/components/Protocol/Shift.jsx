@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Slide, Alert } from "@mui/material";
+import { Slide, Alert, Divider } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 function Shift({ kasa, handleState, state }) {
   const [alert, setAlert] = useState(false);
@@ -92,6 +93,10 @@ function Shift({ kasa, handleState, state }) {
             ></input>
           </div>
         </div>
+        <div className="shift">
+          <Divider orientation="vertical"> </Divider>
+        </div>
+
         <div className="shift">
           <h3>Край на работната смяна</h3>
           <div className="cash-table">

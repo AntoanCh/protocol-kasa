@@ -11,9 +11,6 @@ function Vouchers({ state, handleState, kasa }) {
     ["Дежене", "dejene"],
     ["Призма лукс", "prizma"],
     ["Фидуция", "fiducia"],
-    ["Терминал общо", "terminal"],
-    ["Кеш бек", "cashBack"],
-    ["РКО", "rko"],
   ];
   const generateVoucherItems = () => {
     return vouchers.map((item, index) => (
@@ -32,31 +29,17 @@ function Vouchers({ state, handleState, kasa }) {
       <h3>Ваучери</h3>
       {generateVoucherItems()}
       <div className="inline-input">
-        <label>Тотал</label>
+        <label>Сума ваучери</label>
         <input
           disabled
-          value={vouchers
-            .reduce(
-              (sum, item) =>
-                sum + parseFloat(state[kasa - 1].vouchers[item[1]]),
-              0
-            )
-            .toFixed(2)}
-          step="0.01"
-          type="number"
-        ></input>
-      </div>
-      <div className="inline-input">
-        <label>Тотал</label>
-        <input
-          disabled
-          value={vouchers
-            .reduce(
-              (sum, item) =>
-                sum + parseFloat(state[kasa - 1].vouchers[item[1]]),
-              0
-            )
-            .toFixed(2)}
+          // value={vouchers
+          //   .reduce(
+          //     (sum, item) =>
+          //       sum + parseFloat(state[kasa - 1].vouchers[item[1]]),
+          //     0
+          //   )
+          //   .toFixed(2)}
+          value={state[kasa - 1].totals.vouchers}
           step="0.01"
           type="number"
         ></input>
