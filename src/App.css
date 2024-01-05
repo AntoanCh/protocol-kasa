@@ -10,10 +10,11 @@
 
 .header {
   background-color: #c4c4c4;
+  display: flex;
+  justify-content: space-between;
 }
 
 input:disabled {
-  background-color: #b7b7b7;
   color: black;
 }
 .print-btn {

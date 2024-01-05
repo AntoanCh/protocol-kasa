@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { Slide, Alert, Divider } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 function Shift({ kasa, handleState, state }) {
   const [alert, setAlert] = useState(false);

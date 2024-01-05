@@ -32,7 +32,7 @@ function App() {
         </Route>
         <Route path="/n4" element={<Main kasi="2" obekt="n4" />}>
           {generateRoutes(2, "Н4")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н4" />} />
         </Route>
         <Route path="/n5" element={<Main kasi="6" obekt="n5" />}>
           {generateRoutes(6, "Н5")}
@@ -44,7 +44,7 @@ function App() {
         </Route>
         <Route path="/n7" element={<Main kasi="2" obekt="n7" />}>
           {generateRoutes(2, "Н7")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н7" />} />
         </Route>
         <Route path="/n8" element={<Main kasi="3" obekt="n8" />}>
           {generateRoutes(3, "Н8")}

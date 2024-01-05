@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Main({ kasi, obekt }) {
   //function that generates the whole state of the application
@@ -74,19 +74,6 @@ function Main({ kasi, obekt }) {
   };
 
   const [state, setState] = useState(generateState());
-  // const [badge, setBadge] = useState(0);
-  // useEffect(() => {
-  //   let change;
-  //   for (let obj of state) {
-  //     Object.keys(obj).forEach((key) => {
-  //       if (Object.keys(key).every((i) => i === 0 || i === "")) {
-  //         change = false;
-  //       } else change = true;
-  //     });
-  //     if (change) setBadge(badge + 1);
-  //   }
-  //   console.log(state);
-  // }, [state]);
 
   const newTotalCash = (obj) => {
     let newTotal = 0;
