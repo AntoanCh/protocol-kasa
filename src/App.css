@@ -11,7 +11,10 @@
 .header {
   background-color: #c4c4c4;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+}
+.bottom2 {
+  max-width: 50%;
 }
 
 input:disabled {

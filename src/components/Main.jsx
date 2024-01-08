@@ -55,19 +55,25 @@ function Main({ kasi, obekt }) {
           rko: 0,
         },
         ref: {
-          lenta: 0,
           check: 0,
           karta: 0,
           glovo: 0,
-          klienti: 0,
+        },
+        ref2: {
+          inkaso: 0,
+          storno: 0,
         },
         totals: {
           cash: 0,
           vouchers: 0,
           other: 0,
-          ref: 0,
           total: 0,
+          ref: 0,
+          ref2: 0,
+          lenta: 0,
+          obshto: 0,
         },
+        klienti: 0,
       });
     }
     return arr;
@@ -86,6 +92,13 @@ function Main({ kasi, obekt }) {
     let newTotal = 0;
     for (let item in obj) {
       newTotal = newTotal + obj[item];
+    }
+    return newTotal;
+  };
+  const newTotalRef = (obj) => {
+    let newTotal = 0;
+    for (let item in obj) {
+      newTotal = newTotal + parseFloat(obj[item]);
     }
     return newTotal;
   };
@@ -138,6 +151,106 @@ function Main({ kasi, obekt }) {
     }
   };
 
+  const handleClients = (kasa, newValue) => {
+    const newState = [...state];
+    switch (kasa) {
+      case "1":
+        newState[kasa - 1].klienti = newValue;
+        setState([...newState]);
+        break;
+      case "2":
+        newState[kasa - 1].klienti = newValue;
+        setState([...newState]);
+        break;
+      case "3":
+        newState[kasa - 1].klienti = newValue;
+        setState([...newState]);
+        break;
+      case "4":
+        newState[kasa - 1].klienti = newValue;
+        setState([...newState]);
+        break;
+      case "5":
+        newState[kasa - 1].klienti = newValue;
+        setState([...newState]);
+        break;
+      case "6":
+        newState[kasa - 1].klienti = newValue;
+        setState([...newState]);
+        break;
+    }
+  };
+  const handleRef = (group, input, newValue, kasa) => {
+    const newState = [...state];
+    switch (kasa) {
+      case "1":
+        newState[kasa - 1][group][input] = newValue;
+        newState[kasa - 1].totals[group] = newTotalRef(
+          newState[kasa - 1][group]
+        );
+        newState[kasa - 1].totals.lenta =
+          newState[kasa - 1].totals.cash + newState[kasa - 1].totals.ref2;
+        newState[kasa - 1].totals.obshto =
+          newState[kasa - 1].totals.lenta + newState[kasa - 1].totals.ref;
+        setState([...newState]);
+        break;
+      case "2":
+        newState[kasa - 1][group][input] = newValue;
+        newState[kasa - 1].totals[group] = newTotalRef(
+          newState[kasa - 1][group]
+        );
+        newState[kasa - 1].totals.lenta =
+          newState[kasa - 1].totals.cash + newState[kasa - 1].totals.ref2;
+        newState[kasa - 1].totals.obshto =
+          newState[kasa - 1].totals.lenta + newState[kasa - 1].totals.ref;
+        setState([...newState]);
+        break;
+      case "3":
+        newState[kasa - 1][group][input] = newValue;
+        newState[kasa - 1].totals[group] = newTotalRef(
+          newState[kasa - 1][group]
+        );
+        newState[kasa - 1].totals.lenta =
+          newState[kasa - 1].totals.cash + newState[kasa - 1].totals.ref2;
+        newState[kasa - 1].totals.obshto =
+          newState[kasa - 1].totals.lenta + newState[kasa - 1].totals.ref;
+        setState([...newState]);
+        break;
+      case "4":
+        newState[kasa - 1][group][input] = newValue;
+        newState[kasa - 1].totals[group] = newTotalRef(
+          newState[kasa - 1][group]
+        );
+        newState[kasa - 1].totals.lenta =
+          newState[kasa - 1].totals.cash + newState[kasa - 1].totals.ref2;
+        newState[kasa - 1].totals.obshto =
+          newState[kasa - 1].totals.lenta + newState[kasa - 1].totals.ref;
+        setState([...newState]);
+        break;
+      case "5":
+        newState[kasa - 1][group][input] = newValue;
+        newState[kasa - 1].totals[group] = newTotalRef(
+          newState[kasa - 1][group]
+        );
+        newState[kasa - 1].totals.lenta =
+          newState[kasa - 1].totals.cash + newState[kasa - 1].totals.ref2;
+        newState[kasa - 1].totals.obshto =
+          newState[kasa - 1].totals.lenta + newState[kasa - 1].totals.ref;
+        setState([...newState]);
+        break;
+      case "6":
+        newState[kasa - 1][group][input] = newValue;
+        newState[kasa - 1].totals[group] = newTotalRef(
+          newState[kasa - 1][group]
+        );
+        newState[kasa - 1].totals.lenta =
+          newState[kasa - 1].totals.cash + newState[kasa - 1].totals.ref2;
+        newState[kasa - 1].totals.obshto =
+          newState[kasa - 1].totals.lenta + newState[kasa - 1].totals.ref;
+        setState([...newState]);
+        break;
+    }
+  };
   //function handling state changing based on cash register
   //so every cash register has its own object in the state
   //group is the second object
@@ -147,7 +260,6 @@ function Main({ kasi, obekt }) {
       case "1":
         newState[kasa - 1][group][input] = newValue;
         newState[kasa - 1].totals[group] = newTotal(newState[kasa - 1][group]);
-        console.log(newState);
         setState([...newState]);
         break;
       case "2":
@@ -181,7 +293,9 @@ function Main({ kasi, obekt }) {
   return (
     <div>
       <Header kasi={kasi} obekt={obekt} />
-      <Outlet context={[state, handleState, handleCash]} />
+      <Outlet
+        context={[state, handleState, handleCash, handleRef, handleClients]}
+      />
     </div>
   );
 }

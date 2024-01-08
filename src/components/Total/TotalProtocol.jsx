@@ -1,9 +1,8 @@
 import { Divider } from "@mui/material";
-import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 
 function TotalProtocol({ obekt }) {
-  const [state, handleState] = useOutletContext();
+  const [state] = useOutletContext();
   const curr = new Date();
   curr.setDate(curr.getDate());
   const date = curr.toISOString().substring(0, 10);
@@ -24,17 +23,25 @@ function TotalProtocol({ obekt }) {
     ["РКО", "rko"],
   ];
   const refs = [
-    ["По лента:", "lenta"],
     ["Чек:", "check"],
     ["С карта:", "karta"],
     ["Кредит(Glovo):", "glovo"],
-    ["Бр. Клиенти", "klienti"],
+  ];
+  const refs2 = [
+    ["Инкасо", "inkaso"],
+    ["Сторно", "storno"],
   ];
   let totalRef = 0;
   refs.map((item) => {
     totalRef =
       totalRef +
       state.reduce((sum, obj) => sum + parseFloat(obj.ref[item[1]]), 0);
+  });
+  let totalRef2 = 0;
+  refs2.map((item) => {
+    totalRef2 =
+      totalRef2 +
+      state.reduce((sum, obj) => sum + parseFloat(obj.ref2[item[1]]), 0);
   });
   let totalOther = 0;
   totalOther = state.reduce((sum, obj) => sum + obj.totals.other, 0);
@@ -44,6 +51,8 @@ function TotalProtocol({ obekt }) {
   let totalVouchers = 0;
   totalVouchers = state.reduce((sum, obj) => sum + obj.totals.vouchers, 0);
 
+  let totalClients = 0;
+  totalClients = state.reduce((sum, obj) => sum + obj.klienti, 0);
   const generateCashSales = () => {
     return cash.map((item, index) => (
       <div key={index} className="cash-table">
@@ -109,6 +118,21 @@ function TotalProtocol({ obekt }) {
       </div>
     ));
   };
+  const generateRefs2 = () => {
+    return refs2.map((item, index) => (
+      <div key={index} className="inline-input">
+        <label>{item[0]}</label>
+        <input
+          disabled
+          defaultValue={state.reduce(
+            (sum, obj) => sum + parseFloat(obj.ref2[item[1]]),
+            0
+          )}
+          type="text"
+        ></input>
+      </div>
+    ));
+  };
   return (
     <div className="container">
       <h1>ПРОТОКОЛ ЗА РАБОТА НА ОБЕКТ {obekt}</h1>
@@ -159,18 +183,24 @@ function TotalProtocol({ obekt }) {
         </div>
         <div>
           <h3>Справка</h3>
+          <div className="inline-input">
+            <label>По лента:</label>
+            <input disabled value={totalCash + totalRef2} type="text"></input>
+          </div>
           {generateRefs()}
+          {generateRefs2()}
+          <div className="inline-input">
+            <label>Бр Клиенти:</label>
+            <input disabled value={totalClients} type="text"></input>
+          </div>
           <div className="inline-input">
             <label>Общо:</label>
-            <input disabled value={totalRef} type="text"></input>
+            <input
+              disabled
+              value={totalCash + totalRef2 + totalRef}
+              type="text"
+            ></input>
           </div>
-        </div>
-
-        <div>
-          <label>Инкасо</label>
-          <input type="text"></input>
-          <label>Сторно</label>
-          <input type="text"></input>
         </div>
       </div>
       <div>

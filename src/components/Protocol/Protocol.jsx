@@ -7,7 +7,8 @@ import "../../App.css";
 import { useOutletContext } from "react-router-dom";
 
 function Protocol({ kasa, obekt }) {
-  const [state, handleState, handleCash] = useOutletContext();
+  const [state, handleState, handleCash, handleRef, handleClients] =
+    useOutletContext();
   const curr = new Date();
   curr.setDate(curr.getDate());
   const date = curr.toISOString().substring(0, 10);
@@ -38,15 +39,14 @@ function Protocol({ kasa, obekt }) {
           <Vouchers kasa={kasa} handleState={handleState} state={state} />
           <Others kasa={kasa} handleState={handleState} state={state} />
         </div>
-
-        <Ref kasa={kasa} handleState={handleState} state={state} />
-
-        <div>
-          <label>Инкасо</label>
-          <input type="text"></input>
-          <label>Сторно</label>
-          <input type="text"></input>
-        </div>
+      </div>
+      <div className="bottom2">
+        <Ref
+          kasa={kasa}
+          handleRef={handleRef}
+          state={state}
+          handleClients={handleClients}
+        />
       </div>
       <div>
         <button onClick={() => window.print()} className="print-btn">

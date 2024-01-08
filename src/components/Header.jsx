@@ -84,7 +84,7 @@ function Header({ obekt, kasi }) {
 
   return (
     <div className="header">
-      <Badge
+      {/* <Badge
         badgeContent={""}
         color="success"
         sx={{ top: "13px", left: "10px" }}
@@ -98,7 +98,8 @@ function Header({ obekt, kasi }) {
         >
           {obekt.replace(/n/, "Н")}
         </Avatar>
-      </Badge>
+      </Badge> */}
+
       <CustomTabs centered value={currentTab}>
         {generateTabs(kasi)}
         <CustomTab
@@ -108,7 +109,7 @@ function Header({ obekt, kasi }) {
           component={Link}
         />
       </CustomTabs>
-      <div></div>
+
       <SpeedDial
         direction="down"
         ariaLabel="SpeedDial basic example"

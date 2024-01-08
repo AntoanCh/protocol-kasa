@@ -1,6 +1,6 @@
 import React from "react";
 
-function RefItem({ label, name, state, handleRef, kasa }) {
+function RefItem2({ label, name, state, handleRef, kasa }) {
   const handleChange = (event) => {
     if (event.target.value) {
       let newValue;
@@ -9,16 +9,16 @@ function RefItem({ label, name, state, handleRef, kasa }) {
       } else {
         newValue = parseFloat(event.target.value).toString();
       }
-      handleRef("ref", name, newValue, kasa);
+      handleRef("ref2", name, newValue, kasa);
     } else {
-      handleRef("ref", name, 0, kasa);
+      handleRef("ref2", name, 0, kasa);
     }
   };
   return (
     <div className="inline-input">
       <label>{label}</label>
       <input
-        value={state[kasa - 1].ref[name]}
+        value={state[kasa - 1].ref2[name]}
         onChange={handleChange}
         type="text"
       ></input>
@@ -26,4 +26,4 @@ function RefItem({ label, name, state, handleRef, kasa }) {
   );
 }
 
-export default RefItem;
+export default RefItem2;
