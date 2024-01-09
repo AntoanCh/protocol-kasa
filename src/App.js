@@ -28,7 +28,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/n1" element={<Main kasi="2" obekt="n1" />}>
           {generateRoutes(2, "Н1")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н1" />} />
         </Route>
         <Route path="/n4" element={<Main kasi="2" obekt="n4" />}>
           {generateRoutes(2, "Н4")}
@@ -39,8 +39,8 @@ function App() {
           <Route path="total" element={<TotalProtocol obekt="Н5" />} />
         </Route>
         <Route path="/n6" element={<Main kasi="5" obekt="n6" />}>
-          {generateRoutes(4, "Н6")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          {generateRoutes(5, "Н6")}
+          <Route path="total" element={<TotalProtocol obekt="Н6" />} />
         </Route>
         <Route path="/n7" element={<Main kasi="2" obekt="n7" />}>
           {generateRoutes(2, "Н7")}
@@ -48,31 +48,31 @@ function App() {
         </Route>
         <Route path="/n8" element={<Main kasi="3" obekt="n8" />}>
           {generateRoutes(3, "Н8")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н8" />} />
         </Route>
         <Route path="/n10" element={<Main kasi="3" obekt="n10" />}>
           {generateRoutes(3, "Н10")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н10" />} />
         </Route>
         <Route path="/n12" element={<Main kasi="3" obekt="n12" />}>
           {generateRoutes(3, "Н12")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н12" />} />
         </Route>
         <Route path="/n14" element={<Main kasi="6" obekt="n14" />}>
           {generateRoutes(6, "Н14")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н14" />} />
         </Route>
         <Route path="/n16" element={<Main kasi="2" obekt="n16" />}>
           {generateRoutes(2, "Н16")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н16" />} />
         </Route>
         <Route path="/n17" element={<Main kasi="2" obekt="n17" />}>
           {generateRoutes(2, "Н17")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н17" />} />
         </Route>
         <Route path="/n19" element={<Main kasi="2" obekt="n19" />}>
           {generateRoutes(2, "Н19")}
-          <Route path="total" element={<TotalProtocol obekt="Н5" />} />
+          <Route path="total" element={<TotalProtocol obekt="Н19" />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,29 +1,33 @@
 import React from "react";
 
-function RefItem2({ label, name, state, handleRef, kasa }) {
+function OtherItem({ label, name, kasa, state, handleState }) {
   const handleChange = (event) => {
+    let name = event.target.name;
     if (event.target.value) {
+      let name = event.target.name;
       let newValue;
       if (event.target.value.endsWith(".")) {
         newValue = parseFloat(event.target.value).toString() + ".";
       } else {
-        newValue = parseFloat(event.target.value).toString();
+        newValue = parseFloat(event.target.value);
       }
-      handleRef("ref2", name, newValue, kasa);
+      handleState("other", name, newValue, kasa);
     } else {
-      handleRef("ref2", name, 0, kasa);
+      handleState("other", name, 0, kasa);
     }
   };
   return (
     <div className="inline-input">
       <label>{label}</label>
+
       <input
-        value={state[kasa - 1].ref2[name]}
+        name={name}
         onChange={handleChange}
+        value={state[kasa - 1].other.terminal}
         type="text"
       ></input>
     </div>
   );
 }
 
-export default RefItem2;
+export default OtherItem;

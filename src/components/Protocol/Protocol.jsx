@@ -5,21 +5,42 @@ import Shift from "./Shift";
 import Others from "./Others";
 import "../../App.css";
 import { useOutletContext } from "react-router-dom";
+import { useEffect } from "react";
 
 function Protocol({ kasa, obekt }) {
-  const [state, handleState, handleCash, handleRef, handleClients] =
-    useOutletContext();
+  const [
+    state,
+    handleState,
+    handleCash,
+    handleRef,
+    handleClients,
+    handlePrinter,
+  ] = useOutletContext();
   const curr = new Date();
   curr.setDate(curr.getDate());
   const date = curr.toISOString().substring(0, 10);
 
+  const handleChange = (event) => {
+    if (event.target.value) {
+      const newValue = parseInt(event.target.value);
+
+      handlePrinter(kasa, newValue);
+    } else {
+      handlePrinter(kasa, 0);
+    }
+  };
   return (
     <div className="container">
       <h1>ПРОТОКОЛ ЗА РАБОТА НА КАСА {kasa}</h1>
       <div className="top">
         <div className="inline-input">
           <label>№ на фискален принтер:</label>
-          <input type="text"></input>
+          <input
+            type="text"
+            onChange={handleChange}
+            placeholder="asdas"
+            value={state[kasa - 1].printer}
+          ></input>
         </div>
         <div className="inline-input">
           <label>Обект</label>

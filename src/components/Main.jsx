@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Main({ kasi, obekt }) {
   //function that generates the whole state of the application
@@ -11,6 +11,7 @@ function Main({ kasi, obekt }) {
     const arr = [];
     for (let i = 0; i < 6; i++) {
       arr.push({
+        printer: "",
         start: {
           name: "",
           sum: "",
@@ -53,23 +54,20 @@ function Main({ kasi, obekt }) {
           terminal: 0,
           cashBack: 0,
           rko: 0,
+          inkaso: 0,
+          storno: 0,
         },
         ref: {
           check: 0,
           karta: 0,
           glovo: 0,
         },
-        ref2: {
-          inkaso: 0,
-          storno: 0,
-        },
         totals: {
-          cash: 0,
+          cash: 0.0,
           vouchers: 0,
           other: 0,
           total: 0,
           ref: 0,
-          ref2: 0,
           lenta: 0,
           obshto: 0,
         },
@@ -109,42 +107,55 @@ function Main({ kasi, obekt }) {
       case "1":
         newState[kasa - 1].cash[input][0] = newValue;
         newState[kasa - 1].cash[input][1] = newValue * input;
-        newState[kasa - 1].totals.cash = newTotalCash(newState[kasa - 1].cash);
+        newState[kasa - 1].totals.cash = newTotalCash(
+          newState[kasa - 1].cash
+        ).toFixed(2);
 
         setState([...newState]);
         break;
       case "2":
         newState[kasa - 1].cash[input][0] = newValue;
         newState[kasa - 1].cash[input][1] = newValue * input;
-        newState[kasa - 1].totals.cash = newTotalCash(newState[kasa - 1].cash);
+        newState[kasa - 1].cash[input][1].toFixed(2);
+        newState[kasa - 1].totals.cash = newTotalCash(
+          newState[kasa - 1].cash
+        ).toFixed(2);
 
         setState([...newState]);
         break;
       case "3":
         newState[kasa - 1].cash[input][0] = newValue;
         newState[kasa - 1].cash[input][1] = newValue * input;
-        newState[kasa - 1].totals.cash = newTotalCash(newState[kasa - 1].cash);
+        newState[kasa - 1].totals.cash = newTotalCash(
+          newState[kasa - 1].cash
+        ).toFixed(2);
 
         setState([...newState]);
         break;
       case "4":
         newState[kasa - 1].cash[input][0] = newValue;
         newState[kasa - 1].cash[input][1] = newValue * input;
-        newState[kasa - 1].totals.cash = newTotalCash(newState[kasa - 1].cash);
+        newState[kasa - 1].totals.cash = newTotalCash(
+          newState[kasa - 1].cash
+        ).toFixed(2);
 
         setState([...newState]);
         break;
       case "5":
         newState[kasa - 1].cash[input][0] = newValue;
         newState[kasa - 1].cash[input][1] = newValue * input;
-        newState[kasa - 1].totals.cash = newTotalCash(newState[kasa - 1].cash);
+        newState[kasa - 1].totals.cash = newTotalCash(
+          newState[kasa - 1].cash
+        ).toFixed(2);
 
         setState([...newState]);
         break;
       case "6":
         newState[kasa - 1].cash[input][0] = newValue;
         newState[kasa - 1].cash[input][1] = newValue * input;
-        newState[kasa - 1].totals.cash = newTotalCash(newState[kasa - 1].cash);
+        newState[kasa - 1].totals.cash = newTotalCash(
+          newState[kasa - 1].cash
+        ).toFixed(2);
 
         setState([...newState]);
         break;
@@ -176,6 +187,35 @@ function Main({ kasi, obekt }) {
         break;
       case "6":
         newState[kasa - 1].klienti = newValue;
+        setState([...newState]);
+        break;
+    }
+  };
+  const handlePrinter = (kasa, newValue) => {
+    const newState = [...state];
+    switch (kasa) {
+      case "1":
+        newState[kasa - 1].printer = newValue;
+        setState([...newState]);
+        break;
+      case "2":
+        newState[kasa - 1].printer = newValue;
+        setState([...newState]);
+        break;
+      case "3":
+        newState[kasa - 1].printer = newValue;
+        setState([...newState]);
+        break;
+      case "4":
+        newState[kasa - 1].printer = newValue;
+        setState([...newState]);
+        break;
+      case "5":
+        newState[kasa - 1].printer = newValue;
+        setState([...newState]);
+        break;
+      case "6":
+        newState[kasa - 1].printer = newValue;
         setState([...newState]);
         break;
     }
@@ -294,7 +334,14 @@ function Main({ kasi, obekt }) {
     <div>
       <Header kasi={kasi} obekt={obekt} />
       <Outlet
-        context={[state, handleState, handleCash, handleRef, handleClients]}
+        context={[
+          state,
+          handleState,
+          handleCash,
+          handleRef,
+          handleClients,
+          handlePrinter,
+        ]}
       />
     </div>
   );

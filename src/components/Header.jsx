@@ -4,10 +4,8 @@ import { useLocation, matchPath } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { deepOrange } from "@mui/material/colors";
-import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
-import ShareIcon from "@mui/icons-material/Share";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 
 function Header({ obekt, kasi }) {
@@ -128,7 +126,11 @@ function Header({ obekt, kasi }) {
         }}
         icon={<SpeedDialIcon />}
       >
-        <SpeedDialAction icon={<SaveIcon />} tooltipTitle={"Запази"} />
+        <SpeedDialAction
+          icon={<SaveIcon />}
+          tooltipTitle={"Запази"}
+          sx={{ cursor: "not-allowed" }}
+        />
         <SpeedDialAction
           onClick={() => {
             window.print();

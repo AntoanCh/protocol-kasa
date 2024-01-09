@@ -21,7 +21,7 @@ function CashItem({ kasa, placeholder, state, handleCash }) {
       <input type="text" defaultValue={`${placeholder} лв`} disabled></input>
       <input
         type="text"
-        value={state[kasa - 1].cash[placeholder][1]}
+        value={state[kasa - 1].cash[placeholder][1].toFixed(2)}
         // value={(state[kasa - 1].cash[placeholder] * placeholder).toFixed(2)}
         disabled
       ></input>
