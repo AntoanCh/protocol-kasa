@@ -23,6 +23,10 @@ function Others({ kasa, handleState, state }) {
       />
     ));
   };
+  const total =
+    parseFloat(state[kasa - 1].totals.other) +
+    parseFloat(state[kasa - 1].totals.vouchers) +
+    parseFloat(state[kasa - 1].totals.cash);
   return (
     <div>
       <Divider variant="light" />
@@ -31,23 +35,7 @@ function Others({ kasa, handleState, state }) {
       <Divider />
       <div className="inline-input">
         <label>ТОТАЛ</label>
-        <input
-          disabled
-          // value={vouchers
-          //   .reduce(
-          //     (sum, item) =>
-          //       sum + parseFloat(state[kasa - 1].vouchers[item[1]]),
-          //     0
-          //   )
-          //   .toFixed(2)}
-          value={
-            state[kasa - 1].totals.other +
-            state[kasa - 1].totals.vouchers +
-            state[kasa - 1].totals.cash
-          }
-          step="0.01"
-          type="number"
-        ></input>
+        <input disabled value={total.toFixed(2)} type="text"></input>
       </div>
     </div>
   );

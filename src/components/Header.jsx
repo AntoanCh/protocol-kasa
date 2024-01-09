@@ -7,6 +7,7 @@ import { deepOrange } from "@mui/material/colors";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
+import { keyframes } from "@emotion/react";
 
 function Header({ obekt, kasi }) {
   //Custom tabs from material ui
@@ -16,7 +17,17 @@ function Header({ obekt, kasi }) {
       backgroundColor: "#ffad35",
     },
   });
-  const CustomTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
+  const enterKeyframe = keyframes`
+  0% {
+    transform: scale(0);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+`;
+  const CustomTab = styled((props) => <Tab {...props} />)(({ theme }) => ({
     textTransform: "none",
     minWidth: 0,
     fontWeight: "800",
@@ -29,6 +40,10 @@ function Header({ obekt, kasi }) {
       color: "#00ad05",
       fontWeight: "800",
     },
+    "&& .MuiTouchRipple-child": {
+      backgroundColor: "green",
+    },
+
     "&.Mui-focusVisible": {
       backgroundColor: "#00ef07",
     },

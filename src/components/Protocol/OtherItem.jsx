@@ -23,7 +23,7 @@ function OtherItem({ label, name, kasa, state, handleState }) {
       <input
         name={name}
         onChange={handleChange}
-        value={state[kasa - 1].other.terminal}
+        value={state[kasa - 1].other[name]}
         type="text"
       ></input>
     </div>

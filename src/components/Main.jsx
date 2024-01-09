@@ -2,7 +2,14 @@
 import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import Footer from "./Footer";
+import { useState, useEffect } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
 
 function Main({ kasi, obekt }) {
   //function that generates the whole state of the application
@@ -11,7 +18,11 @@ function Main({ kasi, obekt }) {
     const arr = [];
     for (let i = 0; i < 6; i++) {
       arr.push({
-        printer: "",
+        main: {
+          printer: "",
+          klienti: 0,
+        },
+
         start: {
           name: "",
           sum: "",
@@ -40,7 +51,6 @@ function Main({ kasi, obekt }) {
           0.01: [0, 0],
         },
         vouchers: {
-          sum: 0,
           sodekso: 0,
           etap: 0,
           idunred: 0,
@@ -61,6 +71,7 @@ function Main({ kasi, obekt }) {
           check: 0,
           karta: 0,
           glovo: 0,
+          broi: 0,
         },
         totals: {
           cash: 0.0,
@@ -68,10 +79,7 @@ function Main({ kasi, obekt }) {
           other: 0,
           total: 0,
           ref: 0,
-          lenta: 0,
-          obshto: 0,
         },
-        klienti: 0,
       });
     }
     return arr;
@@ -191,35 +199,7 @@ function Main({ kasi, obekt }) {
         break;
     }
   };
-  const handlePrinter = (kasa, newValue) => {
-    const newState = [...state];
-    switch (kasa) {
-      case "1":
-        newState[kasa - 1].printer = newValue;
-        setState([...newState]);
-        break;
-      case "2":
-        newState[kasa - 1].printer = newValue;
-        setState([...newState]);
-        break;
-      case "3":
-        newState[kasa - 1].printer = newValue;
-        setState([...newState]);
-        break;
-      case "4":
-        newState[kasa - 1].printer = newValue;
-        setState([...newState]);
-        break;
-      case "5":
-        newState[kasa - 1].printer = newValue;
-        setState([...newState]);
-        break;
-      case "6":
-        newState[kasa - 1].printer = newValue;
-        setState([...newState]);
-        break;
-    }
-  };
+
   const handleRef = (group, input, newValue, kasa) => {
     const newState = [...state];
     switch (kasa) {
@@ -329,20 +309,49 @@ function Main({ kasi, obekt }) {
         break;
     }
   };
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", handleOpen);
+  //   return () => window.removeEventListener("beforeunload", handleOpen);
+  // }, []);
+  const [open, setOpen] = useState(true);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Header kasi={kasi} obekt={obekt} />
       <Outlet
-        context={[
-          state,
-          handleState,
-          handleCash,
-          handleRef,
-          handleClients,
-          handlePrinter,
-        ]}
+        context={[state, handleState, handleCash, handleRef, handleClients]}
       />
+      <Footer />
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import RefItem from "./RefItem";
 
-function Ref({ state, handleRef, kasa, handleClients }) {
+function Ref({ state, handleRef, kasa, handleState }) {
   const refs = [
     ["Чек:", "check"],
     ["С карта:", "karta"],
     ["Кредит(Glovo):", "glovo"],
+    ["В Брой", "broi"],
   ];
   const generateRefItems = () => {
     return refs.map((item, index) => (
@@ -24,9 +25,9 @@ function Ref({ state, handleRef, kasa, handleClients }) {
     if (event.target.value) {
       const newValue = parseInt(event.target.value);
 
-      handleClients(kasa, newValue);
+      handleState("main", "klienti", newValue, kasa);
     } else {
-      handleClients(kasa, 0);
+      handleState("main", "klienti", 0, kasa);
     }
   };
   return (
@@ -34,7 +35,11 @@ function Ref({ state, handleRef, kasa, handleClients }) {
       <h3>Справка</h3>
       <div className="inline-input">
         <label>По лента:</label>
-        <input disabled value={state[kasa - 1].totals.cash} type="text"></input>
+        <input
+          disabled
+          value={state[kasa - 1].totals.ref.toFixed(2)}
+          type="text"
+        ></input>
       </div>
       {generateRefItems()}
 
@@ -43,15 +48,7 @@ function Ref({ state, handleRef, kasa, handleClients }) {
         <input
           name="klienti"
           onChange={handleChange}
-          value={state[kasa - 1].klienti}
-          type="text"
-        ></input>
-      </div>
-      <div className="inline-input">
-        <label>Общо:</label>
-        <input
-          disabled
-          value={state[kasa - 1].totals.cash + state[kasa - 1].totals.ref}
+          value={state[kasa - 1].main.klienti}
           type="text"
         ></input>
       </div>

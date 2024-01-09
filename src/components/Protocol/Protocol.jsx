@@ -5,17 +5,14 @@ import Shift from "./Shift";
 import Others from "./Others";
 import "../../App.css";
 import { useOutletContext } from "react-router-dom";
-import { useEffect } from "react";
+import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+import TextField from "@mui/material/TextField";
 
 function Protocol({ kasa, obekt }) {
-  const [
-    state,
-    handleState,
-    handleCash,
-    handleRef,
-    handleClients,
-    handlePrinter,
-  ] = useOutletContext();
+  const [state, handleState, handleCash, handleRef] = useOutletContext();
   const curr = new Date();
   curr.setDate(curr.getDate());
   const date = curr.toISOString().substring(0, 10);
@@ -24,11 +21,12 @@ function Protocol({ kasa, obekt }) {
     if (event.target.value) {
       const newValue = parseInt(event.target.value);
 
-      handlePrinter(kasa, newValue);
+      handleState("main", "printer", newValue, kasa);
     } else {
-      handlePrinter(kasa, 0);
+      handleState("main", "printer", 0, kasa);
     }
   };
+
   return (
     <div className="container">
       <h1>ПРОТОКОЛ ЗА РАБОТА НА КАСА {kasa}</h1>
@@ -38,17 +36,24 @@ function Protocol({ kasa, obekt }) {
           <input
             type="text"
             onChange={handleChange}
-            placeholder="asdas"
-            value={state[kasa - 1].printer}
+            value={state[kasa - 1].main.printer}
           ></input>
         </div>
         <div className="inline-input">
           <label>Обект</label>
           <input disabled type="text" defaultValue={obekt} />
+          {/* <TextField label="Обект" disabled value={obekt} /> */}
         </div>
         <div className="inline-input">
-          <label htmlFor="data">Дата:</label>
-          <input defaultValue={date} type="date" id="date"></input>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Дата"
+              defaultValue={dayjs()}
+              format="DD/MM/YYYY"
+            />
+          </LocalizationProvider> */}
+          <label>Дата:</label>
+          <input type="text" defaultValue={dayjs().format("DD/MM/YYYY")} />
         </div>
       </div>
 
@@ -66,7 +71,7 @@ function Protocol({ kasa, obekt }) {
           kasa={kasa}
           handleRef={handleRef}
           state={state}
-          handleClients={handleClients}
+          handleState={handleState}
         />
       </div>
       <div>
