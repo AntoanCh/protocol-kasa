@@ -10,7 +10,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import logo from "../static/dar_logo.jpg";
 
-function Header({ obekt, kasi, handleSave, handleRemove }) {
+function Header({ obekt, kasi, handleDial }) {
   //Custom tabs from material ui
   const CustomTabs = styled(Tabs)({
     borderBottom: "1px solid #e8e8e8",
@@ -137,16 +137,10 @@ function Header({ obekt, kasi, handleSave, handleRemove }) {
         icon={<SpeedDialIcon />}
       >
         <SpeedDialAction
-          onClick={handleRemove}
+          onClick={handleDial}
           icon={<DeleteForeverIcon />}
-          tooltipTitle={"Изтрий"}
+          tooltipTitle={"Изчисти"}
         />
-        <SpeedDialAction
-          onClick={handleSave}
-          icon={<SaveIcon />}
-          tooltipTitle={"Запази"}
-        />
-
         <SpeedDialAction
           onClick={() => {
             window.print();

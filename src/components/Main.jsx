@@ -3,13 +3,15 @@ import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 function Main({ kasi, obekt }) {
   //function that generates the whole state of the application
@@ -311,6 +313,14 @@ function Main({ kasi, obekt }) {
         break;
     }
   };
+  const useDidMountEffect = (func, deps) => {
+    const didMount = useRef(false);
+
+    useEffect(() => {
+      if (didMount.current) func();
+      else didMount.current = true;
+    }, deps);
+  };
 
   useEffect(() => {
     if (localStorage.getItem("STATE")) {
@@ -318,57 +328,67 @@ function Main({ kasi, obekt }) {
       setState([...newState]);
     }
   }, []);
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+  useDidMountEffect(() => {
+    window.localStorage.setItem("STATE", JSON.stringify(state));
+  }, [state]);
 
-  const [removeDial, setRemoveDial] = useState(true);
+  const [removeDial, setRemoveDial] = useState(false);
   const handleSave = () => {
     window.localStorage.setItem("STATE", JSON.stringify(state));
   };
   const handleRemove = () => {
-    setRemoveDial(true);
     window.localStorage.removeItem("STATE");
+    window.location.reload();
+    setSnack(true);
   };
-
+  const handleDial = () => {
+    setRemoveDial(true);
+  };
   const handleClose = () => {
     setRemoveDial(false);
   };
+  //snackbar
+  const [snack, setSnack] = useState(false);
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnack(false);
+  };
+
   return (
     <div>
-      <Dialog
-        open={removeDial}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Изтриване на състоянието?"}
-        </DialogTitle>
+      <Dialog open={removeDial} onClose={handleClose}>
+        <DialogTitle>{"Изтриване на данните?"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Сигурни ли сте, че искате да изтриете сегашното състояние н
-            протоколите? При затваряне на страницата всички проколи ще бъдат
-            изтрити
+          <DialogContentText>
+            Сигурни ли сте, че искате да изтриете всички данни?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Не</Button>
-          <Button onClick={handleClose}>Да</Button>
+          <Button onClick={handleRemove}>Да</Button>
         </DialogActions>
       </Dialog>
+      <Snackbar open={snack} autoHideDuration={6000} onClose={handleCloseSnack}>
+        <Alert
+          onClose={handleCloseSnack}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Данните са изтрити!
+        </Alert>
+      </Snackbar>
 
       <Header
         kasi={kasi}
         obekt={obekt}
         handleSave={handleSave}
-        handleRemove={handleRemove}
+        handleDial={handleDial}
       />
       <Outlet context={[state, handleState, handleCash, handleRef, printers]} />
       {/* <Footer /> */}
