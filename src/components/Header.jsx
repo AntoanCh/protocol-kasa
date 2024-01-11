@@ -6,10 +6,11 @@ import { styled } from "@mui/material/styles";
 import { deepOrange } from "@mui/material/colors";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import logo from "../static/dar_logo.jpg";
 
-function Header({ obekt, kasi }) {
+function Header({ obekt, kasi, handleSave, handleRemove }) {
   //Custom tabs from material ui
   const CustomTabs = styled(Tabs)({
     borderBottom: "1px solid #e8e8e8",
@@ -84,7 +85,7 @@ function Header({ obekt, kasi }) {
     return arr;
   };
 
-  const handleSave = () => {};
+  console.log(localStorage);
   return (
     <div className="header">
       <div>
@@ -136,11 +137,16 @@ function Header({ obekt, kasi }) {
         icon={<SpeedDialIcon />}
       >
         <SpeedDialAction
+          onClick={handleRemove}
+          icon={<DeleteForeverIcon />}
+          tooltipTitle={"Изтрий"}
+        />
+        <SpeedDialAction
           onClick={handleSave}
           icon={<SaveIcon />}
           tooltipTitle={"Запази"}
-          sx={{ cursor: "not-allowed" }}
         />
+
         <SpeedDialAction
           onClick={() => {
             window.print();

@@ -4,6 +4,12 @@ import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import { useState, useEffect } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Button } from "@mui/material";
 
 function Main({ kasi, obekt }) {
   //function that generates the whole state of the application
@@ -305,12 +311,16 @@ function Main({ kasi, obekt }) {
         break;
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("STATE")) {
+      const newState = JSON.parse(localStorage.getItem("STATE"));
+      setState([...newState]);
+    }
+  }, []);
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       event.preventDefault();
-
-      // Custom logic to handle the refresh
-      // Display a confirmation message or perform necessary actions
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
@@ -318,9 +328,48 @@ function Main({ kasi, obekt }) {
     };
   }, []);
 
+  const [removeDial, setRemoveDial] = useState(true);
+  const handleSave = () => {
+    window.localStorage.setItem("STATE", JSON.stringify(state));
+  };
+  const handleRemove = () => {
+    setRemoveDial(true);
+    window.localStorage.removeItem("STATE");
+  };
+
+  const handleClose = () => {
+    setRemoveDial(false);
+  };
   return (
     <div>
-      <Header kasi={kasi} obekt={obekt} />
+      <Dialog
+        open={removeDial}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Изтриване на състоянието?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Сигурни ли сте, че искате да изтриете сегашното състояние н
+            протоколите? При затваряне на страницата всички проколи ще бъдат
+            изтрити
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Не</Button>
+          <Button onClick={handleClose}>Да</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Header
+        kasi={kasi}
+        obekt={obekt}
+        handleSave={handleSave}
+        handleRemove={handleRemove}
+      />
       <Outlet context={[state, handleState, handleCash, handleRef, printers]} />
       {/* <Footer /> */}
     </div>
