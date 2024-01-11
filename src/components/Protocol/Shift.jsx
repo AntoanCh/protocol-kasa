@@ -11,7 +11,6 @@ function Shift({ kasa, handleState, state }) {
   const handleBlur = (event) => {
     if (isNumeric(event.target.value) || event.target.value === "") {
       setAlert(false);
-      console.log(alert);
       event.target.style.borderColor = "";
     } else {
       setAlert(true);

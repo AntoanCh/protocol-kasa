@@ -26,9 +26,6 @@ function CashSales({ kasa, handleCash, state }) {
         <input
           type="text"
           disabled
-          // value={cash
-          //   .reduce((sum, item) => sum + item * state[kasa - 1].cash[item], 0)
-          //   .toFixed(2)}
           value={parseFloat(state[kasa - 1].totals.cash).toFixed(2)}
         ></input>
       </div>

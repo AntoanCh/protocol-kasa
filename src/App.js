@@ -4,12 +4,6 @@ import Protocol from "./components/Protocol/Protocol";
 import Home from "./components/Home";
 import TotalProtocol from "./components/Total/TotalProtocol";
 import { useState, useEffect } from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
 
 function App() {
   //constructor function for generating sub-routes for each store
@@ -26,21 +20,6 @@ function App() {
       );
     }
     return arr;
-  };
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleOpen);
-    return () => window.removeEventListener("beforeunload", handleOpen);
-  }, []);
-
-  const [open, setOpen] = useState(true);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -96,28 +75,6 @@ function App() {
           <Route path="total" element={<TotalProtocol obekt="Н19" />} />
         </Route>
       </Routes>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
     </BrowserRouter>
   );
 }

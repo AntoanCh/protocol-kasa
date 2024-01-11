@@ -4,7 +4,6 @@ import Voucher from "./Voucher";
 function Vouchers({ state, handleState, kasa }) {
   const vouchers = [
     ["Содексо", "sodekso"],
-    ["Етап Адресс", "etap"],
     ["Идънред", "idunred"],
     ["Бълг. пощи", "poshti"],
     ["Томбоу", "tombou"],
@@ -40,8 +39,7 @@ function Vouchers({ state, handleState, kasa }) {
           //   )
           //   .toFixed(2)}
           value={state[kasa - 1].totals.vouchers}
-          step="0.01"
-          type="number"
+          type="text"
         ></input>
       </div>
     </div>

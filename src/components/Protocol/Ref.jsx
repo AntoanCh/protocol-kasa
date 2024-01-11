@@ -1,5 +1,7 @@
 import React from "react";
 import RefItem from "./RefItem";
+import { Slide, Alert } from "@mui/material";
+import { useState } from "react";
 
 function Ref({ state, handleRef, kasa, handleState }) {
   const refs = [
@@ -14,6 +16,7 @@ function Ref({ state, handleRef, kasa, handleState }) {
         key={index}
         state={state}
         handleRef={handleRef}
+        handleAlert={handleAlert}
         label={item[0]}
         name={item[1]}
         kasa={kasa}
@@ -30,8 +33,33 @@ function Ref({ state, handleRef, kasa, handleState }) {
       handleState("main", "klienti", 0, kasa);
     }
   };
+
+  const [alert, setAlert] = useState([false, ""]);
+
+  const handleAlert = (valid, msg) => {
+    if (valid) {
+      const newAlert = [true, ""];
+      newAlert[1] = msg;
+      setAlert([...newAlert]);
+    }
+  };
+
   return (
     <div>
+      {alert[0] && (
+        <Slide in={alert} direction="left">
+          <Alert
+            variant="filled"
+            severity="error"
+            onClose={() => {
+              setAlert([false, ""]);
+            }}
+          >
+            {alert[1]}
+          </Alert>
+        </Slide>
+      )}
+
       <h3>Справка</h3>
       <div className="inline-input">
         <label>По лента:</label>

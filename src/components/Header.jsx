@@ -7,7 +7,7 @@ import { deepOrange } from "@mui/material/colors";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
-import { keyframes } from "@emotion/react";
+import logo from "../static/dar_logo.jpg";
 
 function Header({ obekt, kasi }) {
   //Custom tabs from material ui
@@ -17,16 +17,6 @@ function Header({ obekt, kasi }) {
       backgroundColor: "#ffad35",
     },
   });
-  const enterKeyframe = keyframes`
-  0% {
-    transform: scale(0);
-    opacity: 0.1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-`;
   const CustomTab = styled((props) => <Tab {...props} />)(({ theme }) => ({
     textTransform: "none",
     minWidth: 0,
@@ -74,7 +64,6 @@ function Header({ obekt, kasi }) {
   ]);
 
   const currentTab = routeMatch?.pattern?.path;
-  console.log(routeMatch?.pattern?.path);
 
   //constructor function to generate number of tabs equal to
   //number of cash desks in current store based on prop
@@ -95,33 +84,38 @@ function Header({ obekt, kasi }) {
     return arr;
   };
 
+  const handleSave = () => {};
   return (
     <div className="header">
-      {/* <Badge
-        badgeContent={""}
-        color="success"
-        sx={{ top: "13px", left: "10px" }}
-      >
-        <Avatar
-          variant="rounded"
-          sx={{
-            padding: "2px",
-            bgcolor: deepOrange[500],
-          }}
+      <div>
+        <Badge
+          badgeContent={obekt.replace("n", "Н")}
+          color="success"
+          sx={{ top: "13px", left: "10px" }}
         >
-          {obekt.replace(/n/, "Н")}
-        </Avatar>
-      </Badge> */}
+          <Avatar
+            variant="rounded"
+            src={logo}
+            sx={{
+              padding: "2px",
+              bgcolor: deepOrange[500],
+            }}
+          ></Avatar>
+        </Badge>
+      </div>
 
-      <CustomTabs centered value={currentTab}>
-        {generateTabs(kasi)}
-        <CustomTab
-          label={`ТОТАЛ`}
-          value={`/${obekt}/total`}
-          to={`/${obekt}/total`}
-          component={Link}
-        />
-      </CustomTabs>
+      <div>
+        <CustomTabs centered value={currentTab}>
+          {generateTabs(kasi)}
+          <CustomTab
+            label={`ТОТАЛ`}
+            value={`/${obekt}/total`}
+            to={`/${obekt}/total`}
+            component={Link}
+          />
+        </CustomTabs>
+      </div>
+      <div></div>
 
       <SpeedDial
         direction="down"
@@ -142,6 +136,7 @@ function Header({ obekt, kasi }) {
         icon={<SpeedDialIcon />}
       >
         <SpeedDialAction
+          onClick={handleSave}
           icon={<SaveIcon />}
           tooltipTitle={"Запази"}
           sx={{ cursor: "not-allowed" }}

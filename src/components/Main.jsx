@@ -4,12 +4,6 @@ import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import { useState, useEffect } from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
 
 function Main({ kasi, obekt }) {
   //function that generates the whole state of the application
@@ -85,6 +79,38 @@ function Main({ kasi, obekt }) {
     return arr;
   };
 
+  const printers = {
+    Н1: ["Избери", "DT511610", "DT794867", "DT794870"],
+    Н4: [],
+    Н5: [
+      "Избери",
+      "DT794832",
+      "DT794834",
+      "DT794835",
+      "DT794846",
+      "DT794831",
+      "DT511664",
+      "DT511677",
+    ],
+    Н6: ["Избери", "DT890249", "DT511930", "DT890047", "DT790266", "DT890051"],
+    Н7: [],
+    Н8: ["Избери", "DT794869", "DT794858", "DT794866", "DT511692"],
+    Н10: ["Избери", "DT794373", "DT794374", "DT794358", "DT511727"],
+    Н12: ["Избери", "DT556965", "DT890482", "DT890483"],
+    Н14: [
+      "Избери",
+      "DT511361",
+      "DT794380",
+      "DT792454",
+      "DT511359",
+      "DT511353",
+      "DT511386",
+      "DT511574",
+    ],
+    Н16: ["Избери", "DT794349", "DT794384", "DT511691"],
+    Н17: ["Избери", "DT790238", "DT790237", "DT511693"],
+    Н19: ["Избери", "DT511387", "DT511380", "DT511607"],
+  };
   const [state, setState] = useState(generateState());
 
   const newTotalCash = (obj) => {
@@ -165,36 +191,6 @@ function Main({ kasi, obekt }) {
           newState[kasa - 1].cash
         ).toFixed(2);
 
-        setState([...newState]);
-        break;
-    }
-  };
-
-  const handleClients = (kasa, newValue) => {
-    const newState = [...state];
-    switch (kasa) {
-      case "1":
-        newState[kasa - 1].klienti = newValue;
-        setState([...newState]);
-        break;
-      case "2":
-        newState[kasa - 1].klienti = newValue;
-        setState([...newState]);
-        break;
-      case "3":
-        newState[kasa - 1].klienti = newValue;
-        setState([...newState]);
-        break;
-      case "4":
-        newState[kasa - 1].klienti = newValue;
-        setState([...newState]);
-        break;
-      case "5":
-        newState[kasa - 1].klienti = newValue;
-        setState([...newState]);
-        break;
-      case "6":
-        newState[kasa - 1].klienti = newValue;
         setState([...newState]);
         break;
     }
@@ -309,49 +305,24 @@ function Main({ kasi, obekt }) {
         break;
     }
   };
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", handleOpen);
-  //   return () => window.removeEventListener("beforeunload", handleOpen);
-  // }, []);
-  const [open, setOpen] = useState(true);
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+      // Custom logic to handle the refresh
+      // Display a confirmation message or perform necessary actions
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
       <Header kasi={kasi} obekt={obekt} />
-      <Outlet
-        context={[state, handleState, handleCash, handleRef, handleClients]}
-      />
-      <Footer />
+      <Outlet context={[state, handleState, handleCash, handleRef, printers]} />
+      {/* <Footer /> */}
     </div>
   );
 }
