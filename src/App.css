@@ -174,7 +174,7 @@ h3 input {
   input,
   label {
     display: block;
-    font-size: smaller;
+    font-size: medium;
   }
 
   input {
@@ -182,7 +182,7 @@ h3 input {
     margin: 0px 0px;
     box-sizing: border-box;
     text-align: center;
-    font-size: smaller;
+    font-size: medium;
     font-weight: 500;
   }
   input[type="date"] {
@@ -191,7 +191,7 @@ h3 input {
     margin: 0px 0;
     box-sizing: border-box;
     text-align: center;
-    font-size: smaller;
+    font-size: medium;
     font-weight: 500;
     border-radius: 7px;
   }
@@ -203,7 +203,7 @@ h3 input {
     box-sizing: border-box;
     text-align: center;
     font-weight: 500;
-    font-size: smaller;
+    font-size: medium;
     border-radius: 7px;
     -webkit-appearance: none;
     -moz-appearance: none;
