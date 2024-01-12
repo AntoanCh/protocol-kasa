@@ -85,8 +85,6 @@ function Header({ obekt, kasi, handleDial }) {
     }
     return arr;
   };
-
-  console.log(localStorage);
   return (
     <div className="header">
       <div>

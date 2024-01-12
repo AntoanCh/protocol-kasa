@@ -17,7 +17,6 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
 
   //handle onBlur event for alert messages
   const handleBlur = (event) => {
-    console.log(event.target);
     if (event.target.name === "check") {
       if (
         event.target.value != parseInt(state[kasa - 1].totals.vouchers) &&
@@ -46,8 +45,8 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
       if (
         event.target.value !=
           parseFloat(state[kasa - 1].totals.cash) +
-            parseFloat(state[kasa - 1].others.inkaso) +
-            parseFloat(state[kasa - 1].others.storno) &&
+            parseFloat(state[kasa - 1].other.inkaso) +
+            parseFloat(state[kasa - 1].other.storno) &&
         event.target.value != 0
       ) {
         event.target.style.borderColor = "red";
