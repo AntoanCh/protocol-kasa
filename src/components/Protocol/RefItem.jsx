@@ -44,7 +44,7 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
     }
     if (event.target.name === "broi") {
       if (
-        event.target.value != parseInt(state[kasa - 1].totals.cash) &&
+        event.target.value != parseFloat(state[kasa - 1].totals.cash) &&
         event.target.value != 0
       ) {
         event.target.style.borderColor = "red";

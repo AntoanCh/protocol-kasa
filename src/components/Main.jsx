@@ -333,6 +333,7 @@ function Main({ kasi, obekt }) {
   }, [state]);
 
   const [removeDial, setRemoveDial] = useState(false);
+  const [contactDial, setContactDial] = useState(false);
   const handleSave = () => {
     window.localStorage.setItem("STATE", JSON.stringify(state));
   };
@@ -341,11 +342,17 @@ function Main({ kasi, obekt }) {
     window.location.reload();
     setSnack(true);
   };
-  const handleDial = () => {
-    setRemoveDial(true);
+  const handleDial = (dial) => {
+    if (dial === "remove") {
+      setRemoveDial(true);
+    }
+    if (dial === "contacts") {
+      setContactDial(true);
+    }
   };
   const handleClose = () => {
     setRemoveDial(false);
+    setContactDial(false);
   };
   //snackbar
   const [snack, setSnack] = useState(false);
@@ -370,8 +377,31 @@ function Main({ kasi, obekt }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Не</Button>
-          <Button onClick={handleRemove}>Да</Button>
+          <Button variant="outlined" color="error" onClick={handleClose}>
+            Не
+          </Button>
+          <Button variant="outlined" color="success" onClick={handleRemove}>
+            Да
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={contactDial}
+        onClose={handleClose}
+        fullWidth
+        maxWidth={"xs"}
+      >
+        <DialogTitle>{"Контакти"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText style={{ maxWidth: 230, fontWeight: "600" }}>
+            Антоан Чавдаров Отдел ИТ email: a.chavdarov@magazinidar.bg Phone:
+            0882112291
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="success" variant="outlined" onClick={handleClose}>
+            ОК
+          </Button>
         </DialogActions>
       </Dialog>
       <Snackbar open={snack} autoHideDuration={6000} onClose={handleCloseSnack}>

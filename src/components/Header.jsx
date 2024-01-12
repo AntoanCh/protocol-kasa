@@ -7,6 +7,7 @@ import { deepOrange } from "@mui/material/colors";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import logo from "../static/dar_logo.jpg";
 
@@ -137,7 +138,7 @@ function Header({ obekt, kasi, handleDial }) {
         icon={<SpeedDialIcon />}
       >
         <SpeedDialAction
-          onClick={handleDial}
+          onClick={() => handleDial("remove")}
           icon={<DeleteForeverIcon />}
           tooltipTitle={"Изчисти"}
         />
@@ -147,6 +148,11 @@ function Header({ obekt, kasi, handleDial }) {
           }}
           icon={<PrintIcon />}
           tooltipTitle={"Принтирай"}
+        />
+        <SpeedDialAction
+          onClick={() => handleDial("contacts")}
+          icon={<ContactEmergencyIcon />}
+          tooltipTitle={"Контакти"}
         />
       </SpeedDial>
     </div>

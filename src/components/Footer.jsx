@@ -1,7 +1,14 @@
 import React from "react";
+import { Button } from "@mui/material";
 
 function Footer() {
-  return <div>Cntacts: a.chavdarov@magazinidar.com phone: 088</div>;
+  return (
+    <div className="footer">
+      <Button variant="outlined" color="success">
+        Контакти
+      </Button>
+    </div>
+  );
 }
 
 export default Footer;
