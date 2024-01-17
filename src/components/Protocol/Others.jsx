@@ -6,6 +6,7 @@ function Others({ kasa, handleState, state }) {
   const others = [
     ["Терминал общо", "terminal"],
     ["Кеш бек", "cashBack"],
+    ["Кредит(Glovo)", "glovo"],
     ["РКО", "rko"],
     ["Инкасо", "inkaso"],
     ["Сторно", "storno"],

@@ -65,6 +65,7 @@ function Main({ kasi, obekt }) {
         other: {
           terminal: 0,
           cashBack: 0,
+          glovo: 0,
           rko: 0,
           inkaso: 0,
           storno: 0,

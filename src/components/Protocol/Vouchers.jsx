@@ -26,22 +26,15 @@ function Vouchers({ state, handleState, kasa }) {
   return (
     <div>
       <h3>Ваучери</h3>
-      {generateVoucherItems()}
       <div className="inline-input">
         <label>Сума ваучери</label>
         <input
           disabled
-          // value={vouchers
-          //   .reduce(
-          //     (sum, item) =>
-          //       sum + parseFloat(state[kasa - 1].vouchers[item[1]]),
-          //     0
-          //   )
-          //   .toFixed(2)}
           value={state[kasa - 1].totals.vouchers}
           type="text"
         ></input>
       </div>
+      {generateVoucherItems()}
     </div>
   );
 }

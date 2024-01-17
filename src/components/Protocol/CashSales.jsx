@@ -16,9 +16,22 @@ function CashSales({ kasa, handleCash, state }) {
       />
     ));
   };
+  const ostatak = () => {
+    let count = 0;
+    for (const [key, value] of Object.entries(state[kasa - 1].cash)) {
+      if (key > 5) {
+        count = value[1] + count;
+      }
+    }
+    return count;
+  };
   return (
     <div>
       <h3>Продажби в брой</h3>
+      <div id="totalCash">
+        <input type="text" value={"Остатък(10 -100лв) :"} disabled></input>
+        <input type="text" disabled value={ostatak()}></input>
+      </div>
       {generateCashItems(cash)}
 
       <div id="totalCash">

@@ -8,6 +8,8 @@ function OtherItem({ label, name, kasa, state, handleState }) {
       let newValue;
       if (event.target.value.endsWith(".")) {
         newValue = parseFloat(event.target.value).toString() + ".";
+      } else if (event.target.value.endsWith(".0")) {
+        newValue = parseFloat(event.target.value).toString() + ".0";
       } else {
         newValue = parseFloat(event.target.value);
       }

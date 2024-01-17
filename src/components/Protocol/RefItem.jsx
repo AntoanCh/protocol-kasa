@@ -6,6 +6,8 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
       let newValue;
       if (event.target.value.endsWith(".")) {
         newValue = parseFloat(event.target.value).toString() + ".";
+      } else if (event.target.value.endsWith(".0")) {
+        newValue = parseFloat(event.target.value).toString() + ".0";
       } else {
         newValue = parseFloat(event.target.value).toString();
       }
@@ -36,6 +38,18 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
       ) {
         event.target.style.borderColor = "red";
         handleAlert(true, "Несъвпадение в картовите плащания");
+      } else {
+        event.target.style.borderColor = "";
+        handleAlert(false, "");
+      }
+    }
+    if (event.target.name === "glovo") {
+      if (
+        event.target.value != parseFloat(state[kasa - 1].other.glovo) &&
+        event.target.value != 0
+      ) {
+        event.target.style.borderColor = "red";
+        handleAlert(true, "Разлика в Кредит(glovo)");
       } else {
         event.target.style.borderColor = "";
         handleAlert(false, "");
