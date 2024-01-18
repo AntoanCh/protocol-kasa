@@ -6,9 +6,15 @@ import Others from "./Others";
 import "../../App.css";
 import { useOutletContext } from "react-router-dom";
 import dayjs from "dayjs";
+import SaveIcon from "@mui/icons-material/Save";
+import PrintIcon from "@mui/icons-material/Print";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
+import { deepOrange } from "@mui/material/colors";
 
 function Protocol({ kasa, obekt }) {
-  const [state, handleState, handleCash, handleRef, printers] =
+  const [state, handleState, handleCash, handleRef, printers, handleDial] =
     useOutletContext();
 
   const handleChange = (event) => {
@@ -48,7 +54,42 @@ function Protocol({ kasa, obekt }) {
       </div>
 
       <Shift kasa={kasa} handleState={handleState} state={state} />
-
+      <SpeedDial
+        direction="down"
+        ariaLabel="SpeedDial basic example"
+        FabProps={{
+          sx: {
+            bgcolor: deepOrange[500],
+            "&:hover": {
+              bgcolor: "#4bb543",
+            },
+          },
+        }}
+        sx={{
+          position: "fixed",
+          top: "2px",
+          left: "95%",
+        }}
+        icon={<SpeedDialIcon />}
+      >
+        <SpeedDialAction
+          onClick={() => handleDial(["remove", kasa])}
+          icon={<DeleteForeverIcon />}
+          tooltipTitle={"Изчисти"}
+        />
+        <SpeedDialAction
+          onClick={() => {
+            window.print();
+          }}
+          icon={<PrintIcon />}
+          // tooltipTitle={"Принтирай"}
+        />
+        <SpeedDialAction
+          onClick={() => handleDial("contacts")}
+          icon={<ContactEmergencyIcon />}
+          tooltipTitle={"Контакти"}
+        />
+      </SpeedDial>
       <div className="bottom">
         <CashSales kasa={kasa} handleCash={handleCash} state={state} />
         <div>

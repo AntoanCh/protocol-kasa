@@ -4,11 +4,7 @@ import { useLocation, matchPath } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { deepOrange } from "@mui/material/colors";
-import SaveIcon from "@mui/icons-material/Save";
-import PrintIcon from "@mui/icons-material/Print";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
+
 import logo from "../static/dar_logo.jpg";
 
 function Header({ obekt, kasi, handleDial }) {
@@ -116,43 +112,6 @@ function Header({ obekt, kasi, handleDial }) {
         </CustomTabs>
       </div>
       <div></div>
-
-      <SpeedDial
-        direction="down"
-        ariaLabel="SpeedDial basic example"
-        FabProps={{
-          sx: {
-            bgcolor: deepOrange[500],
-            "&:hover": {
-              bgcolor: "#4bb543",
-            },
-          },
-        }}
-        sx={{
-          position: "fixed",
-          top: "2px",
-          left: "95%",
-        }}
-        icon={<SpeedDialIcon />}
-      >
-        <SpeedDialAction
-          onClick={() => handleDial("remove")}
-          icon={<DeleteForeverIcon />}
-          tooltipTitle={"Изчисти"}
-        />
-        <SpeedDialAction
-          onClick={() => {
-            window.print();
-          }}
-          icon={<PrintIcon />}
-          tooltipTitle={"Принтирай"}
-        />
-        <SpeedDialAction
-          onClick={() => handleDial("contacts")}
-          icon={<ContactEmergencyIcon />}
-          tooltipTitle={"Контакти"}
-        />
-      </SpeedDial>
     </div>
   );
 }

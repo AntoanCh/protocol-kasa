@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 import React from "react";
 import Header from "./Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, json } from "react-router-dom";
 import Footer from "./Footer";
 import { useState, useEffect, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
@@ -333,26 +333,93 @@ function Main({ kasi, obekt }) {
     window.localStorage.setItem("STATE", JSON.stringify(state));
   }, [state]);
 
-  const [removeDial, setRemoveDial] = useState(false);
+  const [removeDial, setRemoveDial] = useState([false, ""]);
   const [contactDial, setContactDial] = useState(false);
   const handleSave = () => {
     window.localStorage.setItem("STATE", JSON.stringify(state));
   };
-  const handleRemove = () => {
-    window.localStorage.removeItem("STATE");
+  const handleRemove = (kasa) => {
+    const newState = [...state];
+    newState[kasa - 1] = {
+      main: {
+        printer: "",
+        klienti: 0,
+      },
+
+      start: {
+        name: "",
+        sum: "",
+        cigs: "",
+        name2: "",
+      },
+      end: {
+        name: "",
+        sum: "",
+        cigs: "",
+        name2: "",
+      },
+      cash: {
+        100: [0, 0],
+        50: [0, 0],
+        20: [0, 0],
+        10: [0, 0],
+        5: [0, 0],
+        2: [0, 0],
+        1: [0, 0],
+        0.5: [0, 0],
+        0.2: [0, 0],
+        0.1: [0, 0],
+        0.05: [0, 0],
+        0.02: [0, 0],
+        0.01: [0, 0],
+      },
+      vouchers: {
+        sodekso: 0,
+        etap: 0,
+        idunred: 0,
+        poshti: 0,
+        tombou: 0,
+        dejene: 0,
+        prizma: 0,
+        fiducia: 0,
+      },
+      other: {
+        terminal: 0,
+        cashBack: 0,
+        glovo: 0,
+        rko: 0,
+        inkaso: 0,
+        storno: 0,
+      },
+      ref: {
+        check: 0,
+        karta: 0,
+        glovo: 0,
+        broi: 0,
+      },
+      totals: {
+        cash: 0.0,
+        vouchers: 0,
+        other: 0,
+        total: 0,
+        ref: 0,
+      },
+    };
+    window.localStorage.setItem("STATE", JSON.stringify(newState));
+    // window.localStorage.removeItem("STATE");
     window.location.reload();
     setSnack(true);
   };
   const handleDial = (dial) => {
-    if (dial === "remove") {
-      setRemoveDial(true);
+    if (dial[0] === "remove") {
+      setRemoveDial([true, dial[1]]);
     }
-    if (dial === "contacts") {
+    if (dial[0] === "contacts") {
       setContactDial(true);
     }
   };
   const handleClose = () => {
-    setRemoveDial(false);
+    setRemoveDial([false, ""]);
     setContactDial(false);
   };
   //snackbar
@@ -370,18 +437,23 @@ function Main({ kasi, obekt }) {
 
   return (
     <div>
-      <Dialog open={removeDial} onClose={handleClose}>
+      <Dialog open={removeDial[0]} onClose={handleClose}>
         <DialogTitle>{"Изтриване на данните?"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Сигурни ли сте, че искате да изтриете всички данни?
+            Сигурни ли сте, че искате да изтриете данните за каса{" "}
+            {removeDial[1]}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="error" onClick={handleClose}>
             Не
           </Button>
-          <Button variant="outlined" color="success" onClick={handleRemove}>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={() => handleRemove(removeDial[1])}
+          >
             Да
           </Button>
         </DialogActions>
@@ -421,7 +493,16 @@ function Main({ kasi, obekt }) {
         handleSave={handleSave}
         handleDial={handleDial}
       />
-      <Outlet context={[state, handleState, handleCash, handleRef, printers]} />
+      <Outlet
+        context={[
+          state,
+          handleState,
+          handleCash,
+          handleRef,
+          printers,
+          handleDial,
+        ]}
+      />
       {/* <Footer /> */}
     </div>
   );
