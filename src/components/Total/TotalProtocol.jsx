@@ -1,9 +1,15 @@
 import { Divider } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 import dayjs from "dayjs";
+import SaveIcon from "@mui/icons-material/Save";
+import PrintIcon from "@mui/icons-material/Print";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
+import { deepOrange } from "@mui/material/colors";
 
 function TotalProtocol({ obekt }) {
-  const [state] = useOutletContext();
+  const [state, handleDial] = useOutletContext();
   const cash = [100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
   const vouchers = [
     ["Содексо", "sodekso"],
@@ -17,6 +23,7 @@ function TotalProtocol({ obekt }) {
   const other = [
     ["Терминал общо", "terminal"],
     ["Кеш бек", "cashBack"],
+    ["Кредит(glovo)", "glovo"],
     ["РКО", "rko"],
     ["Инкасо", "inkaso"],
     ["Сторно", "storno"],
@@ -29,11 +36,6 @@ function TotalProtocol({ obekt }) {
   ];
 
   let totalRef = 0;
-  // refs.map((item) => {
-  //   totalRef =
-  //     totalRef +
-  //     state.reduce((sum, obj) => sum + parseFloat(obj.ref[item[1]]), 0);
-  // });
   totalRef = state.reduce((sum, obj) => sum + obj.totals.ref, 0);
 
   let totalOther = 0;
@@ -120,6 +122,41 @@ function TotalProtocol({ obekt }) {
     parseFloat(totalCash) + parseFloat(totalOther) + parseFloat(totalVouchers);
   return (
     <div className="container">
+      <SpeedDial
+        id="speed-dial"
+        direction="down"
+        ariaLabel="SpeedDial basic example"
+        FabProps={{
+          sx: {
+            bgcolor: deepOrange[500],
+            "&:hover": {
+              bgcolor: "#4bb543",
+            },
+          },
+        }}
+        sx={{
+          position: "fixed",
+          top: "2px",
+          left: "95%",
+        }}
+        icon={<SpeedDialIcon />}
+      >
+        <SpeedDialAction
+          icon={<DeleteForeverIcon />}
+          sx={{ cursor: "not-allowed" }}
+        />
+        <SpeedDialAction
+          onClick={() => {
+            window.print();
+          }}
+          icon={<PrintIcon />}
+        />
+        <SpeedDialAction
+          onClick={() => handleDial(["contacts"])}
+          icon={<ContactEmergencyIcon />}
+          tooltipTitle={"Контакти"}
+        />
+      </SpeedDial>
       <h1>ПРОТОКОЛ ЗА РАБОТА НА ОБЕКТ {obekt}</h1>
       <div className="top">
         <div className="inline-input">
@@ -143,11 +180,12 @@ function TotalProtocol({ obekt }) {
         </div>
         <div>
           <h3>Ваучери</h3>
-          {generateVouchers()}
-          <div className="inline-input">
+          <div className="inline-input" id="sum">
             <label>Сума ваучери</label>
             <input disabled type="text" value={totalVouchers}></input>
           </div>
+          {generateVouchers()}
+
           <Divider />
           {generateOther()}
           <Divider />

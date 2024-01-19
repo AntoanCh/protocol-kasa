@@ -496,11 +496,11 @@ function Main({ kasi, obekt }) {
       <Outlet
         context={[
           state,
+          handleDial,
           handleState,
           handleCash,
           handleRef,
           printers,
-          handleDial,
         ]}
       />
       {/* <Footer /> */}

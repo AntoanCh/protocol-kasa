@@ -26,7 +26,7 @@ function Vouchers({ state, handleState, kasa }) {
   return (
     <div>
       <h3>Ваучери</h3>
-      <div className="inline-input">
+      <div className="inline-input" id="sum">
         <label>Сума ваучери</label>
         <input
           disabled

@@ -14,7 +14,7 @@ import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 
 function Protocol({ kasa, obekt }) {
-  const [state, handleState, handleCash, handleRef, printers, handleDial] =
+  const [state, handleDial, handleState, handleCash, handleRef, printers] =
     useOutletContext();
 
   const handleChange = (event) => {
@@ -54,7 +54,9 @@ function Protocol({ kasa, obekt }) {
       </div>
 
       <Shift kasa={kasa} handleState={handleState} state={state} />
+
       <SpeedDial
+        id="speed-dial"
         direction="down"
         ariaLabel="SpeedDial basic example"
         FabProps={{
@@ -85,7 +87,7 @@ function Protocol({ kasa, obekt }) {
           // tooltipTitle={"Принтирай"}
         />
         <SpeedDialAction
-          onClick={() => handleDial("contacts")}
+          onClick={() => handleDial(["contacts"])}
           icon={<ContactEmergencyIcon />}
           tooltipTitle={"Контакти"}
         />

@@ -25,7 +25,12 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
         event.target.value != 0
       ) {
         event.target.style.borderColor = "red";
-        handleAlert(true, "Несъвпадение в броя ваучери");
+        handleAlert(
+          true,
+          `Разлика във ваучерите : ${Math.abs(
+            event.target.value - parseInt(state[kasa - 1].totals.vouchers)
+          ).toFixed(2)}лв`
+        );
       } else {
         event.target.style.borderColor = "";
         handleAlert(false, "");
@@ -37,7 +42,12 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
         event.target.value != 0
       ) {
         event.target.style.borderColor = "red";
-        handleAlert(true, "Несъвпадение в картовите плащания");
+        handleAlert(
+          true,
+          `Разлика в плащанията с карта : ${Math.abs(
+            event.target.value - parseFloat(state[kasa - 1].other.terminal)
+          ).toFixed(2)} лв`
+        );
       } else {
         event.target.style.borderColor = "";
         handleAlert(false, "");
@@ -49,7 +59,12 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
         event.target.value != 0
       ) {
         event.target.style.borderColor = "red";
-        handleAlert(true, "Разлика в Кредит(glovo)");
+        handleAlert(
+          true,
+          `Разлика в Кредит(Glovo) : ${Math.abs(
+            event.target.value - parseFloat(state[kasa - 1].other.glovo)
+          ).toFixed(2)}лв`
+        );
       } else {
         event.target.style.borderColor = "";
         handleAlert(false, "");
@@ -60,11 +75,23 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
         event.target.value !=
           parseFloat(state[kasa - 1].totals.cash) +
             parseFloat(state[kasa - 1].other.inkaso) +
+            parseFloat(state[kasa - 1].other.cashBack) +
+            parseFloat(state[kasa - 1].other.rko) +
             parseFloat(state[kasa - 1].other.storno) &&
         event.target.value != 0
       ) {
         event.target.style.borderColor = "red";
-        handleAlert(true, "Несъвпадение в плащанията в брой");
+        handleAlert(
+          true,
+          `Разлика в плащанията в брой : ${Math.abs(
+            event.target.value -
+              (parseFloat(state[kasa - 1].totals.cash) +
+                parseFloat(state[kasa - 1].other.inkaso) +
+                parseFloat(state[kasa - 1].other.cashBack) +
+                parseFloat(state[kasa - 1].other.rko) +
+                parseFloat(state[kasa - 1].other.storno))
+          ).toFixed(2)} лв`
+        );
       } else {
         event.target.style.borderColor = "";
         handleAlert(false, "");
