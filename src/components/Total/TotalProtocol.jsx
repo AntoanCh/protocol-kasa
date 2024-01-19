@@ -120,6 +120,18 @@ function TotalProtocol({ obekt }) {
 
   const total =
     parseFloat(totalCash) + parseFloat(totalOther) + parseFloat(totalVouchers);
+  const ostatak = () => {
+    let count = 0;
+    for (const index of state.keys()) {
+      for (const [key, value] of Object.entries(state[index].cash)) {
+        if (key > 5) {
+          count = value[1] + count;
+        }
+      }
+    }
+
+    return count;
+  };
   return (
     <div className="container">
       <SpeedDial
@@ -142,8 +154,8 @@ function TotalProtocol({ obekt }) {
         icon={<SpeedDialIcon />}
       >
         <SpeedDialAction
+          onClick={() => handleDial(["remove", "all"])}
           icon={<DeleteForeverIcon />}
-          sx={{ cursor: "not-allowed" }}
         />
         <SpeedDialAction
           onClick={() => {
@@ -172,6 +184,10 @@ function TotalProtocol({ obekt }) {
       <div className="bottom">
         <div>
           <h3>Продажби в брой</h3>
+          <div id="totalCash" className="underline">
+            <input type="text" value={"Остатък(10 - 100лв) :"} disabled></input>
+            <input type="text" disabled value={ostatak().toFixed(2)}></input>
+          </div>
           {generateCashSales()}
           <div id="totalCash">
             <input type="text" value={"Всичко в брой :"} disabled></input>
@@ -180,7 +196,7 @@ function TotalProtocol({ obekt }) {
         </div>
         <div>
           <h3>Ваучери</h3>
-          <div className="inline-input" id="sum">
+          <div className="inline-input underline">
             <label>Сума ваучери</label>
             <input disabled type="text" value={totalVouchers}></input>
           </div>
@@ -189,7 +205,7 @@ function TotalProtocol({ obekt }) {
           <Divider />
           {generateOther()}
           <Divider />
-          <div className="inline-input">
+          <div className="inline-input topline">
             <label>ТОТАЛ</label>
             <input disabled type="text" value={total.toFixed(2)}></input>
           </div>
@@ -211,7 +227,6 @@ function TotalProtocol({ obekt }) {
         <button
           onClick={() => {
             window.print();
-            window.localStorage.clear();
           }}
           className="print-btn"
         >

@@ -143,12 +143,16 @@ h3 input {
 .inline-input input {
   width: auto;
 }
-#sum {
-  font-style: italic;
-  padding-bottom: 5px;
-  border-bottom: 2px solid black;
-}
+
 @media print {
+  .underline {
+    border-bottom: 2px solid black;
+    padding-bottom: 3px;
+  }
+  .topline {
+    border-top: 2px solid black;
+  }
+
   #speed-dial {
     display: none;
   }

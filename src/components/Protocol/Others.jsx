@@ -34,7 +34,7 @@ function Others({ kasa, handleState, state }) {
       {generateOthers()}
 
       <Divider />
-      <div className="inline-input">
+      <div className="inline-input topline">
         <label>ТОТАЛ</label>
         <input disabled value={total.toFixed(2)} type="text"></input>
       </div>

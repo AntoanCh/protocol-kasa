@@ -28,7 +28,7 @@ function CashSales({ kasa, handleCash, state }) {
   return (
     <div>
       <h3>Продажби в брой</h3>
-      <div id="totalCash">
+      <div id="totalCash" className="underline">
         <input type="text" value={"Остатък(10 -100лв) :"} disabled></input>
         <input type="text" disabled value={ostatak().toFixed(2)}></input>
       </div>

@@ -18,8 +18,14 @@ function OtherItem({ label, name, kasa, state, handleState }) {
       handleState("other", name, 0, kasa);
     }
   };
+  let line = "";
+  if (name === "terminal") {
+    line = "underline topline";
+  } else {
+    line = "";
+  }
   return (
-    <div className="inline-input">
+    <div className={`inline-input ${line}`}>
       <label>{label}</label>
 
       <input

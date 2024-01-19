@@ -339,74 +339,78 @@ function Main({ kasi, obekt }) {
     window.localStorage.setItem("STATE", JSON.stringify(state));
   };
   const handleRemove = (kasa) => {
-    const newState = [...state];
-    newState[kasa - 1] = {
-      main: {
-        printer: "",
-        klienti: 0,
-      },
+    if (kasa === "all") {
+      window.localStorage.removeItem("STATE");
+    } else {
+      const newState = [...state];
+      newState[kasa - 1] = {
+        main: {
+          printer: "",
+          klienti: 0,
+        },
 
-      start: {
-        name: "",
-        sum: "",
-        cigs: "",
-        name2: "",
-      },
-      end: {
-        name: "",
-        sum: "",
-        cigs: "",
-        name2: "",
-      },
-      cash: {
-        100: [0, 0],
-        50: [0, 0],
-        20: [0, 0],
-        10: [0, 0],
-        5: [0, 0],
-        2: [0, 0],
-        1: [0, 0],
-        0.5: [0, 0],
-        0.2: [0, 0],
-        0.1: [0, 0],
-        0.05: [0, 0],
-        0.02: [0, 0],
-        0.01: [0, 0],
-      },
-      vouchers: {
-        sodekso: 0,
-        etap: 0,
-        idunred: 0,
-        poshti: 0,
-        tombou: 0,
-        dejene: 0,
-        prizma: 0,
-        fiducia: 0,
-      },
-      other: {
-        terminal: 0,
-        cashBack: 0,
-        glovo: 0,
-        rko: 0,
-        inkaso: 0,
-        storno: 0,
-      },
-      ref: {
-        check: 0,
-        karta: 0,
-        glovo: 0,
-        broi: 0,
-      },
-      totals: {
-        cash: 0.0,
-        vouchers: 0,
-        other: 0,
-        total: 0,
-        ref: 0,
-      },
-    };
-    window.localStorage.setItem("STATE", JSON.stringify(newState));
-    // window.localStorage.removeItem("STATE");
+        start: {
+          name: "",
+          sum: "",
+          cigs: "",
+          name2: "",
+        },
+        end: {
+          name: "",
+          sum: "",
+          cigs: "",
+          name2: "",
+        },
+        cash: {
+          100: [0, 0],
+          50: [0, 0],
+          20: [0, 0],
+          10: [0, 0],
+          5: [0, 0],
+          2: [0, 0],
+          1: [0, 0],
+          0.5: [0, 0],
+          0.2: [0, 0],
+          0.1: [0, 0],
+          0.05: [0, 0],
+          0.02: [0, 0],
+          0.01: [0, 0],
+        },
+        vouchers: {
+          sodekso: 0,
+          etap: 0,
+          idunred: 0,
+          poshti: 0,
+          tombou: 0,
+          dejene: 0,
+          prizma: 0,
+          fiducia: 0,
+        },
+        other: {
+          terminal: 0,
+          cashBack: 0,
+          glovo: 0,
+          rko: 0,
+          inkaso: 0,
+          storno: 0,
+        },
+        ref: {
+          check: 0,
+          karta: 0,
+          glovo: 0,
+          broi: 0,
+        },
+        totals: {
+          cash: 0.0,
+          vouchers: 0,
+          other: 0,
+          total: 0,
+          ref: 0,
+        },
+      };
+      window.localStorage.setItem("STATE", JSON.stringify(newState));
+    }
+
     window.location.reload();
     setSnack(true);
   };
