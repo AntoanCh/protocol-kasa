@@ -156,6 +156,7 @@ function TotalProtocol({ obekt }) {
         <SpeedDialAction
           onClick={() => handleDial(["remove", "all"])}
           icon={<DeleteForeverIcon />}
+          tooltipTitle={"Изчисти всички каси"}
         />
         <SpeedDialAction
           onClick={() => {

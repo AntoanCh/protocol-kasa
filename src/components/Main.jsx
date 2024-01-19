@@ -445,8 +445,10 @@ function Main({ kasi, obekt }) {
         <DialogTitle>{"Изтриване на данните?"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Сигурни ли сте, че искате да изтриете данните за каса{" "}
-            {removeDial[1]}?
+            {removeDial[1] === "all"
+              ? "Сигурни ли сте, че искате да изтриете данните за ВСИЧКИ каси"
+              : ` Сигурни ли сте, че искате да изтриете данните за каса
+            ${removeDial[1]}?`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
