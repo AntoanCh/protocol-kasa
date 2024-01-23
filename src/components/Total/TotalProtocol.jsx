@@ -77,10 +77,9 @@ function TotalProtocol({ obekt }) {
         <input
           disabled
           name={item[1]}
-          defaultValue={state.reduce(
-            (sum, obj) => sum + parseFloat(obj.vouchers[item[1]]),
-            0
-          )}
+          defaultValue={state
+            .reduce((sum, obj) => sum + parseFloat(obj.vouchers[item[1]]), 0)
+            .toFixed(2)}
           type="text"
         ></input>
       </div>
@@ -93,10 +92,9 @@ function TotalProtocol({ obekt }) {
         <input
           disabled
           name={item[1]}
-          defaultValue={state.reduce(
-            (sum, obj) => sum + parseFloat(obj.other[item[1]]),
-            0
-          )}
+          defaultValue={state
+            .reduce((sum, obj) => sum + parseFloat(obj.other[item[1]]), 0)
+            .toFixed(2)}
           type="text"
         ></input>
       </div>
@@ -108,10 +106,9 @@ function TotalProtocol({ obekt }) {
         <label>{item[0]}</label>
         <input
           disabled
-          defaultValue={state.reduce(
-            (sum, obj) => sum + parseFloat(obj.ref[item[1]]),
-            0
-          )}
+          defaultValue={state
+            .reduce((sum, obj) => sum + parseFloat(obj.ref[item[1]]), 0)
+            .toFixed(2)}
           type="text"
         ></input>
       </div>
@@ -199,7 +196,11 @@ function TotalProtocol({ obekt }) {
           <h3>Ваучери</h3>
           <div className="inline-input underline">
             <label>Сума ваучери</label>
-            <input disabled type="text" value={totalVouchers}></input>
+            <input
+              disabled
+              type="text"
+              value={totalVouchers.toFixed(2)}
+            ></input>
           </div>
           {generateVouchers()}
 

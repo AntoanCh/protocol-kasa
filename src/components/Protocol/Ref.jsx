@@ -1,6 +1,6 @@
 import React from "react";
 import RefItem from "./RefItem";
-import { Slide, Alert } from "@mui/material";
+import { Slide, Alert, AlertTitle } from "@mui/material";
 import { useState } from "react";
 
 function Ref({ state, handleRef, kasa, handleState }) {
@@ -34,12 +34,13 @@ function Ref({ state, handleRef, kasa, handleState }) {
     }
   };
 
-  const [alert, setAlert] = useState([false, ""]);
+  const [alert, setAlert] = useState([false, "", ""]);
 
-  const handleAlert = (valid, msg) => {
+  const handleAlert = (valid, msg, kasa) => {
     if (valid) {
-      const newAlert = [true, ""];
+      const newAlert = [true, "", ""];
       newAlert[1] = msg;
+      newAlert[2] = kasa;
       setAlert([...newAlert]);
     }
   };
@@ -55,6 +56,7 @@ function Ref({ state, handleRef, kasa, handleState }) {
               setAlert([false, ""]);
             }}
           >
+            <AlertTitle>Каса {alert[2]} :</AlertTitle>
             {alert[1]}
           </Alert>
         </Slide>

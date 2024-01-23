@@ -8,8 +8,12 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
         newValue = parseFloat(event.target.value).toString() + ".";
       } else if (event.target.value.endsWith(".0")) {
         newValue = parseFloat(event.target.value).toString() + ".0";
+      } else if (/^[0-9]*\.[0-9]{2,3}$/.test(event.target.value)) {
+        newValue = parseFloat(event.target.value).toFixed(2);
+      } else if (event.nativeEvent.inputType === "insertFromPaste") {
+        newValue = parseFloat(event.target.value).toFixed(2);
       } else {
-        newValue = parseFloat(event.target.value).toString();
+        newValue = parseFloat(event.target.value); //.toString();
       }
       handleRef("ref", name, newValue, kasa);
     } else {
@@ -29,11 +33,12 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
           true,
           `Разлика във ваучерите : ${Math.abs(
             event.target.value - parseInt(state[kasa - 1].totals.vouchers)
-          ).toFixed(2)}лв`
+          ).toFixed(2)}лв`,
+          kasa
         );
       } else {
         event.target.style.borderColor = "";
-        handleAlert(false, "");
+        handleAlert(false, "", "");
       }
     }
     if (event.target.name === "karta") {
@@ -46,7 +51,8 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
           true,
           `Разлика в плащанията с карта : ${Math.abs(
             event.target.value - parseFloat(state[kasa - 1].other.terminal)
-          ).toFixed(2)} лв`
+          ).toFixed(2)} лв`,
+          kasa
         );
       } else {
         event.target.style.borderColor = "";
@@ -63,7 +69,8 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
           true,
           `Разлика в Кредит(Glovo) : ${Math.abs(
             event.target.value - parseFloat(state[kasa - 1].other.glovo)
-          ).toFixed(2)}лв`
+          ).toFixed(2)}лв`,
+          kasa
         );
       } else {
         event.target.style.borderColor = "";
@@ -90,7 +97,8 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
                 parseFloat(state[kasa - 1].other.cashBack) +
                 parseFloat(state[kasa - 1].other.rko) +
                 parseFloat(state[kasa - 1].other.storno))
-          ).toFixed(2)} лв`
+          ).toFixed(2)} лв`,
+          kasa
         );
       } else {
         event.target.style.borderColor = "";
