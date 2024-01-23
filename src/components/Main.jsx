@@ -509,7 +509,7 @@ function Main({ kasi, obekt }) {
           printers,
         ]}
       />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

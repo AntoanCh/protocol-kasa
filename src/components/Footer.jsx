@@ -1,14 +1,7 @@
 import React from "react";
-import { Button } from "@mui/material";
 
 function Footer() {
-  return (
-    <div className="footer">
-      <Button variant="outlined" color="success">
-        Контакти
-      </Button>
-    </div>
-  );
+  return <div className="footer">Ver: {process.env.REACT_APP_VERSION}</div>;
 }
 
 export default Footer;
