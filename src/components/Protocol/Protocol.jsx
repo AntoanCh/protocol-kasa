@@ -12,10 +12,14 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
+import { useState } from "react";
+import ReactToPrint from "react-to-print";
 
 function Protocol({ kasa, obekt }) {
   const [state, handleDial, handleState, handleCash, handleRef, printers] =
     useOutletContext();
+
+  const [print, setPrint] = useState(false);
 
   const handleChange = (event) => {
     if (event.target.value) {

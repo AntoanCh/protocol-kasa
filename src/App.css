@@ -156,6 +156,9 @@ h3 input {
   #speed-dial {
     display: none;
   }
+  .footer {
+    display: none;
+  }
   .container {
     width: 100%;
     max-width: auto;
@@ -164,6 +167,11 @@ h3 input {
     background-color: #ccc;
     font-size: smaller;
   }
+  /* newnewn */
+  .bottom {
+    display: block;
+  }
+
   .header {
     display: none;
   }
@@ -187,7 +195,8 @@ h3 input {
   input,
   label {
     display: block;
-    font-size: medium;
+    /* medium */
+    font-size: xx-small;
   }
 
   input {
@@ -195,7 +204,8 @@ h3 input {
     margin: 0px 0px;
     box-sizing: border-box;
     text-align: center;
-    font-size: medium;
+    /* medium */
+    font-size: xx-small;
     font-weight: 500;
   }
   input[type="date"] {
@@ -204,7 +214,8 @@ h3 input {
     margin: 0px 0;
     box-sizing: border-box;
     text-align: center;
-    font-size: medium;
+    /* medium */
+    font-size: xx-small;
     font-weight: 500;
     border-radius: 7px;
   }
@@ -216,7 +227,8 @@ h3 input {
     box-sizing: border-box;
     text-align: center;
     font-weight: 500;
-    font-size: medium;
+    /* medium */
+    font-size: xx-small;
     border-radius: 7px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -240,7 +252,8 @@ h3 input {
     align-items: center;
     text-align: center;
     font-weight: 400;
-    font-size: smaller;
+    /* smaller */
+    font-size: xx-small;
   }
   .inline-input input {
     width: auto;
