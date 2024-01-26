@@ -12,13 +12,10 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
-import { useState } from "react";
 
 function Protocol({ kasa, obekt }) {
   const [state, handleDial, handleState, handleCash, handleRef, printers] =
     useOutletContext();
-
-  const [print, setPrint] = useState(false);
 
   const handleChange = (event) => {
     if (event.target.value) {
@@ -95,21 +92,24 @@ function Protocol({ kasa, obekt }) {
           tooltipTitle={"Контакти"}
         />
       </SpeedDial>
-      <div className="bottom">
-        <CashSales kasa={kasa} handleCash={handleCash} state={state} />
-        <div>
-          <Vouchers kasa={kasa} handleState={handleState} state={state} />
-          <Others kasa={kasa} handleState={handleState} state={state} />
+      <div className="bottomNew">
+        <div className="bottom">
+          <CashSales kasa={kasa} handleCash={handleCash} state={state} />
+          <div>
+            <Vouchers kasa={kasa} handleState={handleState} state={state} />
+            <Others kasa={kasa} handleState={handleState} state={state} />
+          </div>
+        </div>
+        <div className="bottom2">
+          <Ref
+            kasa={kasa}
+            handleRef={handleRef}
+            state={state}
+            handleState={handleState}
+          />
         </div>
       </div>
-      <div className="bottom2">
-        <Ref
-          kasa={kasa}
-          handleRef={handleRef}
-          state={state}
-          handleState={handleState}
-        />
-      </div>
+
       <div>
         <button onClick={() => window.print()} className="print-btn">
           PRINT

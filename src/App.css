@@ -170,6 +170,10 @@ h3 input {
   /* newnewn */
   .bottom {
     display: block;
+    max-width: 50%;
+  }
+  .bottomNew {
+    display: flex;
   }
 
   .header {
