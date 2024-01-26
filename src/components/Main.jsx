@@ -132,7 +132,7 @@ function Main({ kasi, obekt }) {
   const newTotal = (obj) => {
     let newTotal = 0;
     for (let item in obj) {
-      newTotal = newTotal + obj[item];
+      newTotal = newTotal + parseFloat(obj[item]);
     }
     return newTotal;
   };
