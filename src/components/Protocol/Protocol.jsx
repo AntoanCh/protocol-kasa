@@ -13,7 +13,6 @@ import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { useState } from "react";
-import ReactToPrint from "react-to-print";
 
 function Protocol({ kasa, obekt }) {
   const [state, handleDial, handleState, handleCash, handleRef, printers] =
