@@ -7,7 +7,6 @@
   background-color: #c4c4c4;
   border-radius: 5px;
 }
-
 .footer {
   display: flex;
   justify-content: center;
@@ -157,7 +156,9 @@ h3 input {
     display: none;
   }
   .footer {
-    display: none;
+    font-size: xx-small;
+    position: absolute;
+    left: 80%;
   }
   .container {
     width: 100%;
@@ -200,7 +201,7 @@ h3 input {
   label {
     display: block;
     /* medium */
-    font-size: x-small;
+    font-size: smaller;
   }
 
   input {
@@ -209,7 +210,7 @@ h3 input {
     box-sizing: border-box;
     text-align: center;
     /* medium */
-    font-size: x-small;
+    font-size: smaller;
     font-weight: 500;
   }
   input[type="date"] {
@@ -219,7 +220,7 @@ h3 input {
     box-sizing: border-box;
     text-align: center;
     /* medium */
-    font-size: x-small;
+    font-size: smaller;
     font-weight: 500;
     border-radius: 7px;
   }
@@ -232,7 +233,7 @@ h3 input {
     text-align: center;
     font-weight: 500;
     /* medium */
-    font-size: x-small;
+    font-size: smaller;
     border-radius: 7px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -257,7 +258,7 @@ h3 input {
     text-align: center;
     font-weight: 400;
     /* smaller */
-    font-size: x-small;
+    font-size: smaller;
   }
   .inline-input input {
     width: auto;

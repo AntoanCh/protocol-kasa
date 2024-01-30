@@ -4,6 +4,7 @@ import Protocol from "./components/Protocol/Protocol";
 import Home from "./components/Home";
 import TotalProtocol from "./components/Total/TotalProtocol";
 import { useState, useEffect } from "react";
+import Proverka from "./components/Proverka/Proverka";
 
 function App() {
   //constructor function for generating sub-routes for each store
@@ -26,6 +27,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/proverka" element={<Proverka />} />
         <Route path="/n1" element={<Main kasi="2" obekt="n1" />}>
           {generateRoutes(2, "Н1")}
           <Route path="total" element={<TotalProtocol obekt="Н1" />} />

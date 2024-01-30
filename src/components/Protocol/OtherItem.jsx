@@ -18,7 +18,6 @@ function OtherItem({ label, name, kasa, state, handleState }) {
         newValue = parseFloat(event.target.value);
       }
       parseFloat(newValue);
-      console.log(newValue);
       handleState("other", name, newValue, kasa);
     } else {
       handleState("other", name, 0, kasa);
