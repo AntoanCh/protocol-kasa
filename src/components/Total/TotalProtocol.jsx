@@ -130,9 +130,6 @@ function TotalProtocol({ obekt }) {
 
     return count;
   };
-  const inkaso2 = parseFloat(
-    state.reduce((sum, obj) => sum + parseFloat(obj.main.inkaso2), 0).toFixed(2)
-  );
   return (
     <div className="container">
       <SpeedDial
@@ -186,25 +183,18 @@ function TotalProtocol({ obekt }) {
       <div className="bottom">
         <div>
           <h3>Продажби в брой</h3>
-          <div id="totalCash" className="underline">
-            <input type="text" value={"Извънредно инкасо :"} disabled></input>
-            <input type="text" disabled value={inkaso2}></input>
-          </div>
+
           <div id="totalCash" className="underline">
             <input
               type="text"
               value={"Остатък едри (10 - 100лв) :"}
               disabled
             ></input>
-            <input
-              type="text"
-              disabled
-              value={(ostatak() - inkaso2).toFixed(2)}
-            ></input>
+            <input type="text" disabled value={ostatak().toFixed(2)}></input>
           </div>
           {generateCashSales()}
           <div id="totalCash">
-            <input type="text" value={"Сума офис :"} disabled></input>
+            <input type="text" value={"Дребни(0.01 - 5лв) :"} disabled></input>
             <input
               type="text"
               disabled

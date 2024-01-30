@@ -94,12 +94,7 @@ function Protocol({ kasa, obekt }) {
       </SpeedDial>
       <div className="bottomNew">
         <div className="bottom">
-          <CashSales
-            kasa={kasa}
-            handleState={handleState}
-            handleCash={handleCash}
-            state={state}
-          />
+          <CashSales kasa={kasa} handleCash={handleCash} state={state} />
           <div>
             <Vouchers kasa={kasa} handleState={handleState} state={state} />
             <Others kasa={kasa} handleState={handleState} state={state} />

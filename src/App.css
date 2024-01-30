@@ -45,10 +45,6 @@ input:disabled {
   font-size: large;
 }
 
-.shift-container {
-  display: flex;
-}
-
 input,
 label {
   display: block;
@@ -166,7 +162,7 @@ h3 input {
     margin: 0 0;
     padding: 0 0;
     background-color: #ccc;
-    font-size: smaller;
+    font-size: small;
   }
   /* newnewn */
   .bottom {
@@ -201,7 +197,7 @@ h3 input {
   label {
     display: block;
     /* medium */
-    font-size: smaller;
+    font-size: small;
   }
 
   input {
@@ -210,7 +206,7 @@ h3 input {
     box-sizing: border-box;
     text-align: center;
     /* medium */
-    font-size: smaller;
+    font-size: small;
     font-weight: 500;
   }
   input[type="date"] {
@@ -220,7 +216,7 @@ h3 input {
     box-sizing: border-box;
     text-align: center;
     /* medium */
-    font-size: smaller;
+    font-size: small;
     font-weight: 500;
     border-radius: 7px;
   }
@@ -258,7 +254,7 @@ h3 input {
     text-align: center;
     font-weight: 400;
     /* smaller */
-    font-size: smaller;
+    font-size: small;
   }
   .inline-input input {
     width: auto;

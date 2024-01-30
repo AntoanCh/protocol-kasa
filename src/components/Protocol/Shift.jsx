@@ -42,60 +42,57 @@ function Shift({ kasa, handleState, state }) {
           </Alert>
         </Slide>
       )}
-      <div className="shift-container">
-        <div className="shift">
-          <h3>Начало на работната смяна</h3>
 
-          <div className="cash-table">
-            <div className="input1">
-              <label htmlFor="name-start">Три имена на касиера</label>
-              <input
-                onChange={handleChange}
-                id="name-start"
-                type="text"
-                value={state[kasa - 1].start.name}
-              ></input>
-            </div>
-            <div className="input2">
-              <label htmlFor="sum-start">Касов депозит</label>
-              <input
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id="sum-start"
-                type="text"
-                value={state[kasa - 1].start.sum}
-              ></input>
-            </div>
-            <div className="input3">
-              <label htmlFor="name-start">Брой цигари</label>
-              <input
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id="cigs-start"
-                type="text"
-                value={state[kasa - 1].start.cigs}
-              ></input>
-            </div>
-          </div>
+      <div className="shift">
+        {/* <h3>Начало на работната смяна</h3> */}
 
-          <div>
-            <input disabled placeholder="Подпис касиер" type="text"></input>
-          </div>
-          <div>
-            <p>Имена и подпис на Зам. Управител/Главен касиер :</p>
+        <div className="cash-table">
+          <div className="input1">
+            <label htmlFor="name-start">Три имена на касиера</label>
             <input
               onChange={handleChange}
-              id="name2-start"
+              id="name-start"
               type="text"
-              value={state[kasa - 1].start.name2}
+              value={state[kasa - 1].start.name}
+            ></input>
+          </div>
+          <div className="input2">
+            <label htmlFor="sum-start">Касов депозит</label>
+            <input
+              onChange={handleChange}
+              onBlur={handleBlur}
+              id="sum-start"
+              type="text"
+              value={state[kasa - 1].start.sum}
+            ></input>
+          </div>
+          <div className="input3">
+            <label htmlFor="name-start">Брой цигари</label>
+            <input
+              onChange={handleChange}
+              onBlur={handleBlur}
+              id="cigs-start"
+              type="text"
+              value={state[kasa - 1].start.cigs}
             ></input>
           </div>
         </div>
-        <div className="shift">
-          <Divider orientation="vertical"> </Divider>
-        </div>
 
-        <div className="shift">
+        <div>
+          <input disabled placeholder="Подпис касиер" type="text"></input>
+        </div>
+        <div>
+          <p>Имена и подпис на Зам. Управител/Главен касиер :</p>
+          <input
+            onChange={handleChange}
+            id="name2-start"
+            type="text"
+            value={state[kasa - 1].start.name2}
+          ></input>
+        </div>
+      </div>
+
+      {/* <div className="shift">
           <h3>Край на работната смяна</h3>
           <div className="cash-table">
             <div className="input1">
@@ -141,8 +138,7 @@ function Shift({ kasa, handleState, state }) {
               value={state[kasa - 1].end.name2}
             ></input>
           </div>
-        </div>
-      </div>
+        </div> */}
     </>
   );
 }

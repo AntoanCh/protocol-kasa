@@ -23,7 +23,6 @@ function Main({ kasi, obekt }) {
         main: {
           printer: "",
           klienti: 0,
-          inkaso2: 0,
         },
 
         start: {
