@@ -15,6 +15,7 @@ function Voucher({ label, state, handleState, kasa, name }) {
       <label>{label}</label>
 
       <input
+        className="active"
         name={name}
         placeholder="asdasdasd"
         onChange={handleChange}

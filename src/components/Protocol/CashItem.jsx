@@ -13,6 +13,7 @@ function CashItem({ kasa, placeholder, state, handleCash }) {
   return (
     <div className="cash-table">
       <input
+        className="active"
         name={placeholder}
         type="text"
         value={state[kasa - 1].cash[placeholder][0]}

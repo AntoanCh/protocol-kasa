@@ -110,6 +110,7 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
     <div className="inline-input">
       <label>{label}</label>
       <input
+        className="active"
         name={name}
         value={state[kasa - 1].ref[name]}
         onBlur={handleBlur}

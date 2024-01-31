@@ -34,6 +34,7 @@ function OtherItem({ label, name, kasa, state, handleState }) {
       <label>{label}</label>
 
       <input
+        className="active"
         name={name}
         onChange={handleChange}
         value={state[kasa - 1].other[name]}
