@@ -13,7 +13,6 @@ function CashItem({ kasa, placeholder, state, handleCash }) {
   return (
     <div className="cash-table">
       <input
-        className="active"
         name={placeholder}
         type="text"
         value={state[kasa - 1].cash[placeholder][0]}
@@ -21,6 +20,7 @@ function CashItem({ kasa, placeholder, state, handleCash }) {
       ></input>
       <input type="text" defaultValue={`${placeholder} лв`} disabled></input>
       <input
+        className="active"
         type="text"
         value={state[kasa - 1].cash[placeholder][1].toFixed(2)}
         // value={(state[kasa - 1].cash[placeholder] * placeholder).toFixed(2)}
