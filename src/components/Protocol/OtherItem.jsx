@@ -29,6 +29,11 @@ function OtherItem({ label, name, kasa, state, handleState }) {
   } else {
     line = "";
   }
+  const handleFocus = (event) => {
+    if (event.target.value == 0) {
+      event.target.select();
+    }
+  };
   return (
     <div className={`inline-input ${line}`}>
       <label>{label}</label>
@@ -36,6 +41,7 @@ function OtherItem({ label, name, kasa, state, handleState }) {
       <input
         className="active"
         name={name}
+        onFocus={handleFocus}
         onChange={handleChange}
         value={state[kasa - 1].other[name]}
         type="text"

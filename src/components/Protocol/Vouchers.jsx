@@ -30,7 +30,7 @@ function Vouchers({ state, handleState, kasa }) {
         <label>Сума ваучери</label>
         <input
           disabled
-          value={state[kasa - 1].totals.vouchers}
+          value={parseFloat(state[kasa - 1].totals.vouchers).toFixed(2)}
           type="text"
         ></input>
       </div>

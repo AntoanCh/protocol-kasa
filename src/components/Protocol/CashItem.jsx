@@ -10,12 +10,18 @@ function CashItem({ kasa, placeholder, state, handleCash }) {
       handleCash(placeholder, 0, kasa);
     }
   };
+  const handleFocus = (event) => {
+    if (event.target.value == 0) {
+      event.target.select();
+    }
+  };
   return (
     <div className="cash-table">
       <input
         name={placeholder}
         type="text"
         value={state[kasa - 1].cash[placeholder][0]}
+        onFocus={handleFocus}
         onChange={handleChange}
       ></input>
       <input type="text" defaultValue={`${placeholder} лв`} disabled></input>

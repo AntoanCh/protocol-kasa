@@ -25,14 +25,14 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
   const handleBlur = (event) => {
     if (event.target.name === "check") {
       if (
-        event.target.value != parseInt(state[kasa - 1].totals.vouchers) &&
+        event.target.value != parseFloat(state[kasa - 1].totals.vouchers) &&
         event.target.value != 0
       ) {
         event.target.style.borderColor = "red";
         handleAlert(
           true,
           `Разлика във ваучерите : ${Math.abs(
-            event.target.value - parseInt(state[kasa - 1].totals.vouchers)
+            event.target.value - parseFloat(state[kasa - 1].totals.vouchers)
           ).toFixed(2)}лв`,
           kasa
         );
@@ -106,12 +106,18 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
       }
     }
   };
+  const handleFocus = (event) => {
+    if (event.target.value == 0) {
+      event.target.select();
+    }
+  };
   return (
     <div className="inline-input">
       <label>{label}</label>
       <input
         className="active"
         name={name}
+        onFocus={handleFocus}
         value={state[kasa - 1].ref[name]}
         onBlur={handleBlur}
         onChange={handleChange}
