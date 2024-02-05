@@ -31,12 +31,6 @@ function Main({ kasi, obekt }) {
           cigs: "",
           name2: "",
         },
-        end: {
-          name: "",
-          sum: "",
-          cigs: "",
-          name2: "",
-        },
         cash: {
           100: [0, 0],
           50: [0, 0],
@@ -350,12 +344,6 @@ function Main({ kasi, obekt }) {
         },
 
         start: {
-          name: "",
-          sum: "",
-          cigs: "",
-          name2: "",
-        },
-        end: {
           name: "",
           sum: "",
           cigs: "",

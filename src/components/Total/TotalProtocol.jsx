@@ -243,10 +243,11 @@ function TotalProtocol({ obekt }) {
         <button
           onClick={() => {
             window.print();
+            window.localStorage.clear();
           }}
           className="print-btn"
         >
-          PRINT
+          ИЗПРАТИ
         </button>
       </div>
     </div>
