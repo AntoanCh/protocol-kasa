@@ -33,6 +33,9 @@ function Protocol({ kasa, obekt }) {
       </option>
     ));
   };
+  window.onblur = () => {
+    window.location.reload();
+  };
   return (
     <div className="container">
       <h1>ПРОТОКОЛ ЗА РАБОТА НА КАСА {kasa}</h1>
