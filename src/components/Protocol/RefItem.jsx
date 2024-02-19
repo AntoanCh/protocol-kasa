@@ -1,6 +1,6 @@
 import React from "react";
 
-function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
+function RefItem({ label, name, state, handleRef, kasa }) {
   const handleChange = (event) => {
     if (event.target.value) {
       let newValue;
@@ -22,90 +22,90 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
   };
 
   //handle onBlur event for alert messages
-  const handleBlur = (event) => {
-    if (event.target.name === "check") {
-      if (
-        event.target.value != parseFloat(state[kasa - 1].totals.vouchers) &&
-        event.target.value != 0
-      ) {
-        event.target.style.borderColor = "red";
-        handleAlert(
-          true,
-          `Разлика във ваучерите : ${Math.abs(
-            event.target.value - parseFloat(state[kasa - 1].totals.vouchers)
-          ).toFixed(2)}лв`,
-          kasa
-        );
-      } else {
-        event.target.style.borderColor = "";
-        handleAlert(false, "", "");
-      }
-    }
-    if (event.target.name === "karta") {
-      if (
-        event.target.value != parseFloat(state[kasa - 1].other.terminal) &&
-        event.target.value != 0
-      ) {
-        event.target.style.borderColor = "red";
-        handleAlert(
-          true,
-          `Разлика в плащанията с карта : ${Math.abs(
-            event.target.value - parseFloat(state[kasa - 1].other.terminal)
-          ).toFixed(2)} лв`,
-          kasa
-        );
-      } else {
-        event.target.style.borderColor = "";
-        handleAlert(false, "");
-      }
-    }
-    if (event.target.name === "glovo") {
-      if (
-        event.target.value != parseFloat(state[kasa - 1].other.glovo) &&
-        event.target.value != 0
-      ) {
-        event.target.style.borderColor = "red";
-        handleAlert(
-          true,
-          `Разлика в Кредит(Glovo) : ${Math.abs(
-            event.target.value - parseFloat(state[kasa - 1].other.glovo)
-          ).toFixed(2)}лв`,
-          kasa
-        );
-      } else {
-        event.target.style.borderColor = "";
-        handleAlert(false, "");
-      }
-    }
-    if (event.target.name === "broi") {
-      if (
-        event.target.value !=
-          parseFloat(state[kasa - 1].totals.cash) +
-            parseFloat(state[kasa - 1].other.inkaso) +
-            parseFloat(state[kasa - 1].other.cashBack) +
-            parseFloat(state[kasa - 1].other.rko) +
-            parseFloat(state[kasa - 1].other.storno) &&
-        event.target.value != 0
-      ) {
-        event.target.style.borderColor = "red";
-        handleAlert(
-          true,
-          `Разлика в плащанията в брой : ${Math.abs(
-            event.target.value -
-              (parseFloat(state[kasa - 1].totals.cash) +
-                parseFloat(state[kasa - 1].other.inkaso) +
-                parseFloat(state[kasa - 1].other.cashBack) +
-                parseFloat(state[kasa - 1].other.rko) +
-                parseFloat(state[kasa - 1].other.storno))
-          ).toFixed(2)} лв`,
-          kasa
-        );
-      } else {
-        event.target.style.borderColor = "";
-        handleAlert(false, "");
-      }
-    }
-  };
+  // const handleBlur = (event) => {
+  //   if (event.target.name === "check") {
+  //     if (
+  //       event.target.value != parseFloat(state[kasa - 1].totals.vouchers) &&
+  //       event.target.value != 0
+  //     ) {
+  //       event.target.style.borderColor = "red";
+  //       handleAlert(
+  //         true,
+  //         `Разлика във ваучерите : ${Math.abs(
+  //           event.target.value - parseFloat(state[kasa - 1].totals.vouchers)
+  //         ).toFixed(2)}лв`,
+  //         kasa
+  //       );
+  //     } else {
+  //       event.target.style.borderColor = "";
+  //       handleAlert(false, "", "");
+  //     }
+  //   }
+  //   if (event.target.name === "karta") {
+  //     if (
+  //       event.target.value != parseFloat(state[kasa - 1].other.terminal) &&
+  //       event.target.value != 0
+  //     ) {
+  //       event.target.style.borderColor = "red";
+  //       handleAlert(
+  //         true,
+  //         `Разлика в плащанията с карта : ${Math.abs(
+  //           event.target.value - parseFloat(state[kasa - 1].other.terminal)
+  //         ).toFixed(2)} лв`,
+  //         kasa
+  //       );
+  //     } else {
+  //       event.target.style.borderColor = "";
+  //       handleAlert(false, "");
+  //     }
+  //   }
+  //   if (event.target.name === "glovo") {
+  //     if (
+  //       event.target.value != parseFloat(state[kasa - 1].other.glovo) &&
+  //       event.target.value != 0
+  //     ) {
+  //       event.target.style.borderColor = "red";
+  //       handleAlert(
+  //         true,
+  //         `Разлика в Кредит(Glovo) : ${Math.abs(
+  //           event.target.value - parseFloat(state[kasa - 1].other.glovo)
+  //         ).toFixed(2)}лв`,
+  //         kasa
+  //       );
+  //     } else {
+  //       event.target.style.borderColor = "";
+  //       handleAlert(false, "");
+  //     }
+  //   }
+  //   if (event.target.name === "broi") {
+  //     if (
+  //       event.target.value !=
+  //         parseFloat(state[kasa - 1].totals.cash) +
+  //           parseFloat(state[kasa - 1].other.inkaso) +
+  //           parseFloat(state[kasa - 1].other.cashBack) +
+  //           parseFloat(state[kasa - 1].other.rko) +
+  //           parseFloat(state[kasa - 1].other.storno) &&
+  //       event.target.value != 0
+  //     ) {
+  //       event.target.style.borderColor = "red";
+  //       handleAlert(
+  //         true,
+  //         `Разлика в плащанията в брой : ${Math.abs(
+  //           event.target.value -
+  //             (parseFloat(state[kasa - 1].totals.cash) +
+  //               parseFloat(state[kasa - 1].other.inkaso) +
+  //               parseFloat(state[kasa - 1].other.cashBack) +
+  //               parseFloat(state[kasa - 1].other.rko) +
+  //               parseFloat(state[kasa - 1].other.storno))
+  //         ).toFixed(2)} лв`,
+  //         kasa
+  //       );
+  //     } else {
+  //       event.target.style.borderColor = "";
+  //       handleAlert(false, "");
+  //     }
+  //   }
+  // };
   const handleFocus = (event) => {
     if (event.target.value == 0) {
       event.target.select();
@@ -119,7 +119,7 @@ function RefItem({ label, name, state, handleRef, handleAlert, kasa }) {
         name={name}
         onFocus={handleFocus}
         value={state[kasa - 1].ref[name]}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         onChange={handleChange}
         type="text"
       ></input>

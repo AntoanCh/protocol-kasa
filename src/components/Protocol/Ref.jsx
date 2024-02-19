@@ -1,9 +1,8 @@
 import React from "react";
 import RefItem from "./RefItem";
-import { Slide, Alert, AlertTitle } from "@mui/material";
-import { useState } from "react";
+import Dif from "./Dif";
 
-function Ref({ state, handleRef, kasa, handleState }) {
+function Ref({ state, handleRef, kasa, handleState, handleAlert }) {
   const refs = [
     ["Чек:", "check"],
     ["С карта:", "karta"],
@@ -16,11 +15,15 @@ function Ref({ state, handleRef, kasa, handleState }) {
         key={index}
         state={state}
         handleRef={handleRef}
-        handleAlert={handleAlert}
         label={item[0]}
         name={item[1]}
         kasa={kasa}
       />
+    ));
+  };
+  const generateDif = () => {
+    return refs.map((item, index) => (
+      <Dif key={index} state={state} name={item[1]} kasa={kasa} />
     ));
   };
 
@@ -34,55 +37,35 @@ function Ref({ state, handleRef, kasa, handleState }) {
     }
   };
 
-  const [alert, setAlert] = useState([false, "", ""]);
-
-  const handleAlert = (valid, msg, kasa) => {
-    if (valid) {
-      const newAlert = [true, "", ""];
-      newAlert[1] = msg;
-      newAlert[2] = kasa;
-      setAlert([...newAlert]);
-    }
-  };
-
   return (
-    <div>
-      {alert[0] && (
-        <Slide in={alert} direction="left">
-          <Alert
-            variant="filled"
-            severity="error"
-            onClose={() => {
-              setAlert([false, ""]);
-            }}
-          >
-            <AlertTitle>Каса {alert[2]} :</AlertTitle>
-            {alert[1]}
-          </Alert>
-        </Slide>
-      )}
+    <>
+      <div>
+        <h3>Справка</h3>
+        <div className="inline-input">
+          <label>По лента:</label>
+          <input
+            disabled
+            value={state[kasa - 1].totals.ref.toFixed(2)}
+            type="text"
+          ></input>
+        </div>
+        {generateRefItems()}
 
-      <h3>Справка</h3>
-      <div className="inline-input">
-        <label>По лента:</label>
-        <input
-          disabled
-          value={state[kasa - 1].totals.ref.toFixed(2)}
-          type="text"
-        ></input>
+        <div className="inline-input">
+          <label>Бр Клиенти:</label>
+          <input
+            name="klienti"
+            onChange={handleChange}
+            value={state[kasa - 1].main.klienti}
+            type="text"
+          ></input>
+        </div>
       </div>
-      {generateRefItems()}
-
-      <div className="inline-input">
-        <label>Бр Клиенти:</label>
-        <input
-          name="klienti"
-          onChange={handleChange}
-          value={state[kasa - 1].main.klienti}
-          type="text"
-        ></input>
+      <div>
+        <h3 style={{ width: "80%" }}>Разлика</h3>
+        <div className="dif">{generateDif()}</div>
       </div>
-    </div>
+    </>
   );
 }
 

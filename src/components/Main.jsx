@@ -329,6 +329,7 @@ function Main({ kasi, obekt }) {
 
   const [removeDial, setRemoveDial] = useState([false, ""]);
   const [contactDial, setContactDial] = useState(false);
+  const [patchDial, setPatchDial] = useState(false);
   const handleSave = () => {
     window.localStorage.setItem("STATE", JSON.stringify(state));
   };
@@ -409,10 +410,14 @@ function Main({ kasi, obekt }) {
     if (dial[0] === "contacts") {
       setContactDial(true);
     }
+    if (dial[0] === "patch") {
+      setPatchDial(true);
+    }
   };
   const handleClose = () => {
     setRemoveDial([false, ""]);
     setContactDial(false);
+    setPatchDial(false);
   };
   //snackbar
   const [snack, setSnack] = useState(false);
@@ -452,6 +457,7 @@ function Main({ kasi, obekt }) {
           </Button>
         </DialogActions>
       </Dialog>
+      {/* CONTACTS DIALOG */}
       <Dialog
         open={contactDial}
         onClose={handleClose}
@@ -460,9 +466,32 @@ function Main({ kasi, obekt }) {
       >
         <DialogTitle>{"Контакти"}</DialogTitle>
         <DialogContent>
-          <DialogContentText style={{ maxWidth: 230, fontWeight: "600" }}>
-            Антоан Чавдаров Отдел ИТ email: a.chavdarov@magazinidar.bg Phone:
-            0882112291
+          <DialogContentText style={{ fontWeight: "600" }}>
+            <p>
+              Антоан Чавдаров Отдел ИТ <br />
+              email: a.chavdarov@magazinidar.bg <br />
+              Phone: 0882112291
+            </p>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="success" variant="outlined" onClick={handleClose}>
+            ОК
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* PATCH NOTES DIALOG */}
+      <Dialog open={patchDial} onClose={handleClose} fullWidth maxWidth={"xs"}>
+        <DialogTitle>{"Patch Notes"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText style={{ maxWidth: "auto", fontWeight: "600" }}>
+            <p>
+              Ver: 1.1.0 <br />
+              -Removed pop up alarm for difference <br />
+              -Added new input fields for difference <br />
+              -Changed style of print button <br />
+              -Added patch notes modal
+            </p>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
