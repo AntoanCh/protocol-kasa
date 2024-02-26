@@ -4,7 +4,9 @@ import Protocol from "./components/Protocol/Protocol";
 import Home from "./components/Home";
 import TotalProtocol from "./components/Total/TotalProtocol";
 import { useState, useEffect } from "react";
-import Proverka from "./components/Proverka/Proverka";
+import Dash from "./components/Dash/Dash";
+import DashProto from "./components/Dash/DashProto";
+import DashHome from "./components/Dash/DashHome";
 
 function App() {
   //constructor function for generating sub-routes for each store
@@ -22,12 +24,43 @@ function App() {
     }
     return arr;
   };
+  const sites = [
+    ["n1", 2],
+    ["n4", 2],
+    ["n5", 6],
+    ["n6", 5],
+    ["n7", 2],
+    ["n8", 3],
+    ["n10", 3],
+    ["n12", 3],
+    ["n14", 6],
+    ["n16", 2],
+    ["n17", 2],
+    ["n19", 2],
+  ];
+  const generateDash = () => {
+    // const arr = [];
+    const arr = sites.map((site, index) => {
+      return (
+        <Route
+          key={index}
+          path={site[0]}
+          element={<Dash obekt={site[0]} kasi={site[1]} />}
+        >
+          {generateRoutes(site[1], site[0])}
+        </Route>
+      );
+    });
+    return arr;
+  };
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/proverka" element={<Proverka />} />
+        <Route path="/dash" element={<DashHome />}>
+          {generateDash()}
+        </Route>
         <Route path="/n1" element={<Main kasi="2" obekt="n1" />}>
           {generateRoutes(2, "Н1")}
           <Route path="total" element={<TotalProtocol obekt="Н1" />} />

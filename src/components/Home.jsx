@@ -147,7 +147,7 @@ function Home() {
       <Button
         style={btnStyle}
         component={Link}
-        to="/proverka"
+        to="/dash"
         fullWidth
         variant="outlined"
         color="success"

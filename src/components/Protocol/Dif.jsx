@@ -6,26 +6,27 @@ import { red } from "@mui/material/colors";
 function Dif({ name, state, kasa }) {
   let target;
   if (name === "check") {
-    target = parseFloat(state[kasa - 1].totals.vouchers);
+    target = parseFloat(state[kasa - 1].totals.vouchers).toFixed(2);
   }
   if (name === "karta") {
-    target = parseFloat(state[kasa - 1].other.terminal);
+    target = parseFloat(state[kasa - 1].other.terminal).toFixed(2);
   }
   if (name === "glovo") {
-    target = parseFloat(state[kasa - 1].other.glovo);
+    target = parseFloat(state[kasa - 1].other.glovo).toFixed(2);
   }
   if (name === "broi") {
-    target =
+    target = (
       parseFloat(state[kasa - 1].totals.cash) +
       parseFloat(state[kasa - 1].other.inkaso) +
       parseFloat(state[kasa - 1].other.cashBack) +
       parseFloat(state[kasa - 1].other.rko) +
-      parseFloat(state[kasa - 1].other.storno);
+      parseFloat(state[kasa - 1].other.storno)
+    ).toFixed(2);
   }
 
   const [highlight, setHighlight] = useState("");
   useEffect(() => {
-    if (target - parseFloat(state[kasa - 1].ref[name]) == 0) {
+    if (target - parseFloat(state[kasa - 1].ref[name]).toFixed(2) === 0) {
       setHighlight("");
     } else {
       setHighlight("red");
