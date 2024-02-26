@@ -490,7 +490,10 @@ function Main({ kasi, obekt }) {
               -Removed pop up alarm for difference <br />
               -Added new input fields for difference <br />
               -Changed style of print button <br />
-              -Added patch notes modal
+              -Added patch notes modal Ver 1.1.1 <br />
+              -Fixed a bug where 0 difference appeared highligted <br />
+              -Added printers for H4 <br />
+              -Added dash layouts
             </p>
           </DialogContentText>
         </DialogContent>
