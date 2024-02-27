@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import DashHeader from "./DashHeader";
-// import axios from "axios";
+import axios from "axios";
 import DashProto from "./DashProto";
 import { Outlet } from "react-router-dom";
 import DashTabs from "./DashTabs";
 import LinearProgress from "@mui/material/LinearProgress";
 import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
-// import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 function Dash({ obekt, kasi }) {
   const [loading, setLoading] = useState(true);

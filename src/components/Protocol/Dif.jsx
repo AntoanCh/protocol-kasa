@@ -5,6 +5,7 @@ import { red } from "@mui/material/colors";
 
 function Dif({ name, state, kasa }) {
   let target;
+
   if (name === "check") {
     target = parseFloat(state[kasa - 1].totals.vouchers).toFixed(2);
   }

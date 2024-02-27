@@ -7,6 +7,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
+import WarningAmber from "@mui/icons-material/WarningAmber";
+import { red } from "@mui/material/colors";
 
 function TotalProtocol({ obekt }) {
   const [state, handleDial] = useOutletContext();
@@ -115,6 +117,68 @@ function TotalProtocol({ obekt }) {
     ));
   };
 
+  const generateDifs = () => {
+    return refs.map((item, index) => {
+      let target;
+
+      if (item[1] === "check") {
+        target = parseFloat(totalVouchers.toFixed(2));
+      }
+      if (item[1] === "karta") {
+        target = parseFloat(
+          state
+            .reduce((sum, obj) => sum + parseFloat(obj.other.terminal), 0)
+            .toFixed(2)
+        ).toFixed(2);
+      }
+      if (item[1] === "glovo") {
+        target = parseFloat(
+          state
+            .reduce((sum, obj) => sum + parseFloat(obj.other.glovo), 0)
+            .toFixed(2)
+        ).toFixed(2);
+      }
+      if (item[1] === "broi") {
+        target = totalCash.toFixed(2);
+      }
+      let highlight;
+
+      if (
+        target -
+          parseFloat(
+            state
+              .reduce((sum, obj) => sum + parseFloat(obj.ref[item[1]]), 0)
+              .toFixed(2)
+          ).toFixed(2) ===
+        0
+      ) {
+        highlight = "";
+      } else {
+        highlight = "red";
+      }
+
+      return (
+        <div style={{ display: "flex" }}>
+          <input
+            style={{ borderColor: highlight, width: "80%" }}
+            className="active"
+            disabled
+            type="text"
+            defaultValue={(
+              target -
+              parseFloat(
+                state
+                  .reduce((sum, obj) => sum + parseFloat(obj.ref[item[1]]), 0)
+                  .toFixed(2)
+              )
+            ).toFixed(2)}
+          ></input>
+          {highlight && <WarningAmber sx={{ color: red[500] }} />}
+        </div>
+      );
+    });
+  };
+
   const total =
     parseFloat(totalCash) + parseFloat(totalOther) + parseFloat(totalVouchers);
 
@@ -129,6 +193,11 @@ function TotalProtocol({ obekt }) {
     }
 
     return count;
+  };
+
+  const handleClick = () => {
+    // window.print();
+    // fetch("POST", "192.168.0.145:27017", () => {});
   };
   return (
     <div className="container">
@@ -238,15 +307,25 @@ function TotalProtocol({ obekt }) {
             <input disabled value={totalClients} type="text"></input>
           </div>
         </div>
+        <div>
+          <h3 style={{ width: "80%" }}>Разлика</h3>
+          <div className="dif">
+            <div style={{ display: "flex" }}>
+              <input
+                style={{ width: "80%" }}
+                className="active"
+                disabled
+                type="text"
+                value={(total.toFixed(2) - totalRef.toFixed(2)).toFixed(2)}
+              ></input>
+              {/* {highlight && <WarningAmber sx={{ color: red[500] }} />} */}
+            </div>
+            {generateDifs()}
+          </div>
+        </div>
       </div>
       <div>
-        <button
-          onClick={() => {
-            window.print();
-            window.localStorage.clear();
-          }}
-          className="print-btn"
-        >
+        <button onClick={handleClick} className="print-btn">
           ИЗПРАТИ
         </button>
       </div>

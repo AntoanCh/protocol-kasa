@@ -63,7 +63,25 @@ function Ref({ state, handleRef, kasa, handleState, handleAlert }) {
       </div>
       <div>
         <h3 style={{ width: "80%" }}>Разлика</h3>
-        <div className="dif">{generateDif()}</div>
+
+        <div className="dif">
+          <div style={{ display: "flex" }}>
+            <input
+              style={{ width: "80%" }}
+              className="active"
+              disabled
+              type="text"
+              value={(
+                parseFloat(state[kasa - 1].totals.other) +
+                parseFloat(state[kasa - 1].totals.vouchers) +
+                parseFloat(state[kasa - 1].totals.cash) -
+                parseFloat(state[kasa - 1].totals.ref)
+              ).toFixed(2)}
+            ></input>
+            {/* {highlight && <WarningAmber sx={{ color: red[500] }} />} */}
+          </div>
+          {generateDif()}
+        </div>
       </div>
     </>
   );
