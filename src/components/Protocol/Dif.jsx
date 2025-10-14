@@ -3,7 +3,9 @@ import { useState } from "react";
 import WarningAmber from "@mui/icons-material/WarningAmber";
 import { red } from "@mui/material/colors";
 
-function Dif({ name, state, kasa }) {
+
+function Dif({ name, state, kasa, currency }) {
+  
   let target;
 
   if (name === "check") {
@@ -41,7 +43,10 @@ function Dif({ name, state, kasa }) {
         className="active"
         disabled
         type="text"
-        value={(target - parseFloat(state[kasa - 1].ref[name])).toFixed(2)}
+        value={(target - parseFloat(state[kasa - 1].ref[name])).toLocaleString("bg-BG", {
+            style: "currency",
+            currency: currency,
+          })}
       ></input>
       {highlight && <WarningAmber sx={{ color: red[500] }} />}
     </div>

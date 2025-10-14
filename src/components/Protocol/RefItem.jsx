@@ -1,25 +1,74 @@
 import React from "react";
 
 function RefItem({ label, name, state, handleRef, kasa }) {
+
+
+
   const handleChange = (event) => {
-    if (event.target.value) {
-      let newValue;
-      if (event.target.value.endsWith(".")) {
-        newValue = parseFloat(event.target.value).toString() + ".";
-      } else if (event.target.value.endsWith(".0")) {
-        newValue = parseFloat(event.target.value).toString() + ".0";
-      } else if (/^[0-9]*\.[0-9]{2,3}$/.test(event.target.value)) {
-        newValue = Number(parseFloat(event.target.value).toFixed(2));
-      } else if (event.nativeEvent.inputType === "insertFromPaste") {
-        newValue = Number(parseFloat(event.target.value).toFixed(2));
-      } else {
-        newValue = parseFloat(event.target.value); //.toString();
-      }
-      handleRef("ref", name, newValue, kasa);
-    } else {
-      handleRef("ref", name, 0, kasa);
-    }
-  };
+  const { name, value, nativeEvent } = event.target;
+
+  // Clean input: allow only digits and one dot
+  let cleaned = value.replace(/[^0-9.]/g, '');
+
+  // Allow only one decimal point
+  const parts = cleaned.split('.');
+  if (parts.length > 2) {
+    cleaned = parts[0] + '.' + parts[1];
+  }
+
+  // Limit decimal part to 2 digits
+  if (parts[1]?.length > 2) {
+    parts[1] = parts[1].slice(0, 2);
+    cleaned = parts.join('.');
+  }
+
+  // Count total digits (excluding dot)
+  const totalDigits = (parts[0] || '').length + (parts[1] || '').length;
+  const maxDigits = 8; // Customize this for your limit (e.g., 6, 8, etc.)
+  if (totalDigits > maxDigits) {
+    return; // Ignore input beyond max digits
+  }
+
+  // Special cases
+  if (cleaned === '.') {
+    handleRef("ref", name, '0.', kasa);
+    return;
+  }
+
+  if (cleaned.endsWith('.')) {
+    const base = parseFloat(cleaned);
+    const newValue = isNaN(base) ? '0.' : base.toString() + '.';
+    handleRef("ref", name, newValue, kasa);
+    return;
+  }
+
+  // Final parsing
+  const num = parseFloat(cleaned);
+
+  // Guarantee a number (fallback to 0)
+  const newValue = isNaN(num) ? 0 : num;
+
+  handleRef("ref", name, newValue, kasa);
+};
+  // const handleChange = (event) => {
+  //   if (event.target.value) {
+  //     let newValue;
+  //     if (event.target.value.endsWith(".")) {
+  //       newValue = parseFloat(event.target.value).toString() + ".";
+  //     } else if (event.target.value.endsWith(".0")) {
+  //       newValue = parseFloat(event.target.value).toString() + ".0";
+  //     } else if (/^[0-9]*\.[0-9]{2,3}$/.test(event.target.value)) {
+  //       newValue = Number(parseFloat(event.target.value).toFixed(2));
+  //     } else if (event.nativeEvent.inputType === "insertFromPaste") {
+  //       newValue = Number(parseFloat(event.target.value).toFixed(2));
+  //     } else {
+  //       newValue = parseFloat(event.target.value); //.toString();
+  //     }
+  //     handleRef("ref", name, newValue, kasa);
+  //   } else {
+  //     handleRef("ref", name, 0, kasa);
+  //   }
+  // };
 
   //handle onBlur event for alert messages
   // const handleBlur = (event) => {

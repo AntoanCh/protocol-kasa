@@ -1,8 +1,14 @@
 import React from "react";
 import Divider from "@mui/material/Divider";
 import OtherItem from "./OtherItem";
+import { useAppState } from "../AppStateContext";
 
-function Others({ kasa, handleState, state }) {
+
+
+function Others({  kasa, 
+  // handleState,state,
+   registerInput, handleKeyDown, inputIndexOffset }) {
+  const { state, handleCash, handleState, handleRef, currency } = useAppState();
   const others = [
     ["Терминал общо", "terminal"],
     ["Кеш бек", "cashBack"],
@@ -13,7 +19,9 @@ function Others({ kasa, handleState, state }) {
   ];
 
   const generateOthers = () => {
-    return others.map((item, index) => (
+    return others.map((item, i) => {
+      const index = inputIndexOffset  +i
+ return(
       <OtherItem
         key={index}
         state={state}
@@ -21,8 +29,13 @@ function Others({ kasa, handleState, state }) {
         label={item[0]}
         name={item[1]}
         kasa={kasa}
+         ref={(el) => registerInput(el, index)}
+        onKeyDown={(e) => handleKeyDown(e, index)}
+        placeholderInput={`Input ${i + 1}`}
       />
-    ));
+    )
+    }
+     );
   };
   const total =
     parseFloat(state[kasa - 1].totals.other) +
@@ -36,7 +49,10 @@ function Others({ kasa, handleState, state }) {
       <Divider />
       <div className="inline-input topline">
         <label>ТОТАЛ</label>
-        <input disabled value={total.toFixed(2)} type="text"></input>
+        <input disabled value={total.toLocaleString("bg-BG", {
+            style: "currency",
+            currency: currency,
+          })} type="text"></input>
       </div>
     </div>
   );

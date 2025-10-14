@@ -6,6 +6,7 @@
   text-align: center;
   background-color: #c4c4c4;
   border-radius: 5px;
+  /* border: 1px solid black; */
 }
 .footer {
   display: flex;
@@ -147,9 +148,45 @@ h3 input {
 }
 
 @media print {
+
+  .print-optimized .MuiOutlinedInput-root {
+    border: 1px solid black !important;
+    background-color: white !important;
+    padding: 2px !important;
+  }
+
+  .print-optimized .MuiInputBase-input {
+    font-size: 14px !important;
+    padding: 4px !important;
+    color: black !important;
+    font-weight: 800 !important;
+    background: none !important;
+  }
+
+  .print-optimized .MuiInputLabel-root {
+    font-size: 12px !important;
+    color: black !important;
+  }
+
+  /* .print-optimized {
+    width: 100px !important; 
+  } */
+
+
+  .MuiInputBase-input {
+    font-size: 35; height: 7; padding: 1; font-weight: 800;
+  }
+  .MuiInputBase-root {
+    font-size: 35; height: 7; padding: 1; font-weight: 800;
+  }
+  
   .underline {
     border-bottom: 2px solid black;
     padding-bottom: 3px;
+  }
+  form {
+    display: contents !important; 
+    /* makes the form behave as if it’s not there for layout */
   }
   .topline {
     border-top: 2px solid black;
@@ -178,11 +215,11 @@ h3 input {
   }
   /* newnewn */
   .bottom {
-    display: block;
-    max-width: 50%;
+    display: block !important;
+    max-width: 50% !important;
   }
   .bottomNew {
-    display: flex;
+    display: flex !important;
   }
 
   .header {
@@ -253,22 +290,22 @@ h3 input {
   }
 
   .report {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 800;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-weight: 800 !important;
   }
 
   .inline-input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    font-weight: 400;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-align: center !important;
+    font-weight: 400 !important;
     /* smaller */
-    font-size: small;
+    font-size: small !important;
   }
   .inline-input input {
-    width: auto;
+    width: auto !important;
   }
 }

@@ -9,6 +9,8 @@ import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import WarningAmber from "@mui/icons-material/WarningAmber";
 import { red } from "@mui/material/colors";
+import axios from "axios";
+import { useState } from "react";
 
 function TotalProtocol({ obekt }) {
   const [state, handleDial] = useOutletContext();
@@ -37,6 +39,7 @@ function TotalProtocol({ obekt }) {
     ["В Брой:", "broi"],
   ];
 
+  const [values, setValues] = useState();
   let totalRef = 0;
   totalRef = state.reduce((sum, obj) => sum + obj.totals.ref, 0);
 
@@ -59,12 +62,12 @@ function TotalProtocol({ obekt }) {
           disabled
           name={item}
           type="text"
-          defaultValue={state.reduce((sum, obj) => sum + obj.cash[item][0], 0)}
+          value={state.reduce((sum, obj) => sum + obj.cash[item][0], 0)}
         ></input>
         <input type="text" defaultValue={`${item} лв`} disabled></input>
         <input
           type="text"
-          defaultValue={state
+          value={state
             .reduce((sum, obj) => sum + parseFloat(obj.cash[item][1]), 0)
             .toFixed(2)}
           disabled
@@ -79,7 +82,7 @@ function TotalProtocol({ obekt }) {
         <input
           disabled
           name={item[1]}
-          defaultValue={state
+          value={state
             .reduce((sum, obj) => sum + parseFloat(obj.vouchers[item[1]]), 0)
             .toFixed(2)}
           type="text"
@@ -94,7 +97,7 @@ function TotalProtocol({ obekt }) {
         <input
           disabled
           name={item[1]}
-          defaultValue={state
+          value={state
             .reduce((sum, obj) => sum + parseFloat(obj.other[item[1]]), 0)
             .toFixed(2)}
           type="text"
@@ -108,7 +111,7 @@ function TotalProtocol({ obekt }) {
         <label>{item[0]}</label>
         <input
           disabled
-          defaultValue={state
+          value={state
             .reduce((sum, obj) => sum + parseFloat(obj.ref[item[1]]), 0)
             .toFixed(2)}
           type="text"
@@ -158,13 +161,13 @@ function TotalProtocol({ obekt }) {
       }
 
       return (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex" }} key={index}>
           <input
             style={{ borderColor: highlight, width: "80%" }}
             className="active"
             disabled
             type="text"
-            defaultValue={(
+            value={(
               target -
               parseFloat(
                 state
@@ -195,9 +198,28 @@ function TotalProtocol({ obekt }) {
     return count;
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     // window.print();
-    // fetch("POST", "192.168.0.145:27017", () => {});
+    // axios.defaults.headers.post["Content-Type"] =
+    //   "application/x-www-form-urlencoded";
+    try {
+      const res = await axios.post("http://192.168.0.145:4002/protokoli", {
+        obekt: obekt,
+        date: dayjs().format("DD/MM/YYYY"),
+        data: state,
+      });
+      console.log(res);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log(`Error ${error.message}`);
+      }
+    }
   };
   return (
     <div className="container">
@@ -249,85 +271,106 @@ function TotalProtocol({ obekt }) {
         </div>
       </div>
 
-      <div className="bottom">
-        <div>
-          <h3>Продажби в брой</h3>
+      <div className="bottomNew">
+        <div className="bottom">
+          <div>
+            <h3>Продажби в брой</h3>
 
-          <div id="totalCash" className="underline">
-            <input
-              type="text"
-              value={"Остатък едри (10 - 100лв) :"}
-              disabled
-            ></input>
-            <input type="text" disabled value={ostatak().toFixed(2)}></input>
-          </div>
-          {generateCashSales()}
-          <div id="totalCash">
-            <input type="text" value={"Дребни(0.01 - 5лв) :"} disabled></input>
-            <input
-              type="text"
-              disabled
-              value={(totalCash - ostatak()).toFixed(2)}
-            ></input>
-          </div>
-          <div id="totalCash">
-            <input type="text" value={"Всичко в брой :"} disabled></input>
-            <input type="text" disabled value={totalCash.toFixed(2)}></input>
-          </div>
-        </div>
-        <div>
-          <h3>Ваучери</h3>
-          <div className="inline-input underline">
-            <label>Сума ваучери</label>
-            <input
-              disabled
-              type="text"
-              value={totalVouchers.toFixed(2)}
-            ></input>
-          </div>
-          {generateVouchers()}
-
-          <Divider />
-          {generateOther()}
-          <Divider />
-          <div className="inline-input topline">
-            <label>ТОТАЛ</label>
-            <input disabled type="text" value={total.toFixed(2)}></input>
-          </div>
-        </div>
-        <div>
-          <h3>Справка</h3>
-          <div className="inline-input">
-            <label>По лента:</label>
-            <input disabled value={totalRef.toFixed(2)} type="text"></input>
-          </div>
-          {generateRefs()}
-          <div className="inline-input">
-            <label>Бр Клиенти:</label>
-            <input disabled value={totalClients} type="text"></input>
-          </div>
-        </div>
-        <div>
-          <h3 style={{ width: "80%" }}>Разлика</h3>
-          <div className="dif">
-            <div style={{ display: "flex" }}>
+            <div id="totalCash" className="underline">
               <input
-                style={{ width: "80%" }}
-                className="active"
+                type="text"
+                value={"Остатък едри (10 - 100лв) :"}
+                disabled
+              ></input>
+              <input type="text" disabled value={ostatak().toFixed(2)}></input>
+            </div>
+            {generateCashSales()}
+            <div id="totalCash">
+              <input
+                type="text"
+                value={"Дребни(0.01 - 5лв) :"}
+                disabled
+              ></input>
+              <input
+                type="text"
+                disabled
+                value={(totalCash - ostatak()).toFixed(2)}
+              ></input>
+            </div>
+            <div id="totalCash">
+              <input type="text" value={"Всичко в брой :"} disabled></input>
+              <input type="text" disabled value={totalCash.toFixed(2)}></input>
+            </div>
+          </div>
+          <div>
+            <h3>Ваучери</h3>
+            <div className="inline-input underline">
+              <label>Сума ваучери</label>
+              <input
                 disabled
                 type="text"
-                value={(total.toFixed(2) - totalRef.toFixed(2)).toFixed(2)}
+                value={totalVouchers.toFixed(2)}
               ></input>
-              {/* {highlight && <WarningAmber sx={{ color: red[500] }} />} */}
             </div>
-            {generateDifs()}
+            {generateVouchers()}
+
+            <Divider />
+            {generateOther()}
+            <Divider />
+            <div className="inline-input topline">
+              <label>ТОТАЛ</label>
+              <input disabled type="text" value={total.toFixed(2)}></input>
+            </div>
+          </div>
+        </div>
+
+        <div className="bottom2">
+          <div>
+            <h3>Справка</h3>
+            <div className="inline-input">
+              <label>По лента:</label>
+              <input disabled value={totalRef.toFixed(2)} type="text"></input>
+            </div>
+            {generateRefs()}
+            <div className="inline-input">
+              <label>Бр Клиенти:</label>
+              <input disabled value={totalClients} type="text"></input>
+            </div>
+          </div>
+          <div>
+            <h3 style={{ width: "80%" }}>Разлика</h3>
+            <div className="dif">
+              <div style={{ display: "flex" }}>
+                <input
+                  style={{ width: "80%" }}
+                  className="active"
+                  disabled
+                  type="text"
+                  value={(total.toFixed(2) - totalRef.toFixed(2)).toFixed(2)}
+                ></input>
+                {/* {highlight && <WarningAmber sx={{ color: red[500] }} />} */}
+              </div>
+              {generateDifs()}
+            </div>
           </div>
         </div>
       </div>
       <div>
-        <button onClick={handleClick} className="print-btn">
+        {/* <button
+          onClick={() => {
+            window.print();
+          }}
+          className="print-btn"
+        >
+          PRINT
+        </button> */}
+        {/* <button
+          onClick={handleClick}
+          // style={{ backgroundColor: "green" }}
+          className="print-btn"
+        >
           ИЗПРАТИ
-        </button>
+        </button> */}
       </div>
     </div>
   );

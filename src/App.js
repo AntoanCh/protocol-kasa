@@ -8,6 +8,7 @@ import Dash from "./components/Dash/Dash";
 import DashProto from "./components/Dash/DashProto";
 import DashHome from "./components/Dash/DashHome";
 
+
 function App() {
   //constructor function for generating sub-routes for each store
   //based on number of cash registers and name of the store
@@ -56,6 +57,7 @@ function App() {
 
   return (
     <BrowserRouter>
+     
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dash" element={<DashHome />}>
@@ -69,8 +71,8 @@ function App() {
           {generateRoutes(2, "Н4")}
           <Route path="total" element={<TotalProtocol obekt="Н4" />} />
         </Route>
-        <Route path="/n5" element={<Main kasi="6" obekt="n5" />}>
-          {generateRoutes(6, "Н5")}
+        <Route path="/n5" element={<Main kasi="8" obekt="n5" />}>
+          {generateRoutes(8, "Н5")}
           <Route path="total" element={<TotalProtocol obekt="Н5" />} />
         </Route>
         <Route path="/n6" element={<Main kasi="5" obekt="n6" />}>
@@ -110,6 +112,7 @@ function App() {
           <Route path="total" element={<TotalProtocol obekt="Н19" />} />
         </Route>
       </Routes>
+    
     </BrowserRouter>
   );
 }

@@ -1,8 +1,17 @@
 import React from "react";
 import RefItem from "./RefItem";
 import Dif from "./Dif";
+import WarningAmber from "@mui/icons-material/WarningAmber";
+import { red } from "@mui/material/colors";
+import { useState, useEffect } from "react";
+import { useAppState } from "../AppStateContext";
 
-function Ref({ state, handleRef, kasa, handleState, handleAlert }) {
+
+
+function Ref({ 
+  // state, handleRef, handleState,
+   kasa, handleAlert }) {
+  const { state, handleCash, handleState, handleRef, currency } = useAppState();
   const refs = [
     ["Чек:", "check"],
     ["С карта:", "karta"],
@@ -23,7 +32,7 @@ function Ref({ state, handleRef, kasa, handleState, handleAlert }) {
   };
   const generateDif = () => {
     return refs.map((item, index) => (
-      <Dif key={index} state={state} name={item[1]} kasa={kasa} />
+      <Dif key={index} state={state} name={item[1]} kasa={kasa} currency={currency} />
     ));
   };
 
@@ -37,6 +46,26 @@ function Ref({ state, handleRef, kasa, handleState, handleAlert }) {
     }
   };
 
+  const [difference, setDifference] = useState(0);
+  const [highlight, setHighlight] = useState("");
+  useEffect(() => {
+    setDifference(
+      (
+        parseFloat(state[kasa - 1].totals.other) +
+        parseFloat(state[kasa - 1].totals.vouchers) +
+        parseFloat(state[kasa - 1].totals.cash) -
+        parseFloat(state[kasa - 1].totals.ref)
+      ).toLocaleString("bg-BG", {
+            style: "currency",
+            currency: currency,
+          })
+    );
+    if (difference == 0) {
+      setHighlight("");
+    } else {
+      setHighlight("red");
+    }
+  }, [state]);
   return (
     <>
       <div>
@@ -45,7 +74,10 @@ function Ref({ state, handleRef, kasa, handleState, handleAlert }) {
           <label>По лента:</label>
           <input
             disabled
-            value={state[kasa - 1].totals.ref.toFixed(2)}
+            value={state[kasa - 1].totals.ref.toLocaleString("bg-BG", {
+            style: "currency",
+            currency: currency,
+          })}
             type="text"
           ></input>
         </div>
@@ -71,12 +103,13 @@ function Ref({ state, handleRef, kasa, handleState, handleAlert }) {
               className="active"
               disabled
               type="text"
-              value={(
-                parseFloat(state[kasa - 1].totals.other) +
-                parseFloat(state[kasa - 1].totals.vouchers) +
-                parseFloat(state[kasa - 1].totals.cash) -
-                parseFloat(state[kasa - 1].totals.ref)
-              ).toFixed(2)}
+              value={
+                difference
+                // parseFloat(state[kasa - 1].totals.other) +
+                // parseFloat(state[kasa - 1].totals.vouchers) +
+                // parseFloat(state[kasa - 1].totals.cash) -
+                // parseFloat(state[kasa - 1].totals.ref)
+              }
             ></input>
             {/* {highlight && <WarningAmber sx={{ color: red[500] }} />} */}
           </div>

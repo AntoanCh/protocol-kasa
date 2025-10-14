@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { deepOrange } from "@mui/material/colors";
 
+
 import logo from "../static/dar_logo.jpg";
 
-function Header({ obekt, kasi, handleDial }) {
+function Header({ obekt, kasi, 
+  handleDial
+ }) {
+ 
   //Custom tabs from material ui
   const CustomTabs = styled(Tabs)({
     borderBottom: "1px solid #e8e8e8",
@@ -57,6 +61,8 @@ function Header({ obekt, kasi, handleDial }) {
     `/${obekt}/kasa4`,
     `/${obekt}/kasa5`,
     `/${obekt}/kasa6`,
+    `/${obekt}/kasa7`,
+    `/${obekt}/kasa8`,
     `/${obekt}/total`,
     `/${obekt}`,
   ]);

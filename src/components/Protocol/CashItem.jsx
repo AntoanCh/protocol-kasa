@@ -1,6 +1,6 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-function CashItem({ kasa, placeholder, state, handleCash }) {
+const CashItem = forwardRef(({ kasa, placeholder, state, handleCash ,placeholderInput ,onKeyDown, currency  },ref) =>  {
   const handleChange = (event) => {
     if (event.target.value) {
       const newValue = parseInt(event.target.value);
@@ -15,6 +15,8 @@ function CashItem({ kasa, placeholder, state, handleCash }) {
       event.target.select();
     }
   };
+ 
+
   return (
     <div className="cash-table">
       <input
@@ -24,17 +26,30 @@ function CashItem({ kasa, placeholder, state, handleCash }) {
         value={state[kasa - 1].cash[placeholder][0]}
         onFocus={handleFocus}
         onChange={handleChange}
+        ref={ref}
+        onKeyDown={onKeyDown}
+        placeholderInput={placeholderInput}
+      
       ></input>
-      <input type="text" defaultValue={`${placeholder} лв`} disabled></input>
+      <input type="text" value={placeholder.toLocaleString("bg-BG", {
+        style: "currency",
+        currency: currency,
+        maximumFractionDigits: placeholder >= 1 ? 0 : 2, 
+      })} disabled></input>
       <input
         className="active"
         type="text"
-        value={state[kasa - 1].cash[placeholder][1].toFixed(2)}
+        value={state[kasa - 1].cash[placeholder][1].toLocaleString("bg-BG", {
+            style: "currency",
+            currency: currency,
+            
+          })}
+        // value={state[kasa - 1].cash[placeholder][1].toFixed(2)}
         // value={(state[kasa - 1].cash[placeholder] * placeholder).toFixed(2)}
         disabled
       ></input>
     </div>
   );
-}
+})
 
 export default CashItem;

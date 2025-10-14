@@ -1,8 +1,17 @@
 import React from "react";
 import { useState } from "react";
-import { Slide, Alert, Divider } from "@mui/material";
+import { Slide, Alert,Box, Divider } from "@mui/material";
+import { useAppState } from "../AppStateContext";
 
-function Shift({ kasa, handleState, state }) {
+
+
+function Shift(
+  { kasa, 
+    // handleState, state 
+  }
+) {
+
+  const { state, handleCash, handleState, handleRef } = useAppState();
   const [alert, setAlert] = useState(false);
   function isNumeric(value) {
     return /\d+(\.\d+)?$/.test(value);
@@ -66,7 +75,7 @@ function Shift({ kasa, handleState, state }) {
               value={state[kasa - 1].start.sum}
             ></input>
           </div>
-          <div className="input3">
+          {/* <div className="input3">
             <label htmlFor="name-start">Брой цигари</label>
             <input
               onChange={handleChange}
@@ -75,13 +84,13 @@ function Shift({ kasa, handleState, state }) {
               type="text"
               value={state[kasa - 1].start.cigs}
             ></input>
-          </div>
+          </div> */}
         </div>
 
-        <div>
+        <Box > 
           <input disabled placeholder="Подпис касиер" type="text"></input>
-        </div>
-        <div>
+        </Box>
+        <Box sx={{marginTop: -2}}>
           <p>Имена и подпис на Зам. Управител/Главен касиер :</p>
           <input
             onChange={handleChange}
@@ -89,7 +98,7 @@ function Shift({ kasa, handleState, state }) {
             type="text"
             value={state[kasa - 1].start.name2}
           ></input>
-        </div>
+        </Box>
       </div>
 
       {/* <div className="shift">

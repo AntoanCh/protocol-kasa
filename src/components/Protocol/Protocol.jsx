@@ -14,11 +14,42 @@ import UpdateIcon from "@mui/icons-material/Update";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Slide, Alert, AlertTitle } from "@mui/material";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import Box from "@mui/material/Box";
+import { useAppState } from "../AppStateContext";
+import { Button } from "@mui/material";
 
 function Protocol({ kasa, obekt }) {
-  const [state, handleDial, handleState, handleCash, handleRef, printers] =
-    useOutletContext();
+  const { state, handleCash, handleState, handleRef,currency, toggleCurrency, handleDial } = useAppState();
+
+   const inputRefs = useRef([]);
+
+    
+
+  // Called by child components to register each input field
+ const registerInput = (el, index) => {
+    if (el) {
+      inputRefs.current[index] = el;
+    }
+  };
+
+  const handleKeyDown = (e, currentIndex) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        
+        const nextInput = inputRefs.current[currentIndex + 1];
+        if (nextInput) nextInput.focus();
+      }
+    };
+ useEffect(() => {
+    inputRefs.current = [];
+  }, []);
+
+  // const [state, handleDial, handleState, handleCash, handleRef] =
+  //   useOutletContext();
+
+  // const [handleDial] = useOutletContext();
+ 
 
   const handleChange = (event) => {
     if (event.target.value) {
@@ -37,10 +68,10 @@ function Protocol({ kasa, obekt }) {
     ));
   };
   window.onblur = () => {
-    window.location.reload();
+    // window.location.reload();
   };
   window.onfocus = () => {
-    window.location.reload();
+    // window.location.reload();
   };
   const [alert, setAlert] = useState([false, "possitive"]);
 
@@ -58,24 +89,26 @@ function Protocol({ kasa, obekt }) {
   };
 
   return (
-    <div className="container">
+    <Box className="container">
       <h1>ПРОТОКОЛ ЗА РАБОТА НА КАСА {kasa}</h1>
-      <div className="top">
-        <div className="inline-input">
-          <label>Фискален принтер №</label>
-          <select onChange={handleChange} value={state[kasa - 1].main.printer}>
-            {generatePrintOptions(printers)}
-          </select>
-        </div>
-        <div className="inline-input">
+     
+      <Box className="top">
+         <Button 
+        variant="contained" 
+        onClick={toggleCurrency}
+        color={currency == "BGN" ? "error" : "success"}
+      >
+        {currency === "BGN" ? "BGN" : "EUR"}
+      </Button>
+        <Box className="inline-input">
           <label>Обект</label>
           <input disabled type="text" defaultValue={obekt} />
-        </div>
-        <div className="inline-input">
+        </Box>
+        <Box className="inline-input">
           <label>Дата:</label>
           <input type="text" defaultValue={dayjs().format("DD/MM/YYYY")} />
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       <Shift kasa={kasa} handleState={handleState} state={state} />
 
@@ -110,7 +143,7 @@ function Protocol({ kasa, obekt }) {
           icon={<PrintIcon />}
           // tooltipTitle={"Принтирай"}
         />
-        <SpeedDialAction
+        {/* <SpeedDialAction
           onClick={() => handleDial(["contacts"])}
           icon={<ContactEmergencyIcon />}
           tooltipTitle={"Контакти"}
@@ -119,7 +152,7 @@ function Protocol({ kasa, obekt }) {
           onClick={() => handleDial(["patch"])}
           icon={<UpdateIcon />}
           tooltipTitle={"Patch Notes"}
-        />
+        /> */}
       </SpeedDial>
       {/* {alert[0] && (
         <Slide in={alert} direction="left">
@@ -134,32 +167,43 @@ function Protocol({ kasa, obekt }) {
           </Alert>
         </Slide>
       )} */}
-      <div className="bottomNew">
-        <div className="bottom">
-          <CashSales kasa={kasa} handleCash={handleCash} state={state} />
-          <div>
-            <Vouchers kasa={kasa} handleState={handleState} state={state} />
-            <Others kasa={kasa} handleState={handleState} state={state} />
-          </div>
-        </div>
+      <Box className="bottomNew">
+        <form>
+        <Box className="bottom">
+          <CashSales kasa={kasa} handleCash={handleCash} state={state} registerInput={registerInput}
+        handleKeyDown={handleKeyDown}
+        inputIndexOffset={0} />
+          <Box>
+            <Vouchers kasa={kasa} handleState={handleState} state={state} registerInput={registerInput}
+        handleKeyDown={handleKeyDown}
+        inputIndexOffset={13} />
+            <Others kasa={kasa} handleState={handleState} state={state} registerInput={registerInput}
+        handleKeyDown={handleKeyDown}
+        inputIndexOffset={20} />
+          </Box>
+        </Box>
 
-        <div className="bottom2">
+        <Box className="bottom2">
           <Ref
             handleAlert={handleAlert}
             kasa={kasa}
             handleRef={handleRef}
             state={state}
             handleState={handleState}
+            registerInput={registerInput}
+        handleKeyDown={handleKeyDown}
+        inputIndexOffset={0}
           />
-        </div>
-      </div>
+        </Box>
+        </form>
+      </Box>
 
-      <div>
+      <Box>
         <button onClick={handleClick} className="print-btn">
-          PRINT
+          ПРИНТИРАЙ
         </button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

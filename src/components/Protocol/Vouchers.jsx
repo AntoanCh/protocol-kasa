@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import Voucher from "./Voucher";
+import { Box } from "@mui/material";
+import { useAppState } from "../AppStateContext";
 
-function Vouchers({ state, handleState, kasa }) {
+
+
+function Vouchers({ 
+  // state, handleState, 
+  kasa, registerInput, handleKeyDown, inputIndexOffset  }) {
+const { state, handleCash, handleState, handleRef, currency } = useAppState();
+ 
   const vouchers = [
     ["Содексо", "sodekso"],
     ["Идънред", "idunred"],
@@ -11,8 +19,14 @@ function Vouchers({ state, handleState, kasa }) {
     ["Призма лукс", "prizma"],
     ["Фидуция", "fiducia"],
   ];
+
+  
+
+
   const generateVoucherItems = () => {
-    return vouchers.map((item, index) => (
+    return vouchers.map((item, i) => {
+      const index = inputIndexOffset  +i
+ return (
       <Voucher
         key={index}
         label={item[0]}
@@ -20,22 +34,34 @@ function Vouchers({ state, handleState, kasa }) {
         state={state}
         handleState={handleState}
         kasa={kasa}
+       ref={(el) => registerInput(el, index)}
+        onKeyDown={(e) => handleKeyDown(e, index)}
+        placeholderInput={`Input ${i + 1}`}
       />
-    ));
+    )
+    }
+     );
   };
+
+
   return (
-    <div>
+    <Box>
       <h3>Ваучери</h3>
-      <div className="inline-input underline">
+      <Box className="inline-input underline">
         <label>Сума ваучери</label>
         <input
           disabled
-          value={parseFloat(state[kasa - 1].totals.vouchers).toFixed(2)}
+          value={parseFloat(state[kasa - 1].totals.vouchers).toLocaleString("bg-BG", {
+            style: "currency",
+            currency: currency,
+          })}
           type="text"
         ></input>
-      </div>
+      </Box>
+       <form>
       {generateVoucherItems()}
-    </div>
+      </form>
+    </Box>
   );
 }
 

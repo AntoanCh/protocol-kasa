@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-function DashProto() {
+function DashProto({ kasa }) {
   // const [state, handleDial, handleState, handleCash, handleRef, printers] =
   //   useOutletContext();
 
