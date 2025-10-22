@@ -90,7 +90,10 @@ function Protocol({ kasa, obekt }) {
 
   return (
     <Box className="container">
-      <h1>ПРОТОКОЛ ЗА РАБОТА НА КАСА {kasa}</h1>
+      <h1>
+  ПРОТОКОЛ ЗА РАБОТА НА{" "}
+  {kasa >= 7 && kasa <= 10 ? `КАСА ${kasa}(SCO)` : `КАСА ${kasa}`}
+</h1>
      
       <Box className="top">
          <Button 

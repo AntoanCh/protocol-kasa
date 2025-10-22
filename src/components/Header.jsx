@@ -76,11 +76,21 @@ function Header({ obekt, kasi,
   //passed from Main.jsx which is passed from App.jsx with Route definition
   const generateTabs = (kasi) => {
     const arr = [];
+    
     for (let i = 1; i <= kasi; i++) {
+       let labelText;
+       
+    if (i >= 7 && i <= 10) {
+      // special label for kasa 7–10
+      labelText = `КАСА ${i}(SCO)`;
+    } else {
+      // default label
+      labelText = `КАСА ${i}`;
+    }
       arr.push(
         <CustomTab
           key={i}
-          label={`КАСА ${i}`}
+          label={labelText}
           value={`/${obekt}/kasa${i}`}
           to={`/${obekt}/kasa${i}`}
           component={Link}
