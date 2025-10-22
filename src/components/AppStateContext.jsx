@@ -189,13 +189,13 @@ const generateInitialKasa = () => ({
   totals: { cash:0.0, vouchers:0, other:0, total:0, ref:0, lenta:0, obshto:0 }
 });
 
-const generateState = () => Array.from({ length: 8 }, () => generateInitialKasa());
+const generateState = () => Array.from({ length: 10 }, () => generateInitialKasa());
 
 const totalCash = cash => Object.values(cash).reduce((acc, [_, sum]) => acc + sum, 0);
 const totalGroup = group => Object.values(group).reduce((acc, val) => acc + parseFloat(val), 0);
 
 export const AppStateProvider = ({ children, setSnack }) => {
-  const [currency, setCurrency] = useState("EUR"); // active currency
+  const [currency, setCurrency] = useState("BGN"); // active currency
   const [allStates, setAllStates] = useState({
     EUR: generateState(),
     BGN: generateState()

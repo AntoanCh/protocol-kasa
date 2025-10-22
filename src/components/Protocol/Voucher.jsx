@@ -75,8 +75,10 @@ const Voucher = forwardRef(({ label,
 const handleChange = (event) => {
   const { name, value, nativeEvent } = event.target;
 
+  let cleaned = value.replace(/,/g, '.');           // Convert commas to dots
+cleaned = cleaned.replace(/[^0-9.]/g, '');        // Keep only digits and dots
   // Clean input: allow only digits and one dot
-  let cleaned = value.replace(/[^0-9.]/g, '');
+  cleaned = cleaned.replace(/[^0-9.]/g, '');
 
   // Allow only one decimal point
   const parts = cleaned.split('.');

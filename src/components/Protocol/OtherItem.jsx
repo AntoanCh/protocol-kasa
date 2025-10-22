@@ -3,11 +3,14 @@ import TextField from '@mui/material/TextField';
 import { Box } from "@mui/material";
 
 const OtherItem = forwardRef(({ label, name, kasa, state, handleState,placeholderInput ,onKeyDown }, ref) => {
-const handleChange = (event) => {
+
+ const handleChange = (event) => {
   const { name, value, nativeEvent } = event.target;
 
+  let cleaned = value.replace(/,/g, '.');           // Convert commas to dots
+cleaned = cleaned.replace(/[^0-9.]/g, '');        // Keep only digits and dots
   // Clean input: allow only digits and one dot
-  let cleaned = value.replace(/[^0-9.]/g, '');
+  cleaned = cleaned.replace(/[^0-9.]/g, '');
 
   // Allow only one decimal point
   const parts = cleaned.split('.');
@@ -49,6 +52,53 @@ const handleChange = (event) => {
 
   handleState("other", name, newValue, kasa);
 };
+
+// const handleChange = (event) => {
+//   const { name, value, nativeEvent } = event.target;
+
+//   // Clean input: allow only digits and one dot
+//   let cleaned = value.replace(/[^0-9.]/g, '');
+
+//   // Allow only one decimal point
+//   const parts = cleaned.split('.');
+//   if (parts.length > 2) {
+//     cleaned = parts[0] + '.' + parts[1];
+//   }
+
+//   // Limit decimal part to 2 digits
+//   if (parts[1]?.length > 2) {
+//     parts[1] = parts[1].slice(0, 2);
+//     cleaned = parts.join('.');
+//   }
+
+//   // Count total digits (excluding dot)
+//   const totalDigits = (parts[0] || '').length + (parts[1] || '').length;
+//   const maxDigits = 8; // Customize this for your limit (e.g., 6, 8, etc.)
+//   if (totalDigits > maxDigits) {
+//     return; // Ignore input beyond max digits
+//   }
+
+//   // Special cases
+//   if (cleaned === '.') {
+//     handleState("other", name, '0.', kasa);
+//     return;
+//   }
+
+//   if (cleaned.endsWith('.')) {
+//     const base = parseFloat(cleaned);
+//     const newValue = isNaN(base) ? '0.' : base.toString() + '.';
+//     handleState("other", name, newValue, kasa);
+//     return;
+//   }
+
+//   // Final parsing
+//   const num = parseFloat(cleaned);
+
+//   // Guarantee a number (fallback to 0)
+//   const newValue = isNaN(num) ? 0 : num;
+
+//   handleState("other", name, newValue, kasa);
+// };
   // const handleChange = (event) => {
   //   let name = event.target.name;
   //   if (event.target.value) {

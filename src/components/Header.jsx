@@ -63,6 +63,8 @@ function Header({ obekt, kasi,
     `/${obekt}/kasa6`,
     `/${obekt}/kasa7`,
     `/${obekt}/kasa8`,
+    `/${obekt}/kasa9`,
+    `/${obekt}/kasa10`,
     `/${obekt}/total`,
     `/${obekt}`,
   ]);

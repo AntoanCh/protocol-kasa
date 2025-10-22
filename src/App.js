@@ -71,8 +71,8 @@ function App() {
           {generateRoutes(2, "Н4")}
           <Route path="total" element={<TotalProtocol obekt="Н4" />} />
         </Route>
-        <Route path="/n5" element={<Main kasi="8" obekt="n5" />}>
-          {generateRoutes(8, "Н5")}
+        <Route path="/n5" element={<Main kasi="10" obekt="n5" />}>
+          {generateRoutes(10, "Н5")}
           <Route path="total" element={<TotalProtocol obekt="Н5" />} />
         </Route>
         <Route path="/n6" element={<Main kasi="5" obekt="n6" />}>

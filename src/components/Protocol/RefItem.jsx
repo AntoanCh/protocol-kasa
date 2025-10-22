@@ -1,35 +1,35 @@
 import React from "react";
 
 function RefItem({ label, name, state, handleRef, kasa }) {
+const handleChange = (event) => {
+  const { name, value } = event.target;
 
+  // 1) Convert commas to dots, then strip invalid chars
+  let cleaned = value.replace(/,/g, '.');
+  cleaned = cleaned.replace(/[^0-9.]/g, '');
 
-
-  const handleChange = (event) => {
-  const { name, value, nativeEvent } = event.target;
-
-  // Clean input: allow only digits and one dot
-  let cleaned = value.replace(/[^0-9.]/g, '');
-
-  // Allow only one decimal point
-  const parts = cleaned.split('.');
+  // 2) Allow only one decimal point
+  let parts = cleaned.split('.');
   if (parts.length > 2) {
     cleaned = parts[0] + '.' + parts[1];
+    parts = cleaned.split('.'); // recompute after change
   }
 
-  // Limit decimal part to 2 digits
+  // 3) Limit decimal part to 2 digits
   if (parts[1]?.length > 2) {
     parts[1] = parts[1].slice(0, 2);
     cleaned = parts.join('.');
+    parts = cleaned.split('.'); // recompute after change
   }
 
-  // Count total digits (excluding dot)
+  // 4) Limit total digits (excluding the dot) to 6
   const totalDigits = (parts[0] || '').length + (parts[1] || '').length;
-  const maxDigits = 8; // Customize this for your limit (e.g., 6, 8, etc.)
+  const maxDigits = 6;
   if (totalDigits > maxDigits) {
     return; // Ignore input beyond max digits
   }
 
-  // Special cases
+  // 5) Special partial-input cases to preserve UX
   if (cleaned === '.') {
     handleRef("ref", name, '0.', kasa);
     return;
@@ -42,14 +42,61 @@ function RefItem({ label, name, state, handleRef, kasa }) {
     return;
   }
 
-  // Final parsing
+  // 6) Final parse (fallback to 0)
   const num = parseFloat(cleaned);
-
-  // Guarantee a number (fallback to 0)
   const newValue = isNaN(num) ? 0 : num;
 
   handleRef("ref", name, newValue, kasa);
 };
+
+
+
+//   const handleChange = (event) => {
+//   const { name, value, nativeEvent } = event.target;
+
+//   // Clean input: allow only digits and one dot
+//   let cleaned = value.replace(/[^0-9.]/g, '');
+
+//   // Allow only one decimal point
+//   const parts = cleaned.split('.');
+//   if (parts.length > 2) {
+//     cleaned = parts[0] + '.' + parts[1];
+//   }
+
+//   // Limit decimal part to 2 digits
+//   if (parts[1]?.length > 2) {
+//     parts[1] = parts[1].slice(0, 2);
+//     cleaned = parts.join('.');
+//   }
+
+//   // Count total digits (excluding dot)
+//   const totalDigits = (parts[0] || '').length + (parts[1] || '').length;
+//   const maxDigits = 8; // Customize this for your limit (e.g., 6, 8, etc.)
+//   if (totalDigits > maxDigits) {
+//     return; // Ignore input beyond max digits
+//   }
+
+//   // Special cases
+//   if (cleaned === '.') {
+//     handleRef("ref", name, '0.', kasa);
+//     return;
+//   }
+
+//   if (cleaned.endsWith('.')) {
+//     const base = parseFloat(cleaned);
+//     const newValue = isNaN(base) ? '0.' : base.toString() + '.';
+//     handleRef("ref", name, newValue, kasa);
+//     return;
+//   }
+
+//   // Final parsing
+//   const num = parseFloat(cleaned);
+
+//   // Guarantee a number (fallback to 0)
+//   const newValue = isNaN(num) ? 0 : num;
+
+//   handleRef("ref", name, newValue, kasa);
+// };
   // const handleChange = (event) => {
   //   if (event.target.value) {
   //     let newValue;

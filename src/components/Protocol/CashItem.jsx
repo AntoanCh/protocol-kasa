@@ -1,15 +1,23 @@
 import React, { forwardRef } from "react";
 
 const CashItem = forwardRef(({ kasa, placeholder, state, handleCash ,placeholderInput ,onKeyDown, currency  },ref) =>  {
-  const handleChange = (event) => {
-    if (event.target.value) {
-      const newValue = parseInt(event.target.value);
+ const handleChange = (event) => {
+  let { value } = event.target;
 
-      handleCash(placeholder, newValue, kasa);
-    } else {
-      handleCash(placeholder, 0, kasa);
-    }
-  };
+  // Remove all non-digit characters
+  value = value.replace(/\D/g, '');
+
+  // Limit to 6 digits
+  if (value.length > 6) {
+    value = value.slice(0, 6);
+  }
+
+  // Convert to integer (or 0 if empty)
+  const newValue = value ? parseInt(value, 10) : 0;
+
+  handleCash(placeholder, newValue, kasa);
+};
+
   const handleFocus = (event) => {
     if (event.target.value == 0) {
       event.target.select();
