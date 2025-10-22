@@ -72,56 +72,106 @@ const Voucher = forwardRef(({ label,
 //     }
 //   };
 
-const handleChange = (event) => {
-  const { name, value, nativeEvent } = event.target;
+// const handleChange = (event) => {
+//   const { name, value, nativeEvent } = event.target;
 
-  let cleaned = value.replace(/,/g, '.');           // Convert commas to dots
-cleaned = cleaned.replace(/[^0-9.]/g, '');        // Keep only digits and dots
-  // Clean input: allow only digits and one dot
-  cleaned = cleaned.replace(/[^0-9.]/g, '');
+//   let cleaned = value.replace(/,/g, '.');           // Convert commas to dots
+// cleaned = cleaned.replace(/[^0-9.]/g, '');        // Keep only digits and dots
+//   // Clean input: allow only digits and one dot
+//   cleaned = cleaned.replace(/[^0-9.]/g, '');
+
+//   // Allow only one decimal point
+//   const parts = cleaned.split('.');
+//   if (parts.length > 2) {
+//     cleaned = parts[0] + '.' + parts[1];
+//   }
+
+//   // Limit decimal part to 2 digits
+//   if (parts[1]?.length > 2) {
+//     parts[1] = parts[1].slice(0, 2);
+//     cleaned = parts.join('.');
+//   }
+
+//   // Count total digits (excluding dot)
+//   const totalDigits = (parts[0] || '').length + (parts[1] || '').length;
+//   const maxDigits = 8; // Customize this for your limit (e.g., 6, 8, etc.)
+//   if (totalDigits > maxDigits) {
+//     return; // Ignore input beyond max digits
+//   }
+
+//   // Special cases
+//   if (cleaned === '.') {
+//     handleState("vouchers", name, '0.', kasa);
+//     return;
+//   }
+
+//   if (cleaned.endsWith('.')) {
+//     const base = parseFloat(cleaned);
+//     const newValue = isNaN(base) ? '0.' : base.toString() + '.';
+//     handleState("vouchers", name, newValue, kasa);
+//     return;
+//   }
+
+//   // Final parsing
+//   const num = parseFloat(cleaned);
+
+//   // Guarantee a number (fallback to 0)
+//   const newValue = isNaN(num) ? 0 : num;
+
+//   handleState("vouchers", name, newValue, kasa);
+// };
+
+const handleChange = (event) => {
+  const { name, value } = event.target;
+
+  // 1) Normalize and allow only digits + one dot
+  let cleaned = value.replace(/,/g, ".").replace(/[^0-9.]/g, "");
 
   // Allow only one decimal point
-  const parts = cleaned.split('.');
-  if (parts.length > 2) {
-    cleaned = parts[0] + '.' + parts[1];
+  const firstDot = cleaned.indexOf(".");
+  if (firstDot !== -1) {
+    cleaned =
+      cleaned.slice(0, firstDot + 1) +
+      cleaned
+        .slice(firstDot + 1)
+        .replace(/\./g, ""); // remove any extra dots after the first
   }
+
+  // Split parts after final cleaning
+  let parts = cleaned.split(".");
 
   // Limit decimal part to 2 digits
   if (parts[1]?.length > 2) {
     parts[1] = parts[1].slice(0, 2);
-    cleaned = parts.join('.');
+    cleaned = parts.join(".");
   }
 
-  // Count total digits (excluding dot)
-  const totalDigits = (parts[0] || '').length + (parts[1] || '').length;
-  const maxDigits = 8; // Customize this for your limit (e.g., 6, 8, etc.)
+  // Enforce total digits (excluding dot)
+  const totalDigits = (parts[0] || "").length + (parts[1] || "").length;
+  const maxDigits = 8;
   if (totalDigits > maxDigits) {
-    return; // Ignore input beyond max digits
+    return; // ignore extra input
   }
 
-  // Special cases
-  if (cleaned === '.') {
-    handleState("vouchers", name, '0.', kasa);
+  // Empty → zero
+  if (cleaned === "") {
+    handleState("vouchers", name, 0, kasa);
     return;
   }
 
-  if (cleaned.endsWith('.')) {
-    const base = parseFloat(cleaned);
-    const newValue = isNaN(base) ? '0.' : base.toString() + '.';
-    handleState("vouchers", name, newValue, kasa);
+  // 2) Preserve "editing" states as STRING so the dot/zero doesn't vanish
+  // - "1."   (ends with dot)
+  // - "1.0"  (one decimal so far; user may type another digit)
+  if (cleaned.endsWith(".") || /\.\d$/.test(cleaned)) {
+    handleState("vouchers", name, cleaned, kasa); // store string temporarily
     return;
   }
 
-  // Final parsing
+  // 3) Final parse to number for stable state/math
   const num = parseFloat(cleaned);
-
-  // Guarantee a number (fallback to 0)
-  const newValue = isNaN(num) ? 0 : num;
-
+  const newValue = Number.isNaN(num) ? 0 : num;
   handleState("vouchers", name, newValue, kasa);
 };
-
-
   const handleFocus = (event) => {
     if (event.target.value == 0) {
       event.target.select();
